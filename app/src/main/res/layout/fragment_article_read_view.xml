@@ -1,0 +1,123 @@
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <RelativeLayout
+        android:background="@android:color/white"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        tools:context="com.sunny.sunnyday.Fragments.ArticleReadViewFragment">
+
+        <RelativeLayout
+            android:padding="20dp"
+            android:id="@+id/upperRelativeLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:textStyle="bold"
+                android:id="@+id/author_name_TV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Calvin Harris"
+                android:textSize="16sp"
+                android:textColor="@android:color/black"
+                />
+            <TextView
+                android:id="@+id/post_date_and_read_time_TV"
+                android:layout_width="wrap_content"
+                android:layout_below="@id/author_name_TV"
+                android:layout_height="wrap_content"
+
+                android:text="24 Oct, 12 min read"
+                android:textSize="12sp"
+                android:textColor="#aaa"
+                />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:text="@string/fragment_article_read_view_save_article"
+                android:textSize="8sp"
+                android:id="@+id/saveArticle_Btn"
+                android:textColor="@android:color/white"
+                android:background="@drawable/save_article_button_background"
+                android:layout_alignBottom="@+id/post_date_and_read_time_TV"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                />
+
+        </RelativeLayout>
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/upperRelativeLayout"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                android:orientation="vertical">
+                <ImageView
+                    android:id="@+id/article_image_IV"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:src="@drawable/reader_view_sample_image"
+                    android:scaleType="centerCrop"
+                    />
+                <RelativeLayout
+                    android:padding="20dp"
+                    android:id="@+id/lowerRelativeLayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/article_image_IV"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true">
+                    <TextView
+                        android:id="@+id/article_title_TV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Quotes about freedom"
+                        android:textSize="16sp"
+                        android:textColor="@android:color/black"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true" />
+
+                    <android.support.v4.widget.NestedScrollView
+                        android:layout_marginTop="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_below="@+id/article_title_TV"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true">
+                        <TextView
+                            android:id="@+id/article_description_TV"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="My version of another classic sports font. Ideal for apparel design and naming sports jerseys. The dollar ($) key holds an alternate glyph for the letter 's'. The left and right curly brackets hold alternate glyphs for numbers '2' and '5'.
+
+If you find this font useful then please consider a donation to justme54satyahoo.co.uk, any amount will be greatly appreciated. A donation isn't necessary to use this font for personal or non-commercial use. I'll be interested to know how people use it so a picture or artwork sent to justme54satyahoo.co.uk would be nice.
+
+If you wish to use this font commercially a donation or license is required, please email for further information. "
+                            android:textSize="11sp"
+                            android:textColor="@android:color/black" />
+                    </android.support.v4.widget.NestedScrollView>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </android.support.v4.widget.NestedScrollView>
+
+
+
+
+
+
+    </RelativeLayout>
+</layout>
+
+

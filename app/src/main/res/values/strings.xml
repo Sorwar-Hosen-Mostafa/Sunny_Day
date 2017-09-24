@@ -1,0 +1,89 @@
+<resources>
+    <string name="app_name">Sunny Day</string>
+    <string name="health_hygiene_menu_item_text"><![CDATA[Health & Hygiene]]></string>
+    <string name="period_calender_menu_item_text">Period Calender</string>
+    <string name="settings_menu_item_text">Settings</string>
+    <string-array name="logs_title">
+        <item>Period starts</item>
+        <item>2nd Day</item>
+        <item>3rd Day</item>
+        <item>4rt Day</item>
+        <item>5th Day</item>
+        <item>6th Day</item>
+        <item>7th Day</item>
+        <item>8th Day</item>
+    </string-array>
+    <string-array name="logs_title_pregnant">
+        <item>1st Favourable day for conceive</item>
+        <item>2nd Favourable day for conceive</item>
+        <item>3rd Favourable day for conceive</item>
+        <item>4th Favourable day for conceive</item>
+        <item>last Favourable day for conceive</item>
+    </string-array>
+    <string-array name="logs_title_symbols">
+        <item>PS</item>
+        <item>2D</item>
+        <item>3D</item>
+        <item>4D</item>
+        <item>5D</item>
+        <item>6D</item>
+        <item>7D</item>
+        <item>8D</item>
+    </string-array>
+    <string-array name="logs_title_symbols_pregnant">
+        <item>1F</item>
+        <item>2F</item>
+        <item>3F</item>
+        <item>4F</item>
+        <item>LF</item>
+    </string-array>
+    <string-array name="logs_suggessions">
+        <item>Make reminder of emergency.</item>
+        <item>Drink log of water not to be dehydrated.</item>
+        <item>Take bed rest. do not do any heavy work.</item>
+        <item>Eat healthy and keep yourself strong.</item>
+        <item>Eat healthy and keep yourself strong.</item>
+        <item>Eat healthy and keep yourself strong.</item>
+        <item>Eat healthy and keep yourself strong.</item>
+        <item>Eat healthy and keep yourself strong.</item>
+    </string-array>
+    <string-array name="logs_suggessions_pregnant">
+        <item>Make reminder of emergency.</item>
+        <item>Drink log of water not to be dehydrated.</item>
+        <item>Take bed rest. do not do any heavy work.</item>
+        <item>Eat healthy and keep yourself strong.</item>
+        <item>Eat healthy and keep yourself strong.</item>
+    </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="dummy_text">It seems that only fragments of the original text remain in the Lorem Ipsum texts used today. One may speculate that over the course of time certain letters were added or deleted at various positions within the text. This might also explain why one can now find slightly different versions. Due to the age of the Lorem Ipsum text there are no copyright issues to contend with.</string>
+    <string name="fragment_two_set_the_date_in_the_calender"><u>Set the date in the calender</u></string>
+    <string name="settings_pregnant_mode">Pregnancy Mode</string>
+    <string name="settings_notifications">Notifications</string>
+    <string name="settings_reset_cycle_info">Reset Cycle Info</string>
+    <string name="settings_terms_and_conditions">Terms Of Service</string>
+    <string name="settings_license">License</string>
+    <string name="settings_settings">Settings</string>
+    <string name="settings_view_saved_article">View Saved Articles</string>
+    <string name="fragment_one_how_can_we_help_you">How can we help you?</string>
+    <string name="data_collection_fragments_steps">Steps</string>
+    <string name="fragment_one_i_want_to_get_pregnant">I want to get pregnant</string>
+    <string name="fragment_one_i_need_accurate_predictions_of_favourable_days_of_conception">I need accurate predictions of favourable days of conception</string>
+    <string name="fragment_one_i_just_want_to_track_my_cycle">I just want to track my cycle</string>
+    <string name="fragment_one_i_want_to_receive_cycle_predictios">I want to receive cycle predictios</string>
+    <string name="data_collection_fragments_next">next</string>
+    <string name="fragment_two_when_did_your_last_period_n_start">When did your last period  start?</string>
+    <string name="fragment_three_on_avarage_how_long_is_nyour_period">On avarage, How long is  \nyour period??</string>
+    <string name="data_collection_fragments_i_don_t_know">         I don\'t know</string>
+    <string name="fragment_four_how_long_is_your_cycle">How long is your cycle??</string>
+    <string name="fragment_five_what_year_were_you_born">What year were you born?</string>
+    <string name="fragment_five_the_cycle_prediction_will_be_more_accurate_if_the_app_get_your_age">The cycle prediction will be more accurate if the app get your age.</string>
+    <string name="fragment_six_get_reminders_nabout_your_cycle">Get reminders \nabout your cycle</string>
+    <string name="fragment_six_we_will_send_you_reminders_about_the_begining_of_a_new_cycle_so_that_you_dont_forget_to_long">We will send you reminders about the begining of a new cycle so that you dont forget to long it. you can change the text of the reminders in the settings.</string>
+    <string name="fragment_article_read_view_save_article">Save article</string>
+    <string name="health_and_hygiene_title">Health and Hygiene</string>
+    <string name="trending_now_title">Trending Now</string>
+    <string name="what_s_in_what_s_out_title">What\'s in/What\'s out</string>
+
+</resources>

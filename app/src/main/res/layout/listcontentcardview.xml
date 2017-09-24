@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:id="@+id/horizontalCardView"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_view"
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:layout_gravity="center"
+        android:layout_margin="5dp"
+        card_view:cardCornerRadius="4dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:id="@+id/newcontainer"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="30dp"
+                    android:gravity="center"
+                    android:layout_height="wrap_content"
+                    android:text="new"
+                    android:id="@+id/new_tag"
+                    android:background="@android:color/holo_blue_dark"
+                    android:layout_weight="0.6"
+                    android:padding="2dp"
+                    android:textColor="@android:color/white"
+                    android:textSize="9sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_below="@id/newcontainer"
+                android:layout_width="120dp"
+                android:id="@+id/card_view_inner_holder"
+                android:layout_height="match_parent"
+                android:padding="4dp"
+                android:layout_alignParentRight="true">
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/card_view_inner"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    card_view:cardCornerRadius="4dp">
+
+                    <ImageView
+                        android:id="@+id/articleImage_IV"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/whatsinwhatsout" />
+
+
+                </android.support.v7.widget.CardView>
+            </RelativeLayout>
+
+
+            <LinearLayout
+                android:layout_below="@id/newcontainer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toLeftOf="@+id/card_view_inner_holder"
+                android:layout_toStartOf="@+id/card_view_inner_holder"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/articleTitle_TV"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="5dp"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:layout_height="0dp"
+                    android:layout_toLeftOf="@+id/card_view_inner"
+                    android:layout_toStartOf="@+id/card_view_inner"
+                    android:layout_weight="2.5"
+                    android:text="Banana and Monkey make the story"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1.3"
+                    android:layout_marginBottom="3dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/articlePostDate_TV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="7 july"
+                        android:textSize="9sp" />
+
+                    <ImageView
+                        android:id="@+id/imageView"
+                        android:layout_width="10dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical"
+                        android:layout_margin="5dp"
+                        android:padding="3dp"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/dot" />
+
+                    <TextView
+                        android:id="@+id/articleReadTime_TV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="10 min read"
+                        android:textSize="9sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1.3"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/SaveArticle_Btn"
+                        android:layout_marginRight="3dp"
+                        android:layout_width="20dp"
+                        android:scaleType="fitXY"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/favouriteicon" />
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+
+    </android.support.v7.widget.CardView>
+
+</RelativeLayout>

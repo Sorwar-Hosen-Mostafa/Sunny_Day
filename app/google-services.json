@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "20746454048",
+    "firebase_url": "https://sunnyday-12055.firebaseio.com",
+    "project_id": "sunnyday-12055",
+    "storage_bucket": "sunnyday-12055.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:20746454048:android:bf077e4d49774761",
+        "android_client_info": {
+          "package_name": "com.sunny.sunnyday"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "20746454048-4lpc07hp4kja0nrfkkl6qjhqk4l2nfkv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sunny.sunnyday",
+            "certificate_hash": "ffba99418b8d21e58bcb3e75289624142c1948f0"
+          }
+        },
+        {
+          "client_id": "20746454048-s7ssfao2t2308fgt9p0auukod1i0o226.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCT8Ww-W_q_gHCSF3ObalZ4gBcQwXdXM-g"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "20746454048-s7ssfao2t2308fgt9p0auukod1i0o226.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

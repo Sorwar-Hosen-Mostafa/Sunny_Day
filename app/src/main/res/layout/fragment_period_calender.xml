@@ -1,0 +1,115 @@
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.sunny.sunnyday.Fragments.PeriodCalenderFragment"
+    >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <!-- TODO: Update blank fragment layout -->
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:background="@android:color/white"
+                android:layout_width="match_parent"
+                android:id="@+id/calendar_frag_container"
+                android:layout_height="250dp"
+               >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_height="40dp">
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:id="@+id/buttonPreviousMonth"
+                        android:padding="10dp"
+                        android:scaleType="centerInside"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/previous_month_icon"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="40dp"
+                        android:id="@+id/month_TV"
+                        android:text="Jan 2017"
+                        android:textColor="@android:color/black"
+                        android:textSize="16sp"
+                        android:gravity="center"/>
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:padding="10dp"
+                        android:id="@+id/buttonNextMonth"
+                        android:layout_weight="1"
+                        android:scaleType="centerInside"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/next_month_icon"/>
+                </LinearLayout>
+
+
+                <com.github.sundeepk.compactcalendarview.CompactCalendarView
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/compactcalendar_view"
+                    android:layout_width="fill_parent"
+                    android:paddingRight="10dp"
+                    android:paddingLeft="10dp"
+                    android:layout_height="match_parent"
+                    app:compactCalendarTargetHeight="210dp"
+                    app:compactCalendarTextSize="11sp"
+                    app:compactCalendarBackgroundColor="#fff"
+                    app:compactCalendarTextColor="#000"
+                    app:compactCalendarCurrentSelectedDayBackgroundColor="#E57373"
+                    app:compactCalendarCurrentDayBackgroundColor="#B71C1C"
+                    app:compactCalendarMultiEventIndicatorColor="#fff"
+                    />
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:background="@drawable/gradient_calender_home"
+                android:layout_height="match_parent">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_margin="10dp"
+                    android:id="@+id/middleRelativeLayout"
+                    >
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/log_image"
+                        android:id="@+id/log_btn"
+                        android:tint="#931A57"
+                        />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:textSize="15dp"
+                        android:text="LOG"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/white"/>
+
+                </RelativeLayout>
+
+                <android.support.v7.widget.RecyclerView
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_below="@id/middleRelativeLayout"
+                    android:id="@+id/periodCalenderRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_weight="2"
+                    android:layout_height="match_parent">
+                </android.support.v7.widget.RecyclerView>
+            </RelativeLayout>
+
+        </LinearLayout>
+
+
+</layout>
+
+

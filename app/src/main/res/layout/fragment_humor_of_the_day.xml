@@ -1,0 +1,28 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.sunny.sunnyday.Fragments.HumorOfTheDayFragment">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:padding="5dp"
+        android:id="@+id/parentlayout"
+        android:layout_height="match_parent">
+
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:orientation="vertical">
+
+           <android.support.v7.widget.RecyclerView
+               android:padding="5dp"
+               android:layout_weight="10"
+               android:layout_marginTop="5dp"
+               android:id="@+id/humorOfTheDayRecyclerView"
+               android:layout_width="match_parent"
+               android:layout_height="0dp"></android.support.v7.widget.RecyclerView>
+       </LinearLayout>
+
+    </FrameLayout>
+</layout>
+
+

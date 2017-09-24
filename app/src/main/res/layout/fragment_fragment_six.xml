@@ -1,0 +1,96 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/gradient_fragsix"
+        tools:context="com.sunny.sunnyday.DataCollectionFragments.FragmentOne">
+
+        <TextView
+            android:layout_marginTop="20dp"
+            android:id="@+id/stepstext_TV"
+            android:layout_width="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:textColor="@android:color/white"
+            android:layout_height="wrap_content"
+            android:text="@string/data_collection_fragments_steps"/>
+        <LinearLayout
+            android:layout_below="@id/stepstext_TV"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:id="@+id/upperLinearLayout"
+            android:layout_height="50dp"
+            android:orientation="horizontal">
+            <ImageView
+                android:id="@+id/backbutton_IV"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="11dp"
+                android:src="@drawable/back_icon"
+                android:tint="@android:color/white" />
+            <ImageView
+                android:src="@drawable/progresssix"
+                android:id="@+id/progressBarImage"
+                android:layout_width="200dp"
+                android:layout_height="51dp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/whendidyourlastperiodstart_TV"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/upperLinearLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:text="@string/fragment_six_get_reminders_nabout_your_cycle"/>
+
+
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_above="@id/buttonNext"
+            android:layout_below="@id/whendidyourlastperiodstart_TV"
+            android:layout_height="220dp">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1.2"
+                android:src="@drawable/step_6_icon"
+                android:id="@+id/imageView3" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:gravity="center_horizontal"
+                android:padding="15dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="@string/fragment_six_we_will_send_you_reminders_about_the_begining_of_a_new_cycle_so_that_you_dont_forget_to_long"
+                android:id="@+id/idontknow_RB"
+                android:textStyle="bold"
+                android:textSize="10sp"
+                android:textColor="#ccc"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+        </LinearLayout>
+
+
+        <Button
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/border_button_data_collection_two"
+            android:layout_alignParentBottom="true"
+            android:id="@+id/buttonNext"
+            android:textColor="#681747"
+            android:textStyle="bold"
+            android:layout_centerHorizontal="true"
+            android:layout_width="250dp"
+            android:layout_height="40dp"
+            android:text="@string/data_collection_fragments_next" />
+
+    </RelativeLayout>
+</layout>

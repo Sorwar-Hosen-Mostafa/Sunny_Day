@@ -1,0 +1,193 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.sunny.sunnyday.Fragments.SettingsFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#261027"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <LinearLayout
+            android:id="@+id/upperLinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="110dp"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="@string/settings_settings"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/SettingsTextSize"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="20dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:id="@+id/viewSavedArticle_Btn"
+                android:text="@string/settings_view_saved_article"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/ViewSavedArticleButtonTextSize"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/upperLine"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/upperLinearLayout"
+            android:layout_margin="5dp"
+            android:background="@android:color/white">
+
+        </View>
+
+        <LinearLayout
+            android:id="@+id/middleLinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:layout_below="@id/upperLine"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="8"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:paddingBottom="10dp"
+                    android:paddingTop="10dp"
+                    android:text="@string/settings_pregnant_mode"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/SettingsItemsTextSize"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:paddingBottom="10dp"
+                    android:paddingTop="10dp"
+                    android:text="@string/settings_notifications"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/SettingsItemsTextSize"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:paddingBottom="10dp"
+                    android:paddingTop="10dp"
+                    android:text="@string/settings_reset_cycle_info"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/SettingsItemsTextSize"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:padding="5dp">
+
+                <ToggleButton
+                    android:id="@+id/pragnentchkState"
+                    android:layout_width="45dp"
+                    android:layout_height="22dp"
+                    android:background="@drawable/toggle_selector"
+                    android:textOff=""
+                    android:textOn=""
+                    android:layout_marginTop="7dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignLeft="@+id/resetData_BTN"
+                    android:layout_alignStart="@+id/resetData_BTN" />
+
+                <ToggleButton
+                    android:id="@+id/notificationchkState"
+                    android:layout_width="45dp"
+                    android:layout_height="22dp"
+                    android:background="@drawable/toggle_selector"
+                    android:textOff=""
+                    android:textOn=""
+                    android:layout_centerVertical="true"
+                    android:layout_alignLeft="@+id/pragnentchkState"
+                    android:layout_alignStart="@+id/pragnentchkState" />
+
+                <Button
+                    android:id="@+id/resetData_BTN"
+                    android:layout_width="39dp"
+                    android:layout_height="20dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/border_button"
+                    android:text="go"
+                    android:textColor="@android:color/white"
+                    android:layout_marginBottom="7dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/lowerLine"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/middleLinearLayout"
+            android:layout_margin="10dp"
+            android:background="@android:color/white">
+
+        </View>
+
+        <LinearLayout
+            android:id="@+id/lowerLinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_below="@id/lowerLine"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:id="@+id/termsandcondition_btn"
+                android:text="@string/settings_terms_and_conditions"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/SettingsItemsTextSize"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="@string/settings_license"
+                android:id="@+id/lisense_btn"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/SettingsItemsTextSize"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+
+</layout>

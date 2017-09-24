@@ -1,0 +1,51 @@
+<layout xmlns:design="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:id="@+id/parentlayout"
+        android:layout_height="match_parent"
+        tools:context="com.example.jibunnisa.alfaklassify.Fragments.MyAccountFragment">
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/ProgramsTabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#4e92cf"
+            style="@style/MyTabLayout"
+            app:tabGravity="fill"
+            app:tabIndicatorColor="#fff"
+            app:tabIndicatorHeight="2dp"
+            app:tabMode="fixed"
+            app:tabTextColor="#343434"
+            app:tabSelectedTextColor="#ffffff">
+
+        </android.support.design.widget.TabLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="6dp"
+            android:background="#4e92cf"></View>
+
+        <FrameLayout
+            android:orientation="vertical"
+            android:id="@+id/child_fragment_container"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="10">
+
+
+        </FrameLayout>
+        <android.support.design.widget.BottomNavigationView
+            android:layout_width="match_parent"
+            android:id="@+id/bottom_nevigation_view"
+            android:layout_height="0dp"
+            design:itemBackground="@drawable/bnv_item_background"
+            design:itemIconTint="@color/bnv_tab_item_forground"
+            design:itemTextColor="@color/bnv_tab_item_forground"
+            android:layout_weight="1"
+            design:menu="@menu/bottom_bar_menu_item"></android.support.design.widget.BottomNavigationView>
+
+    </LinearLayout>
+</layout>

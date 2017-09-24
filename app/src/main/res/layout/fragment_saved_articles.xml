@@ -1,0 +1,37 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:padding="5dp"
+        android:id="@+id/parentlayout"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:padding="10dp"
+                android:background="@color/colorPrimary"
+                android:textSize="22sp"
+                android:layout_gravity="center"
+                android:text="Saved Articles"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:padding="5dp"
+                android:layout_weight="10"
+                android:layout_marginTop="5dp"
+                android:id="@+id/SavedArticleRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"></android.support.v7.widget.RecyclerView>
+        </LinearLayout>
+
+    </FrameLayout>
+</layout>

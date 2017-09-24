@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="TabsTextSize">25dp</dimen>
+       
+    <dimen name="NextButtonTextSize">150dp</dimen>
+       
+    <dimen name="ArticleTitleTextSize">30dp</dimen>
+       
+    <dimen name="ArticleDescriptionTextSize">16sp</dimen>
+
+    <dimen name="ArticlePostDateTextSize">25dp</dimen>
+       
+    <dimen name="ArticleReadTimeTextSize">150dp</dimen>
+       
+    <dimen name="ActivityTitleTextSize">30dp</dimen>
+       
+    <dimen name="LogButtonTextSize">16sp</dimen>
+
+    <dimen name="LogTitleTextSize">25dp</dimen>
+       
+    <dimen name="LogSuggessionTextSize">150dp</dimen>
+       
+    <dimen name="LogDateTextSize">30dp</dimen>
+       
+    <dimen name="LogDayTextSize">16sp</dimen>
+
+    <dimen name="LogTitleSymbolTextSize">25dp</dimen>
+       
+    <dimen name="SettingsItemsTextSize">16sp</dimen>
+       
+    <dimen name="SettingsTextSize">25sp</dimen>
+       
+    <dimen name="ViewSavedArticleButtonTextSize">18sp</dimen>
+
+</resources>
