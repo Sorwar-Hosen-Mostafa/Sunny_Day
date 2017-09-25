@@ -3,6 +3,7 @@ package com.sunny.sunnyday.Fragments;
 
 import android.content.Context;
 import android.databinding.DataBindingUtil;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -48,6 +49,8 @@ public class ArticleReadViewFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        Typeface typeface = Typeface.createFromAsset(getActivity().getAssets(),"HelveticaLTStd-BlkCond.ttf");
+        Typeface typeface2 = Typeface.createFromAsset(getActivity().getAssets(),"HelveticaLTStd-Light.ttf");
         MainActivity mainActivity = (MainActivity) getActivity();
         article = mainActivity.getArticleViewData();
         articleReadViewBinding.articleDescriptionTV.setText(article.getArticle_Description());
@@ -55,6 +58,11 @@ public class ArticleReadViewFragment extends Fragment {
         articleReadViewBinding.postDateAndReadTimeTV.setText(article.getArticle_PostDate()+" ,"+article.getArticle_Readtime());
         articleReadViewBinding.authorNameTV.setText(article.getArticle_author());
         articleReadViewBinding.articleTitleTV.setText(article.getArticle_title());
+
+        articleReadViewBinding.postDateAndReadTimeTV.setTypeface(typeface);
+        articleReadViewBinding.authorNameTV.setTypeface(typeface);
+        articleReadViewBinding.articleTitleTV.setTypeface(typeface);
+        articleReadViewBinding.saveArticleBtn.setTypeface(typeface);
 
         articleReadViewBinding.saveArticleBtn.setOnClickListener(new View.OnClickListener() {
             @Override

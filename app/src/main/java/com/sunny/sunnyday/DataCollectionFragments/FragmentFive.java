@@ -49,7 +49,7 @@ public class FragmentFive extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        Typeface typeface = Typeface.createFromAsset(getActivity().getAssets(),"Jersey M54.ttf");
+        Typeface typeface = Typeface.createFromAsset(getActivity().getAssets(),"HelveticaLTStd-BlkCond.ttf");
         fiveBinding.dataOfBirthPicker.setTypeface(typeface);
         mainActivity = (MainActivity) getActivity();
 

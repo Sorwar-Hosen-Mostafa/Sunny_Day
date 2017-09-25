@@ -104,22 +104,7 @@
             android:layout_toRightOf="@+id/date_picker"
             android:layout_toEndOf="@+id/date_picker" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="3dp"
-            android:layout_above="@id/days_TV"
-            android:id="@+id/toblineView"
-            android:background="@android:color/white"
-            >
 
-        </View>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="3dp"
-            android:id="@+id/bottomlineView"
-            android:layout_marginTop="26dp"
-            android:layout_below="@+id/toblineView"
-            android:background="@android:color/white"></View>
 
 
 

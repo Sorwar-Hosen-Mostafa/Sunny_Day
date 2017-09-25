@@ -65,9 +65,9 @@ public class FragmentTwo extends Fragment {
 
 
         mainActivity = (MainActivity) getActivity();
-        Typeface typeface = Typeface.createFromAsset(getActivity().getAssets(),"Jersey M54.ttf");
+        Typeface typeface = Typeface.createFromAsset(getActivity().getAssets(),"HelveticaLTStd-BlkCond.ttf");
         twoBinding.datePicker.setTypeface(typeface);
-        twoBinding.monthPicker.setDisplayedValues(new String[]{"JAN","FAB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"});
+        twoBinding.monthPicker.setDisplayedValues(new String[]{"JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"});
         twoBinding.monthPicker.setValue(month+1);
         twoBinding.monthPicker.setTypeface(typeface);
 

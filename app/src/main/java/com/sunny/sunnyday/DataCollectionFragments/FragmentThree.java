@@ -54,7 +54,8 @@ public class FragmentThree extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
 
-        Typeface typeface = Typeface.createFromAsset(getActivity().getAssets(),"Jersey M54.ttf");
+        Typeface typeface = Typeface.createFromAsset(getActivity().getAssets(),"HelveticaLTStd-BlkCond.ttf");
+
         threeBinding.cyclePeriodPicker.setTypeface(typeface);
         threeBinding.idontknowRB.setOnClickListener(new View.OnClickListener() {
             @Override

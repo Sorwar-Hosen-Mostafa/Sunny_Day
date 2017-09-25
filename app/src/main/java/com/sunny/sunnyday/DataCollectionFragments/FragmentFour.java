@@ -51,7 +51,7 @@ public class FragmentFour extends Fragment {
     public void onActivityCreated(@Nullable final Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        Typeface typeface = Typeface.createFromAsset(getActivity().getAssets(),"Jersey M54.ttf");
+        Typeface typeface = Typeface.createFromAsset(getActivity().getAssets(),"HelveticaLTStd-BlkCond.ttf");
         fourBinding.CycleLengthPicker.setTypeface(typeface);
         mainActivity = (MainActivity) getActivity();
 

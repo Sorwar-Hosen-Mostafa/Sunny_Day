@@ -74,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
     private WhatsInWhatsOutFragment whatsInWhatsOutFragment;
     private TrendingNowFragmet trendingNowFragmet;
     private FragmentOne fragmentOne;
+
     private Article article;
     private ArrayList<Article> articles;
     int size;

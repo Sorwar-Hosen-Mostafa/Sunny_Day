@@ -47,6 +47,7 @@
             android:textColor="@android:color/white"
             android:textSize="18sp"
             android:textStyle="bold"
+            android:typeface="sans"
             android:textAlignment="center"
             android:text="@string/fragment_three_on_avarage_how_long_is_nyour_period"/>
         <RadioButton
@@ -103,22 +104,7 @@
             android:layout_toRightOf="@+id/cycle_period_picker"
             android:layout_toEndOf="@+id/cycle_period_picker" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="3dp"
-            android:layout_above="@id/days_TV"
-            android:id="@+id/toblineView"
-            android:background="@android:color/white"
-            >
 
-        </View>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="3dp"
-            android:id="@+id/bottomlineView"
-            android:layout_marginTop="26dp"
-            android:layout_below="@+id/toblineView"
-            android:background="@android:color/white"></View>
         <Button
             android:layout_marginBottom="20dp"
             android:background="@drawable/border_button_data_collection_two"
