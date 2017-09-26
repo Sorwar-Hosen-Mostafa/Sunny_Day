@@ -20,10 +20,163 @@
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:text="* This License” refers to version 3 of the GNU General Public License.\n\n* “Copyright” also means copyright-like laws that apply to other kinds of works, such as semiconductor masks.\n\n* “The Program” refers to any copyrightable work licensed under this License. Each licensee is addressed as “you”. “Licensees” and “recipients” may be individuals or organizations.\n\n* To “modify” a work means to copy from or adapt all or part of the work in a fashion requiring copyright permission, other than the making of an exact copy. The resulting work is called a “modified version” of the earlier work or a work “based on” the earlier work.\n\n* A “covered work” means either the unmodified Program or a work based on the Program.\n\n* To “propagate” a work means to do anything with it that, without permission, would make you directly or secondarily liable for infringement under applicable copyright law, except executing it on a computer or modifying a private copy. Propagation includes copying, distribution (with or without modification), making available to the public, and in some countries other activities as well."
-            android:layout_height="match_parent" />
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:padding="5dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <View
+                    android:layout_width="0dp"
+                    android:layout_weight=".2"
+                    android:background="#999"
+                    android:layout_height="match_parent">
+
+                </View>
+                <TextView
+                    android:layout_marginLeft="5dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="10"
+                    android:layout_height="wrap_content"
+                    android:text="@string/fragment_five_the_cycle_prediction_will_be_more_accurate_if_the_app_get_your_age"/>
+            </LinearLayout>
+            <LinearLayout
+                android:padding="5dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <View
+                    android:layout_width="0dp"
+                    android:layout_weight=".2"
+                    android:background="#999"
+                    android:layout_height="match_parent">
+
+                </View>
+                <TextView
+                    android:layout_marginLeft="5dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="10"
+                    android:layout_height="wrap_content"
+                    android:text="@string/fragment_five_the_cycle_prediction_will_be_more_accurate_if_the_app_get_your_age"/>
+            </LinearLayout>
+            <LinearLayout
+                android:padding="5dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <View
+                    android:layout_width="0dp"
+                    android:layout_weight=".2"
+                    android:background="#999"
+                    android:layout_height="match_parent">
+
+                </View>
+                <TextView
+                    android:layout_marginLeft="5dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="10"
+                    android:layout_height="wrap_content"
+                    android:text="@string/fragment_five_the_cycle_prediction_will_be_more_accurate_if_the_app_get_your_age"/>
+            </LinearLayout>
+            <LinearLayout
+                android:padding="5dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <View
+                    android:layout_width="0dp"
+                    android:layout_weight=".2"
+                    android:background="#999"
+                    android:layout_height="match_parent">
+
+                </View>
+                <TextView
+                    android:layout_marginLeft="5dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="10"
+                    android:layout_height="wrap_content"
+                    android:text="@string/fragment_five_the_cycle_prediction_will_be_more_accurate_if_the_app_get_your_age"/>
+            </LinearLayout>
+            <LinearLayout
+                android:padding="5dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <View
+                    android:layout_width="0dp"
+                    android:layout_weight=".2"
+                    android:background="#999"
+                    android:layout_height="match_parent">
+
+                </View>
+                <TextView
+                    android:layout_marginLeft="5dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="10"
+                    android:layout_height="wrap_content"
+                    android:text="@string/fragment_five_the_cycle_prediction_will_be_more_accurate_if_the_app_get_your_age"/>
+            </LinearLayout>
+            <LinearLayout
+                android:padding="5dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <View
+                    android:layout_width="0dp"
+                    android:layout_weight=".2"
+                    android:background="#999"
+                    android:layout_height="match_parent">
+
+                </View>
+                <TextView
+                    android:layout_marginLeft="5dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="10"
+                    android:layout_height="wrap_content"
+                    android:text="@string/fragment_five_the_cycle_prediction_will_be_more_accurate_if_the_app_get_your_age"/>
+            </LinearLayout>
+            <LinearLayout
+                android:padding="5dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <View
+                    android:layout_width="0dp"
+                    android:layout_weight=".2"
+                    android:background="#999"
+                    android:layout_height="match_parent">
+
+                </View>
+                <TextView
+                    android:layout_marginLeft="5dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="10"
+                    android:layout_height="wrap_content"
+                    android:text="@string/fragment_five_the_cycle_prediction_will_be_more_accurate_if_the_app_get_your_age"/>
+            </LinearLayout>
+            <LinearLayout
+                android:padding="5dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <View
+                    android:layout_width="0dp"
+                    android:layout_weight=".2"
+                    android:background="#999"
+                    android:layout_height="match_parent">
+
+                </View>
+                <TextView
+                    android:layout_marginLeft="5dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="10"
+                    android:layout_height="wrap_content"
+                    android:text="@string/fragment_five_the_cycle_prediction_will_be_more_accurate_if_the_app_get_your_age"/>
+            </LinearLayout>
+        </LinearLayout>
     </ScrollView>
 
 

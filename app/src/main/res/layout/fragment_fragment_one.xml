@@ -82,7 +82,7 @@
                 android:layout_marginLeft="41dp"
                 android:id="@+id/textView2"
                 android:layout_width="match_parent"
-                android:textColor="#ccc"
+                android:textColor="#eee"
                 android:textSize="11sp"
                 android:layout_height="wrap_content"
                 android:text="@string/fragment_one_i_need_accurate_predictions_of_favourable_days_of_conception"
@@ -104,7 +104,7 @@
                 android:layout_marginLeft="41dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="#ccc"
+                android:textColor="#eee"
                 android:text="@string/fragment_one_i_want_to_receive_cycle_predictios"/>
         </RadioGroup>
 

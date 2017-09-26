@@ -57,7 +57,7 @@
             android:id="@+id/idontknow_RB"
             android:textStyle="bold"
             android:textSize="12sp"
-            android:textColor="#ccc"
+            android:textColor="#eee"
             android:layout_below="@+id/whendidyourlastperiodstart_TV"
             android:layout_alignLeft="@+id/whendidyourlastperiodstart_TV"
             android:layout_alignStart="@+id/whendidyourlastperiodstart_TV"
