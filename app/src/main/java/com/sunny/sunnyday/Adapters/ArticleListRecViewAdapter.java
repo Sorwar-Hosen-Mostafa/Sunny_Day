@@ -11,7 +11,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.firebase.database.DatabaseReference;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
@@ -36,14 +35,11 @@ public class ArticleListRecViewAdapter extends RecyclerView.Adapter<ArticleListR
     ArrayList<Article > already_saved_articles;
     LayoutInflater inflater;
     ClickedListener clickedListener;
-    String device_id;
-    ArticleListRecViewAdapter articleListRecViewAdapter;
     String from;
     Context context;
     ArrayList<Article> saved_articles_list;
     SavedArticleDAO savedArticleDAO;
     MainActivity mainActivity;;
-    DatabaseReference databaseReferencetwo;
     public ArticleListRecViewAdapter(List<Article> articles, Context context, String from){
 
         this.context = context;
@@ -167,32 +163,7 @@ public class ArticleListRecViewAdapter extends RecyclerView.Adapter<ArticleListR
                 else {
 
                 }
-                //Toast.makeText(context,"article saved",Toast.LENGTH_SHORT).show();
-//                device_id = Utils.getFromPrefs(context,Utils.DATA_COLLECTION_PREFERENCES,Utils.USER_DEVICE_ID,Utils.DEFAULT_VALUE);
-//                databaseReferencetwo = FirebaseDatabase.getInstance().getReference(device_id).child(Utils.USER_SAVED_ARTICLE);
-//
-//                mainActivity.saveArticle();
-//
-//                saved_articles_final=mainActivity.getSaved_articles_final();
-//                boolean status = false;
-//                for(int i=0;i<saved_articles_final.size();i++){
-//                    if(saved_articles_final.get(i).equals(article.getId())){
-//                        status= true;
-//                        break;
-//                    }
-//                    else {
-//                        status = false;
-//                        continue;
-//                    }
-//                }
-//                if (status==true){
-//                    Toast.makeText(context,"You have already saved this article",Toast.LENGTH_LONG).show();
-//                }
-//                else {
-//                    saved_articles_final.add(article.getId());
-//                    android.util.Log.e("final",saved_articles_final.toString());
-//                    databaseReferencetwo.setValue(saved_articles_final);
-//                }
+
             }
         });
 

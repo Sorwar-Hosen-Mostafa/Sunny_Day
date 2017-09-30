@@ -5,13 +5,9 @@ import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
-import android.icu.util.MeasureUnit;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
@@ -22,19 +18,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
 import android.util.Log;
-import android.util.Size;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 import com.sunny.sunnyday.DataCollectionFragments.FragmentOne;
 import com.sunny.sunnyday.Fragments.ArticleReadViewFragment;
 import com.sunny.sunnyday.Fragments.HealthAndFitnessFragment;
@@ -56,11 +45,9 @@ public class MainActivity extends AppCompatActivity {
 
 
     LinearLayout parentlayout;
-    ArrayList<String> saved_articles;
     ArrayList<String> saved_articles_final;
     String device_id;
     DatabaseReference databaseReference;
-    DatabaseReference databaseReferencetwo;
     public static int REQUEST_READ_PHONE_STATE = 1;
     private ActivityMainBinding activityMainBinding;
     private HealthAndFitnessFragment healthAndFitnessFragment;
@@ -77,7 +64,6 @@ public class MainActivity extends AppCompatActivity {
     public boolean fromsavedarticle = false;
 
     private Article article;
-    private ArrayList<Article> articles;
     int size;
 
 
@@ -144,26 +130,24 @@ public class MainActivity extends AppCompatActivity {
             TextView tv = (TextView) (((LinearLayout) ((LinearLayout) activityMainBinding.ProgramsTabLayout.getChildAt(0)).getChildAt(i)).getChildAt(1));
             tv.setTextColor(Color.parseColor("#ffffff"));
             tv.setTextSize(1, 11);
-            // tv.setTextSize(TypedValue.COMPLEX_UNIT_SP,25);
         }
 
 
-        if (ActivityCompat.checkSelfPermission(MainActivity.this, android.Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED) {
-
-
-            ContinueProcess();
-
-
-        } else {
-            askForPermission(android.Manifest.permission.READ_PHONE_STATE, REQUEST_READ_PHONE_STATE);
-        }
+//        if (ActivityCompat.checkSelfPermission(MainActivity.this, android.Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED) {
+//
+//
+//            ContinueProcess();
+//
+//
+//        } else {
+//            askForPermission(android.Manifest.permission.READ_PHONE_STATE, REQUEST_READ_PHONE_STATE);
+//        }
 
 
         activityMainBinding.ProgramsTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
 
-              //  Utils.saveToPrefs(MainActivity.this, Utils.DATA_COLLECTION_PREFERENCES, Utils.FROM_NOTIFICATION, Utils.STATUS_TRUE);
 
                 switch (tab.getPosition()) {
                     case 0:
@@ -206,7 +190,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
 
-               // Utils.saveToPrefs(MainActivity.this, Utils.DATA_COLLECTION_PREFERENCES, Utils.FROM_NOTIFICATION, Utils.STATUS_TRUE);
 
                 switch (tab.getPosition()) {
                     case 0:
@@ -248,13 +231,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-//                for(int i=0;i<size;i++)
-//                {
-//                    TextView tv = (TextView)(((LinearLayout)((LinearLayout)activityMainBinding.ProgramsTabLayout.getChildAt(0)).getChildAt(i)).getChildAt(1));
-//                    tv.setTextColor(Color.parseColor("#cccccc"));
-//                }
-
-              //  Utils.saveToPrefs(MainActivity.this, Utils.DATA_COLLECTION_PREFERENCES, Utils.FROM_NOTIFICATION, Utils.STATUS_TRUE);
 
                 switch (item.getItemId()) {
                     case R.id.healthAndHygieneMenuItem:
@@ -297,13 +273,6 @@ public class MainActivity extends AppCompatActivity {
                                 Utils.saveToPrefs(MainActivity.this,Utils.DATA_COLLECTION_PREFERENCES,Utils.FIRST_TIME_OPEN_APP,Utils.STATUS_FALSE);
                             }
                             else {
-                              //  Utils.saveToPrefs(MainActivity.this,Utils.DATA_COLLECTION_PREFERENCES,Utils.FROM_NOTIFICATION,Utils.STATUS_TRUE);
-//                                settingsFragment = new SettingsFragment();
-//                                fragmentManager = getSupportFragmentManager();
-//                                fragmentTransaction = fragmentManager.beginTransaction();
-//                                fragmentTransaction.replace(R.id.child_fragment_container, settingsFragment, "settingsFrag");
-//                                fragmentTransaction.addToBackStack("eww");
-//                                fragmentTransaction.commit();
                                 activityMainBinding.ProgramsTabLayout.setSelectedTabIndicatorColor(Color.parseColor("#4e92cf"));
                                 periodCalenderFragment = new PeriodCalenderFragment();
                                 fragmentManager = getSupportFragmentManager();
@@ -366,60 +335,56 @@ public class MainActivity extends AppCompatActivity {
         return deviceId;
     }
 
-    private void askForPermission(String permission, Integer requestCode) {
-        if (ContextCompat.checkSelfPermission(MainActivity.this, permission) != PackageManager.PERMISSION_GRANTED) {
+//    private void askForPermission(String permission, Integer requestCode) {
+//        if (ContextCompat.checkSelfPermission(MainActivity.this, permission) != PackageManager.PERMISSION_GRANTED) {
+//
+//            if (ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this, permission)) {
+//
+//                ActivityCompat.requestPermissions(MainActivity.this, new String[]{permission}, requestCode);
+//
+//            } else {
+//
+//                Log.d(TAG, "askForPermission: " + permission);
+//
+//                ActivityCompat.requestPermissions(MainActivity.this, new String[]{permission}, requestCode);
+//            }
+//        } else {
+//            Toast.makeText(MainActivity.this, "" + permission + " is already granted.", Toast.LENGTH_SHORT).show();
+//        }
+//    }
 
-            // Should we show an explanation?
-            if (ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this, permission)) {
+//    @Override
+//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+//        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+//
+//        Log.d(TAG, "onRequestPermissionsResult: " + requestCode);
+//
+//        switch (requestCode) {
+//            case 1:
+//                if (grantResults.length > 0
+//                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+//
+//                    Log.d(TAG, "onRequestPermissionsResult: request");
+//
+//                    ContinueProcess();
+//
+//                } else {
+//                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+//                        finishAffinity();
+//                    } else {
+//                        finish();
+//                    }
+//                }
+//                break;
+//
+//        }
+//    }
 
-                //This is called if user has denied the permission before
-                //In this case I am just asking the permission again
-                ActivityCompat.requestPermissions(MainActivity.this, new String[]{permission}, requestCode);
-
-            } else {
-
-                Log.d(TAG, "askForPermission: " + permission);
-
-                ActivityCompat.requestPermissions(MainActivity.this, new String[]{permission}, requestCode);
-            }
-        } else {
-            Toast.makeText(MainActivity.this, "" + permission + " is already granted.", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-
-        Log.d(TAG, "onRequestPermissionsResult: " + requestCode);
-
-        switch (requestCode) {
-            case 1:
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
-                    Log.d(TAG, "onRequestPermissionsResult: request");
-
-                    ContinueProcess();
-
-                } else {
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                        finishAffinity();
-                    } else {
-                        finish();
-                    }
-                }
-                break;
-
-        }
-    }
-
-    private void ContinueProcess() {
-
-        Utils.saveToPrefs(MainActivity.this, Utils.DATA_COLLECTION_PREFERENCES, Utils.USER_DEVICE_ID, getuserdeviceID());
-        //   Toast.makeText(MainActivity.this,Utils.getFromPrefs(MainActivity.this,Utils.DATA_COLLECTION_PREFERENCES,Utils.USER_DEVICE_ID).toString(),Toast.LENGTH_LONG).show();
-
-    }
+//    private void ContinueProcess() {
+//
+//        Utils.saveToPrefs(MainActivity.this, Utils.DATA_COLLECTION_PREFERENCES, Utils.USER_DEVICE_ID, getuserdeviceID());
+//
+//    }
 
     @Override
     public void onBackPressed() {

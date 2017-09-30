@@ -4,7 +4,6 @@ package com.sunny.sunnyday.Fragments;
 import android.app.AlarmManager;
 import android.app.DatePickerDialog;
 import android.app.PendingIntent;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
@@ -24,8 +23,6 @@ import com.github.sundeepk.compactcalendarview.CompactCalendarView;
 import com.github.sundeepk.compactcalendarview.domain.Event;
 import com.sunny.sunnyday.Adapters.LogListRecViewAdapter;
 import com.sunny.sunnyday.AlarmReceiver;
-import com.sunny.sunnyday.MainActivity;
-import com.sunny.sunnyday.MyJobService;
 import com.sunny.sunnyday.Model.Log;
 import com.sunny.sunnyday.R;
 import com.sunny.sunnyday.Utils;
@@ -38,18 +35,12 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import me.tatarka.support.job.JobInfo;
-import me.tatarka.support.job.JobScheduler;
 
-/**
- * A simple {@link Fragment} subclass.
- */
+
 public class PeriodCalenderFragment extends Fragment {
 
-    private int JOB_ID = 0;
     private Log log;
     private ArrayList<Log> logs;
-    public JobScheduler jobScheduler;
     int lastYear = 0;
     boolean prev = false;
     boolean periodalarmset = false;
@@ -62,11 +53,10 @@ public class PeriodCalenderFragment extends Fragment {
     SimpleDateFormat monthformatter = new SimpleDateFormat("MM");
     SimpleDateFormat yearformatter = new SimpleDateFormat("yyyy");
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMM yyyy");
-    private Calendar calendertemp, calendarkemp;
+    private Calendar calendarkemp;
     ArrayList<Integer> months;
     Calendar calendarforeventset;
     LogListRecViewAdapter logListRecViewAdapter;
-    boolean fisttime = true;
     Calendar calendarcurrent = Calendar.getInstance(Locale.getDefault());
     Date datecurrent;
     boolean log_function;
@@ -81,7 +71,6 @@ public class PeriodCalenderFragment extends Fragment {
     Date datemain;
     Date ldtemp;
     Intent notificationIntent;
-    int month;
     PendingIntent pendingIntent;
     AlarmManager alarmManager;
     String pragnancystatus;
@@ -120,7 +109,6 @@ public class PeriodCalenderFragment extends Fragment {
         calendarcurrent.set(Calendar.DAY_OF_MONTH, 1);
         datecurrent = new Date(calendarcurrent.getTimeInMillis());
         datecurrent.setHours(0);
-        //  android.util.Log.e("current date",datecurrent.toString());
 
 
         calendarkemp = Calendar.getInstance();
@@ -133,8 +121,6 @@ public class PeriodCalenderFragment extends Fragment {
         logs = new ArrayList<>();
         ddd = new Date();
 
-
-        // periodCalenderBinding.
 
 
         dateFormatMonth = new SimpleDateFormat("MMMM- yyyy", Locale.getDefault());
@@ -213,12 +199,11 @@ public class PeriodCalenderFragment extends Fragment {
             @Override
             public void onDayClick(Date dateClicked) {
 
-                calendarDateClicked = dateClicked;
-                //android.util.Log.e("error from listener:", String.valueOf(calendarDateClicked));
-                if (periodCalenderBinding.compactcalendarView.getEvents(dateClicked).size() > 0) {
-                    Event event = periodCalenderBinding.compactcalendarView.getEvents(dateClicked).get(0);
-                    //  Toast.makeText(getActivity(), "" + event.getData().toString(), Toast.LENGTH_SHORT).show();
-                }
+//                calendarDateClicked = dateClicked;
+//                if (periodCalenderBinding.compactcalendarView.getEvents(dateClicked).size() > 0) {
+//                    Event event = periodCalenderBinding.compactcalendarView.getEvents(dateClicked).get(0);
+//                    Toast.makeText(getActivity(), "" + event.getData().toString(), Toast.LENGTH_SHORT).show();
+//                }
             }
 
             @Override
@@ -289,8 +274,6 @@ public class PeriodCalenderFragment extends Fragment {
                             seteventsoncalendarnew(calendarforeventset);
                             logListRecViewAdapter.notifyDataSetChanged();
 
-                            //  posiion = posiion-(periodduration+5);
-                            //  periodCalenderBinding.periodCalenderRecyclerView.getLayoutManager().scrollToPosition(posiion);
 
                         } else {
                             periodCalenderBinding.periodCalenderRecyclerView.getLayoutManager().scrollToPosition(0);
@@ -398,22 +381,18 @@ public class PeriodCalenderFragment extends Fragment {
         public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
 
             clearAllAlarms();
-            //android.util.Log.e("date:",String .valueOf(datePicker.getDayOfMonth()));
             datePicker.getDrawingTime();
             int new_day = datePicker.getDayOfMonth();
             int new_month = datePicker.getMonth();
             int new_year = datePicker.getYear();
 
-            //android.util.Log.e("error from listener:", String.valueOf(new_day));
 
             Calendar calendar = Calendar.getInstance();
             calendar.set(Calendar.DAY_OF_MONTH, new_day);
             calendar.set(Calendar.MONTH, new_month);
             calendar.set(Calendar.YEAR, new_year);
-            int daysonmonth = calendar.getActualMaximum(Calendar.DATE);
-          //  Toast.makeText(getActivity(), "days on month " + daysonmonth, Toast.LENGTH_SHORT).show();
+            //int daysonmonth = calendar.getActualMaximum(Calendar.DATE);
 
-            //android.util.Log.e("error massage from log",""+daysonmonth);
             log_function = true;
             Utils.saveToPrefs(getActivity(), Utils.DATA_COLLECTION_PREFERENCES, Utils.LOG_FUNCTION, Utils.STATUS_TRUE);
             periodCalenderBinding.compactcalendarView.removeAllEvents();
@@ -500,7 +479,6 @@ public class PeriodCalenderFragment extends Fragment {
             }
             Event eventone = new Event(Color.parseColor("#C072A4"), ddd.getTime(), logTitles[i]);
             periodCalenderBinding.compactcalendarView.addEvent(eventone);
-            // android.util.Log.e("setting events", String.valueOf(simpleDateFormat.format(ddd.getTime())));
 
             String date = cal.get(Calendar.DAY_OF_MONTH) + "" + getextfromnumber(cal.get(Calendar.DAY_OF_MONTH)) + " " + getMonthFromNumber(cal.get(Calendar.MONTH) + 1);
             String day = formatter.format(ddd);
@@ -520,11 +498,9 @@ public class PeriodCalenderFragment extends Fragment {
                     cld.set(Calendar.SECOND, 0);
                     cld.set(Calendar.MILLISECOND, 0);
                     dte = cld.getTime();
-                    //android.util.Log.e("alarms:",dte.toString());
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
                         notificationIntent.putExtra("request_code", i + 100);
                         pendingIntent = PendingIntent.getBroadcast(getActivity(), 100 + i, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-                        //  android.util.Log.e("event notif alarms", String.valueOf(simpleDateFormat.format(dte.getTime())));
                         alarmManager.setExact(AlarmManager.RTC_WAKEUP, dte.getTime(), pendingIntent);
                         periodalarmset = true;
                     }
@@ -545,8 +521,6 @@ public class PeriodCalenderFragment extends Fragment {
         }
 
         lastdate = new Date(milliTimearray[0]);
-        String ddddd = simpleDateFormat.format(lastdate.getTime());
-        // android.util.Log.e("last date:",ddddd);
 
         if (lastdate.getTime() < datemain.getTime()) {
             periodCalenderBinding.compactcalendarView.setCurrentDate(datemain);
@@ -585,7 +559,6 @@ public class PeriodCalenderFragment extends Fragment {
                 }
                 Event eventone = new Event(Color.parseColor("#FFA500"), ddd.getTime(), "Favourable pregnancy date");
                 periodCalenderBinding.compactcalendarView.addEvent(eventone);
-                //  android.util.Log.e("setting fpd", String.valueOf(simpleDateFormat.format(ddd.getTime())));
                 String mon = formatter.format(ddd);
                 String date = cal.get(Calendar.DAY_OF_MONTH) + "" + getextfromnumber(cal.get(Calendar.DAY_OF_MONTH)) + " " + getMonthFromNumber(cal.get(Calendar.MONTH) + 1);
                 log = new Log(logTitlesPregnant[i], logSuggessionsPregnant[i], date, mon, logTitleSymbolsPregnant[i]);

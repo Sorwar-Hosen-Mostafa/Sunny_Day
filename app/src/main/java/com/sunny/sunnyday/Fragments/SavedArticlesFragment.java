@@ -72,58 +72,7 @@ public class SavedArticlesFragment extends Fragment {
 
         mainActivity.fromsavedarticle = true;
         savedArticleDao= new SavedArticleDAO(getActivity());
-        // mainActivity.saveArticle();
-        //arrayList=mainActivity.getSaved_articles_final();
 
-//        device_id = Utils.getFromPrefs(getActivity(),Utils.DATA_COLLECTION_PREFERENCES,Utils.USER_DEVICE_ID);
-//        dbRef = FirebaseDatabase.getInstance().getReference();
-//        final Query query2 = dbRef.child(device_id).child(Utils.USER_SAVED_ARTICLE);
-//
-//        final Query query = dbRef.child(Utils.FIRE_ARTICLE);
-//
-//        query.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//
-//                articles = new ArrayList<Article>();
-//                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-//
-//                    articles.add(snapshot.getValue(Article.class));
-//
-//                }
-//
-//                if (articles.size() > 0) {
-//
-//                    ArrayList<Article> saved_articles_list = savedArticleDao.getSavedArticles();
-//
-//                    for (int i = 0; i < articles.size(); i++) {
-//                        for (int j = 0; j < saved_articles_list.size(); j++) {
-//                            if (saved_articles_list.get(j).getId().equals(articles.get(i).getId())) {
-//                                finalarticles.add(articles.get(j));
-//                            } else {
-//                                Toast.makeText(mainActivity, "No articles saved yet", Toast.LENGTH_SHORT).show();
-//                            }
-//                        }
-//                    }
-//
-//                    if (getActivity() != null   ) {
-//                        articleListRecViewAdapter = new ArticleListRecViewAdapter(finalarticles, getActivity());
-//                        savedArticlesBinding.SavedArticleRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-//                        savedArticlesBinding.SavedArticleRecyclerView.setAdapter(articleListRecViewAdapter);
-//                    } else {
-//
-//                    }
-//                }
-//
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//
-//            }
-//
-//
-//        });
 
         if(isNetworkAvailable()){
             getdata();

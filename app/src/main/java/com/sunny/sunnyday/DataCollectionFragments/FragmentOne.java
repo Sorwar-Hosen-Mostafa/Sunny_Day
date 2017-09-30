@@ -14,7 +14,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 
 import com.shawnlin.numberpicker.NumberPicker;
 import com.sunny.sunnyday.Fragments.HealthAndFitnessFragment;
@@ -95,7 +94,6 @@ public class FragmentOne extends Fragment {
                         Utils.saveToPrefs(getActivity(),Utils.DATA_COLLECTION_PREFERENCES,Utils.USER_WANT_TO_PREGNANT_STATUS,Utils.STATUS_FALSE);
                         break;
                 }
-              //  Toast.makeText(getActivity(),Utils.getFromPrefs(getActivity(),Utils.DATA_COLLECTION_PREFERENCES,Utils.USER_WANT_TO_PREGNANT_STATUS)+ " ",Toast.LENGTH_LONG).show();
 
 
                 fragmentTwo = new FragmentTwo();

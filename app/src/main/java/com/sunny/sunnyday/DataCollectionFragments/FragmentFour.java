@@ -11,8 +11,6 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
-import android.widget.Toast;
 
 import com.sunny.sunnyday.MainActivity;
 import com.sunny.sunnyday.R;
@@ -80,21 +78,6 @@ public class FragmentFour extends Fragment {
             }
         });
 
-//        fourBinding.idontknowRB.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//                if(isChecked){
-//                    set=true;
-//                    cycle_length = 27;
-//                    fourBinding.CycleLengthPicker.setEnabled(false);
-//                }
-//                else {
-//                    set=false;
-//                    cycle_length = fourBinding.CycleLengthPicker.getValue();
-//                    fourBinding.CycleLengthPicker.setEnabled(true);
-//                }
-//            }
-//        });
 
 
         fourBinding.buttonNext.setOnClickListener(new View.OnClickListener() {
@@ -108,7 +91,6 @@ public class FragmentFour extends Fragment {
                 }
 
                 Utils.saveToPrefs(getActivity(),Utils.DATA_COLLECTION_PREFERENCES,Utils.USER_CYCLE_LENGTH,String .valueOf(cycle_length));
-               // Toast.makeText(getActivity(), Utils.getFromPrefs(getActivity(),Utils.DATA_COLLECTION_PREFERENCES,Utils.USER_CYCLE_LENGTH)+" ",Toast.LENGTH_LONG).show();
 
                 fragmentManager = mainActivity.fragmentManager;
                 fragmentTransaction = mainActivity.fragmentTransaction;

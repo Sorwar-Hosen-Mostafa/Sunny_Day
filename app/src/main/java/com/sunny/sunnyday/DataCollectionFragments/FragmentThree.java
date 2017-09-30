@@ -11,9 +11,6 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
-import android.widget.Toast;
-
 import com.sunny.sunnyday.MainActivity;
 import com.sunny.sunnyday.R;
 import com.sunny.sunnyday.Utils;
@@ -84,22 +81,7 @@ public class FragmentThree extends Fragment {
 
             }
         });
-//        threeBinding.idontknowRB.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//                if(isChecked){
-//                    set=true;
-//                    period_duration = 3;
-//                    threeBinding.cyclePeriodPicker.setEnabled(false);
-//                    threeBinding.idontknowRB.setChecked(true);
-//                }
-//                else {
-//                    set=false;
-//                    period_duration = threeBinding.cyclePeriodPicker.getValue();
-//                    threeBinding.cyclePeriodPicker.setEnabled(true);
-//                }
-//            }
-//        });
+
 
         mainActivity = (MainActivity) getActivity();
 
@@ -113,7 +95,6 @@ public class FragmentThree extends Fragment {
                 }
                 Utils.saveToPrefs(getActivity(),Utils.DATA_COLLECTION_PREFERENCES,Utils.USER_PERIOD_DURATION,String .valueOf(period_duration));
 
-               // Toast.makeText(getActivity(), Utils.getFromPrefs(getActivity(),Utils.DATA_COLLECTION_PREFERENCES,Utils.USER_PERIOD_DURATION)+" ",Toast.LENGTH_LONG).show();
 
                 fragmentManager = mainActivity.fragmentManager;
                 fragmentTransaction = mainActivity.fragmentTransaction;

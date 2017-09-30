@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,8 +20,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-import com.lapism.searchview.SearchHistoryTable;
-import com.sunny.sunnyday.Adapters.ArticleGridRecViewAdapter;
 import com.sunny.sunnyday.Adapters.ArticleListRecViewAdapter;
 import com.sunny.sunnyday.MainActivity;
 import com.sunny.sunnyday.Model.Article;
@@ -65,9 +62,6 @@ public class HumorOfTheDayFragment extends Fragment {
     public void onActivityCreated(@Nullable final Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-//        progressDialog = new SpotsDialog(getActivity(), R.style.Custom_Progress_Bar);
-//        progressDialog.setMessage("please wait..");
-//        progressDialog.show();
 
         MainActivity mainActivity = (MainActivity) getActivity();
 
@@ -121,9 +115,7 @@ public class HumorOfTheDayFragment extends Fragment {
                     articleListRecViewAdapter = new ArticleListRecViewAdapter(articles, getActivity(), "HOTD");
                     humorOfTheDayBinding.humorOfTheDayRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
                     humorOfTheDayBinding.humorOfTheDayRecyclerView.setAdapter(articleListRecViewAdapter);
-                    if (articleListRecViewAdapter.getItemCount() > 0) {
-                        //  progressDialog.dismiss();
-                    }
+
                 }
             }
 

@@ -2,16 +2,13 @@ package com.sunny.sunnyday.Fragments;
 
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.databinding.DataBindingUtil;
-import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.GridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -94,19 +91,7 @@ public class HealthAndFitnessFragment extends Fragment {
             } else {
                 getdata();
             }
-//            new AlertDialog.Builder(getActivity())
-//                    .setIcon(android.R.drawable.ic_dialog_alert)
-//                    .setTitle("Alert!!")
-//                    .setMessage("please connect your phone to internet to load new articles.")
-//                    .setPositiveButton("OK", new DialogInterface.OnClickListener()
-//                    {
-//                        @Override
-//                        public void onClick(DialogInterface dialog, int which) {
-//                            getdata();
-//                        }
-//
-//                    })
-//                    .show();
+
             getdata();
         }
 

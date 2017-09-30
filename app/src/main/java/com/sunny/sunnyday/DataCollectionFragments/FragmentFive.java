@@ -11,7 +11,6 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.sunny.sunnyday.MainActivity;
 import com.sunny.sunnyday.R;
@@ -64,7 +63,6 @@ public class FragmentFive extends Fragment {
 
                 yearOfBirth = String.valueOf(fiveBinding.dataOfBirthPicker.getValue());
                 Utils.saveToPrefs(getActivity(),Utils.DATA_COLLECTION_PREFERENCES,Utils.USER_BIRTH_YEAR, yearOfBirth);
-               // Toast.makeText(getActivity(), Utils.getFromPrefs(getActivity(),Utils.DATA_COLLECTION_PREFERENCES,Utils.USER_BIRTH_YEAR)+" ",Toast.LENGTH_LONG).show();
 
                 fragmentManager = mainActivity.fragmentManager;
                 fragmentTransaction = mainActivity.fragmentTransaction;

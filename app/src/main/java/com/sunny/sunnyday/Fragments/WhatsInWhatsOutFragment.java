@@ -9,12 +9,10 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.GridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -69,9 +67,6 @@ public class WhatsInWhatsOutFragment extends Fragment {
 
         mainActivity.fromsavedarticle = false;
 
-//        progressDialog = new SpotsDialog(getActivity(), R.style.Custom_Progress_Bar);
-//        progressDialog.setMessage("please wait..");
-//        progressDialog.show();
 
         if(isNetworkAvailable()){
             getdata();
@@ -101,16 +96,7 @@ public class WhatsInWhatsOutFragment extends Fragment {
 
 
     }
-    public ArrayList<Article> getarticlesarray(){
 
-        return this.articles;
-
-    }
-    public void setarticlesarray(ArrayList<Article> articles){
-
-        this.articles = articles;
-
-    }
     private boolean isNetworkAvailable() {
         ConnectivityManager connectivityManager
                 = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -137,7 +123,7 @@ public class WhatsInWhatsOutFragment extends Fragment {
                     whatsInWhatsOutBinding.whatsInWhatsOutRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
                     whatsInWhatsOutBinding.whatsInWhatsOutRecyclerView.setAdapter(articleGridRecViewAdapter);
                     if (articleGridRecViewAdapter.getItemCount() > 0) {
-                        //  progressDialog.dismiss();
+
                     }
                 }
             }

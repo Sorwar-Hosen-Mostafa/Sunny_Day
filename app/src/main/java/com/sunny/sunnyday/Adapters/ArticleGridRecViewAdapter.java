@@ -8,9 +8,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-
-import com.google.firebase.database.DatabaseReference;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
@@ -31,16 +28,12 @@ public class ArticleGridRecViewAdapter extends RecyclerView.Adapter<ArticleGridR
 
     List<Article> articles ;
     ArrayList<Article > already_saved_articles;
-    ArrayList<String > saved_articles_final;
     LayoutInflater inflater;
     ClickedListener clickedListener;
-    String device_id;
     Context context;
 
     MainActivity mainActivity;;
-    DatabaseReference databaseReference;
     SavedArticleDAO savedArticleDAO;
-    DatabaseReference databaseReferencetwo;
     ArrayList<Article> saved_articles_list;
     public ArticleGridRecViewAdapter(List<Article> articles, Context context){
 
@@ -174,33 +167,6 @@ public class ArticleGridRecViewAdapter extends RecyclerView.Adapter<ArticleGridR
 
 
 
-
-//                device_id = Utils.getFromPrefs(context,Utils.DATA_COLLECTION_PREFERENCES,Utils.USER_DEVICE_ID);
-//                databaseReferencetwo = FirebaseDatabase.getInstance().getReference(device_id).child(Utils.USER_SAVED_ARTICLE);
-//
-//                mainActivity.saveArticle();
-//
-//                saved_articles_final=mainActivity.getSaved_articles_final();
-//                boolean status = false;
-//                for(int i=0;i<saved_articles_final.size();i++){
-//                    if(saved_articles_final.get(i).equals(article.getId())){
-//                        status= true;
-//                        break;
-//                    }
-//                    else {
-//                        status = false;
-//                        continue;
-//                    }
-//                }
-//                if (status==true){
-//                    Toast.makeText(context,"You have already saved this article",Toast.LENGTH_SHORT).show();
-//                }
-//                else {
-//                    saved_articles_final.add(article.getId());
-//                    android.util.Log.e("final",saved_articles_final.toString());
-//                    databaseReferencetwo.setValue(saved_articles_final);
-//                    Toast.makeText(context,"article saved",Toast.LENGTH_SHORT).show();
-//                }
 
             }
         });

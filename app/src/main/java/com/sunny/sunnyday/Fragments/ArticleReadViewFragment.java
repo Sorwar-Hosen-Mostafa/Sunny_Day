@@ -15,7 +15,6 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
-import com.sunny.sunnyday.DataCollectionFragments.FragmentFive;
 import com.sunny.sunnyday.LocalDatabase.SavedArticleDAO;
 import com.sunny.sunnyday.MainActivity;
 
@@ -55,7 +54,6 @@ public class ArticleReadViewFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         Typeface typeface = Typeface.createFromAsset(getActivity().getAssets(),"HelveticaLTStd-BlkCond.ttf");
-        Typeface typeface2 = Typeface.createFromAsset(getActivity().getAssets(),"HelveticaLTStd-Light.ttf");
         final MainActivity mainActivity = (MainActivity) getActivity();
         article = mainActivity.getArticleViewData();
         articleReadViewBinding.articleDescriptionTV.setText(article.getArticle_Description());

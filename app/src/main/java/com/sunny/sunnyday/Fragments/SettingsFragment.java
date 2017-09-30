@@ -117,9 +117,7 @@ public class SettingsFragment extends Fragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Utils.saveToPrefs(getActivity(),Utils.DATA_COLLECTION_PREFERENCES,Utils.DATA_COLLECTED_STATUS,Utils.STATUS_FALSE);
-                       // Utils.saveToPrefs(getActivity(),Utils.DATA_COLLECTION_PREFERENCES,Utils.EVENT_SET_ON_CALENDAR,Utils.STATUS_FALSE);
                         Toast.makeText(getActivity(),"Data reset successfully",Toast.LENGTH_SHORT).show();
-                        //Snackbar.make(,"Data Reset Successfully",Snackbar.LENGTH_SHORT).show();
                     }
                 });
                 alert.setNegativeButton("No",null);

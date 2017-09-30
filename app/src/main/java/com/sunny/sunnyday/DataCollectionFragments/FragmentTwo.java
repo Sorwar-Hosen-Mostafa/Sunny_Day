@@ -11,7 +11,6 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.sunny.sunnyday.MainActivity;
 import com.sunny.sunnyday.R;
@@ -20,7 +19,6 @@ import com.sunny.sunnyday.databinding.FragmentFragmentTwoBinding;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -80,11 +78,9 @@ public class FragmentTwo extends Fragment {
 
                 date = String .valueOf(twoBinding.datePicker.getValue());
                 number = twoBinding.monthPicker.getValue();
-               // month = getMonthFromNumber(number);
                 Utils.saveToPrefs(getActivity(),Utils.DATA_COLLECTION_PREFERENCES,Utils.USER_LAST_PERIOD_DATE,date);
                 Utils.saveToPrefs(getActivity(),Utils.DATA_COLLECTION_PREFERENCES,Utils.USER_LAST_PERIOD_MONTH,String .valueOf(number));
 
-               // Toast.makeText(getActivity(), Utils.getFromPrefs(getActivity(),Utils.DATA_COLLECTION_PREFERENCES,Utils.USER_LAST_PERIOD_DATE)+" "+Utils.getFromPrefs(getActivity(),Utils.DATA_COLLECTION_PREFERENCES,Utils.USER_LAST_PERIOD_MONTH),Toast.LENGTH_LONG).show();
 
                 fragmentThree = new FragmentThree();
                 fragmentManager = mainActivity.fragmentManager;

@@ -10,7 +10,6 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +21,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.sunny.sunnyday.Adapters.ArticleGridRecViewAdapter;
-import com.sunny.sunnyday.Adapters.ArticleListRecViewAdapter;
 import com.sunny.sunnyday.MainActivity;
 import com.sunny.sunnyday.Model.Article;
 import com.sunny.sunnyday.R;
@@ -68,9 +66,7 @@ public class TrendingNowFragmet extends Fragment {
         MainActivity mainActivity = (MainActivity) getActivity();
 
         mainActivity.fromsavedarticle = false;
-//        progressDialog = new SpotsDialog(getActivity(), R.style.Custom_Progress_Bar);
-//        progressDialog.setMessage("please wait..");
-//        progressDialog.show();
+
 
         if(isNetworkAvailable()){
           getdata();
@@ -97,17 +93,7 @@ public class TrendingNowFragmet extends Fragment {
 
     }
 
-    public ArrayList<Article> getarticlesarray() {
 
-        return this.articles;
-
-    }
-
-    public void setarticlesarray(ArrayList<Article> articles) {
-
-        this.articles = articles;
-
-    }
     private boolean isNetworkAvailable() {
         ConnectivityManager connectivityManager
                 = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -134,9 +120,7 @@ public class TrendingNowFragmet extends Fragment {
                     articleGridRecViewAdapter = new ArticleGridRecViewAdapter(articles, getActivity());
                     trendingNowFragmetBinding.trendingNowRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
                     trendingNowFragmetBinding.trendingNowRecyclerView.setAdapter(articleGridRecViewAdapter);
-                    if (articleGridRecViewAdapter.getItemCount() > 0) {
-                        // progressDialog.dismiss();
-                    }
+
                 }
             }
 
