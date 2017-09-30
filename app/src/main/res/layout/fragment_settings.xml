@@ -109,7 +109,7 @@
 
                 <ToggleButton
                     android:id="@+id/pragnentchkState"
-                    android:layout_width="45dp"
+                    android:layout_width="40dp"
                     android:layout_height="22dp"
                     android:background="@drawable/toggle_selector"
                     android:textOff=""
@@ -121,7 +121,7 @@
 
                 <ToggleButton
                     android:id="@+id/notificationchkState"
-                    android:layout_width="45dp"
+                    android:layout_width="40dp"
                     android:layout_height="22dp"
                     android:background="@drawable/toggle_selector"
                     android:textOff=""
@@ -132,7 +132,7 @@
 
                 <Button
                     android:id="@+id/resetData_BTN"
-                    android:layout_width="39dp"
+                    android:layout_width="38dp"
                     android:layout_height="20dp"
                     android:layout_weight="1"
                     android:background="@drawable/border_button"

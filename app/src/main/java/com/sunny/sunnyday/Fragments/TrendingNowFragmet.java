@@ -23,6 +23,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.sunny.sunnyday.Adapters.ArticleGridRecViewAdapter;
 import com.sunny.sunnyday.Adapters.ArticleListRecViewAdapter;
+import com.sunny.sunnyday.MainActivity;
 import com.sunny.sunnyday.Model.Article;
 import com.sunny.sunnyday.R;
 import com.sunny.sunnyday.Utils;
@@ -64,6 +65,9 @@ public class TrendingNowFragmet extends Fragment {
     public void onActivityCreated(@Nullable final Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        MainActivity mainActivity = (MainActivity) getActivity();
+
+        mainActivity.fromsavedarticle = false;
 //        progressDialog = new SpotsDialog(getActivity(), R.style.Custom_Progress_Bar);
 //        progressDialog.setMessage("please wait..");
 //        progressDialog.show();

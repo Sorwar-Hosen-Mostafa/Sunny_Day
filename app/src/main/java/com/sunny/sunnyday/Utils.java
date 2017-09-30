@@ -8,9 +8,6 @@ import android.widget.Toast;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * Created by nexttel_1 on 5/17/2017.
- */
 
 public class Utils {
 
@@ -18,6 +15,8 @@ public class Utils {
     public static final String SETTINGS_PREFERENCES = "settingsprefs";
     public static final String SAVED_ARTICLE_PREFS = "savedarticleprefs";
     public static final String FIRST_TIME_RUNS_APP = "firsttimerunsapp";
+    public static final String FIRST_TIME_OPEN_APP = "firsttimeopensapp";
+
 
 
     public static final String LOG_FUNCTION = "log_function";
@@ -29,11 +28,16 @@ public class Utils {
     public final static String USER_SAVED_ARTICLE = "user_saved_article";
 
 
+
+    //public final static String FROM_SAVED_ARTICLE = "event_set_on_calendar";
     public final static String EVENT_SET_ON_CALENDAR = "event_set_on_calendar";
 
     public final static String USER_WANT_TO_PREGNANT_STATUS = "user_wants_to_pregnant";
     public final static String USER_LAST_PERIOD_DATE = "user_last_period_date";
     public final static String USER_LAST_PERIOD_MONTH = "user_last_period_month";
+    public final static String USER_LAST_PERIOD_YEAR = "user_last_period_year";
+    public final static String USER_CURRENT_PERIOD_DATE = "user_current_period_date";
+    public final static String USER_CURRENT_PERIOD_MONTH = "user_current_period_month";
     public final static String USER_PERIOD_DURATION = "user_period_duration";
     public final static String USER_CYCLE_LENGTH = "user_cycle_length";
     public final static String USER_BIRTH_YEAR= "user_birth_year";
@@ -72,7 +76,7 @@ public class Utils {
             return prefs.getString(key, "null");
         } catch (Exception e) {
             e.printStackTrace();
-            Toast.makeText(context,e.getMessage().toString(),Toast.LENGTH_LONG).show();
+            Toast.makeText(context,e.getMessage(),Toast.LENGTH_LONG).show();
             return "null";
         }
     }

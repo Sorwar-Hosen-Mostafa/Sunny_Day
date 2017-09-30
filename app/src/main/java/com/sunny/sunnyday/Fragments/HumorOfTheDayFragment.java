@@ -24,6 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.lapism.searchview.SearchHistoryTable;
 import com.sunny.sunnyday.Adapters.ArticleGridRecViewAdapter;
 import com.sunny.sunnyday.Adapters.ArticleListRecViewAdapter;
+import com.sunny.sunnyday.MainActivity;
 import com.sunny.sunnyday.Model.Article;
 import com.sunny.sunnyday.R;
 import com.sunny.sunnyday.Utils;
@@ -68,7 +69,9 @@ public class HumorOfTheDayFragment extends Fragment {
 //        progressDialog.setMessage("please wait..");
 //        progressDialog.show();
 
+        MainActivity mainActivity = (MainActivity) getActivity();
 
+        mainActivity.fromsavedarticle = false;
 
         if (isNetworkAvailable()) {
             getdata();

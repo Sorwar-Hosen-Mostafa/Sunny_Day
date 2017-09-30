@@ -69,6 +69,9 @@ public class HealthAndFitnessFragment extends Fragment {
     public void onActivityCreated(@Nullable final Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        MainActivity mainActivity = (MainActivity) getActivity();
+
+        mainActivity.fromsavedarticle = false;
 
         progressDialog = new SpotsDialog(getActivity(), R.style.Custom_Progress_Bar);
         progressDialog.setMessage("please wait..");

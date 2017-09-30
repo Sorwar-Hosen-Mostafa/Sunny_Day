@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.sunny.sunnyday.Fragments.PeriodCalenderFragment;
+import com.sunny.sunnyday.Fragments.SettingsFragment;
 import com.sunny.sunnyday.MainActivity;
 import com.sunny.sunnyday.R;
 import com.sunny.sunnyday.Utils;
@@ -27,8 +28,11 @@ public class FragmentSix extends Fragment {
     private PeriodCalenderFragment periodCalenderFragment;
     private FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
+    private FragmentManager fragmentManager2;
+    private FragmentTransaction fragmentTransaction2;
     private MainActivity mainActivity;
     FragmentFragmentSixBinding sixBinding;
+    private SettingsFragment settingsFragment;
     private FragmentFive fragmentFive;
     public FragmentSix() {
         // Required empty public constructor
@@ -57,6 +61,12 @@ public class FragmentSix extends Fragment {
             public void onClick(View v) {
 
                 Utils.saveToPrefs(getActivity(),Utils.DATA_COLLECTION_PREFERENCES,Utils.DATA_COLLECTED_STATUS,"true");
+                settingsFragment = new SettingsFragment();
+                fragmentManager2 = mainActivity.fragmentManager;
+                fragmentTransaction2 = fragmentManager2.beginTransaction();
+                fragmentTransaction2.replace(R.id.child_fragment_container, settingsFragment, "settingsFrag");
+                fragmentTransaction2.addToBackStack("eww");
+                fragmentTransaction2.commit();
                     periodCalenderFragment = new PeriodCalenderFragment();
                     fragmentManager = mainActivity.fragmentManager;
                     fragmentTransaction = mainActivity.fragmentTransaction;

@@ -70,6 +70,7 @@ public class SavedArticlesFragment extends Fragment {
 
         mainActivity = (MainActivity) getActivity();
 
+        mainActivity.fromsavedarticle = true;
         savedArticleDao= new SavedArticleDAO(getActivity());
         // mainActivity.saveArticle();
         //arrayList=mainActivity.getSaved_articles_final();

@@ -46,11 +46,14 @@ import me.tatarka.support.job.JobScheduler;
  */
 public class PeriodCalenderFragment extends Fragment {
 
-    private int JOB_ID = 0 ;
+    private int JOB_ID = 0;
     private Log log;
     private ArrayList<Log> logs;
     public JobScheduler jobScheduler;
+    int lastYear = 0;
     boolean prev = false;
+    boolean periodalarmset = false;
+    boolean pregnancyalarmset = false;
     private SimpleDateFormat dateFormatMonth;
     private FragmentPeriodCalenderBinding periodCalenderBinding;
     private Calendar calendar;
@@ -59,21 +62,26 @@ public class PeriodCalenderFragment extends Fragment {
     SimpleDateFormat monthformatter = new SimpleDateFormat("MM");
     SimpleDateFormat yearformatter = new SimpleDateFormat("yyyy");
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMM yyyy");
-    private Calendar calendertemp;
+    private Calendar calendertemp, calendarkemp;
     ArrayList<Integer> months;
+    Calendar calendarforeventset;
     LogListRecViewAdapter logListRecViewAdapter;
     boolean fisttime = true;
     Calendar calendarcurrent = Calendar.getInstance(Locale.getDefault());
-    Date datecurrent ;
+    Date datecurrent;
     boolean log_function;
     private Date calendarDateClicked;
+    Calendar calendarmain;
     private long milliTimearray[];
     private String logTitles[], logTitleSymbols[], logSuggessions[], logTitlesPregnant[], logTitleSymbolsPregnant[], logSuggessionsPregnant[];
     int mYear, mMonth, mDay, periodduration, periodcyclelength, lastperiodmonth, lastperiodday;
     Date lastdate;
-    Date ddd;
+    Date ddd, datekemp;
     ArrayList<Log> logstemp;
+    Date datemain;
+    Date ldtemp;
     Intent notificationIntent;
+    int month;
     PendingIntent pendingIntent;
     AlarmManager alarmManager;
     String pragnancystatus;
@@ -95,22 +103,38 @@ public class PeriodCalenderFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
 
+        calendarmain = Calendar.getInstance();
+        calendarmain.set(Calendar.HOUR, 0);
+        calendarmain.set(Calendar.MILLISECOND, 0);
+        calendarmain.set(Calendar.SECOND, 0);
+        calendarmain.set(Calendar.MINUTE, 0);
+        datemain = new Date(calendarmain.getTimeInMillis());
+        datemain.setHours(0);
+
+
         months = new ArrayList<>();
-        calendarcurrent.set(Calendar.HOUR,0);
-        calendarcurrent.set(Calendar.MINUTE,0);
-        calendarcurrent.set(Calendar.SECOND,0);
-        calendarcurrent.set(Calendar.MILLISECOND,0);
-        calendarcurrent.set(Calendar.DAY_OF_MONTH,1);
+        calendarcurrent.set(Calendar.HOUR, 0);
+        calendarcurrent.set(Calendar.MINUTE, 0);
+        calendarcurrent.set(Calendar.SECOND, 0);
+        calendarcurrent.set(Calendar.MILLISECOND, 0);
+        calendarcurrent.set(Calendar.DAY_OF_MONTH, 1);
         datecurrent = new Date(calendarcurrent.getTimeInMillis());
         datecurrent.setHours(0);
-        android.util.Log.e("current date",datecurrent.toString());
+        //  android.util.Log.e("current date",datecurrent.toString());
+
+
+        calendarkemp = Calendar.getInstance();
+        calendarkemp = calendarcurrent;
+        calendarkemp.add(Calendar.MONTH, 5);
+        datekemp = new Date(calendarkemp.getTimeInMillis());
+        datekemp.setHours(0);
+
 
         logs = new ArrayList<>();
         ddd = new Date();
 
 
         // periodCalenderBinding.
-
 
 
         dateFormatMonth = new SimpleDateFormat("MMMM- yyyy", Locale.getDefault());
@@ -125,7 +149,6 @@ public class PeriodCalenderFragment extends Fragment {
 
         periodCalenderBinding.compactcalendarView.setUseThreeLetterAbbreviation(true);
         periodCalenderBinding.compactcalendarView.setFirstDayOfWeek(7);
-
 
 
         calendar = Calendar.getInstance();
@@ -143,6 +166,13 @@ public class PeriodCalenderFragment extends Fragment {
         periodduration = Integer.parseInt(Utils.getFromPrefs(getActivity(), Utils.DATA_COLLECTION_PREFERENCES, Utils.USER_PERIOD_DURATION));
         pragnancystatus = Utils.getFromPrefs(getActivity(), Utils.DATA_COLLECTION_PREFERENCES, Utils.USER_WANT_TO_PREGNANT_STATUS);
 
+        if (!Utils.getFromPrefs(getActivity(), Utils.DATA_COLLECTION_PREFERENCES, Utils.USER_LAST_PERIOD_YEAR).equals("null")) {
+            lastYear = Integer.parseInt(Utils.getFromPrefs(getActivity(), Utils.DATA_COLLECTION_PREFERENCES, Utils.USER_LAST_PERIOD_YEAR));
+        } else {
+            lastYear = calendar.get(Calendar.YEAR);
+        }
+
+        android.util.Log.e("whatcomesfrompref", lastperiodday + " " + lastperiodmonth + " " + lastYear);
 
         periodCalenderBinding.buttonNextMonth.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -160,27 +190,22 @@ public class PeriodCalenderFragment extends Fragment {
         periodCalenderBinding.logBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DatePickerDialog dateDialog = new DatePickerDialog(getActivity(),R.style.DialogTheme, dateSet, mYear, lastperiodmonth, lastperiodday);
+                DatePickerDialog dateDialog = new DatePickerDialog(getActivity(), R.style.DialogTheme, dateSet, mYear, Integer.parseInt(monthformatter.format(datemain.getTime())) - 1, Integer.parseInt(dayformatter.format(datemain.getTime())));
                 dateDialog.show();
             }
         });
 
-      //  clearAllNotificationAlarts();
-//        if(Utils.getFromPrefs(getActivity(),Utils.DATA_COLLECTION_PREFERENCES,Utils.FROM_NOTIFICATION).equals(Utils.STATUS_TRUE)){
-//            lastperiodday = lastperiodday+1;
-//        }
-        if(Utils.getFromPrefs(getActivity(),Utils.DATA_COLLECTION_PREFERENCES,Utils.LOG_FUNCTION).equals(Utils.STATUS_TRUE)){
-            Utils.saveToPrefs(getActivity(),Utils.DATA_COLLECTION_PREFERENCES,Utils.USER_LAST_PERIOD_DATE,String .valueOf(lastperiodday+1));
-            lastperiodday = Integer.parseInt(Utils.getFromPrefs(getActivity(),Utils.DATA_COLLECTION_PREFERENCES,Utils.USER_LAST_PERIOD_DATE));
-            seteventsoncalendar(lastperiodday, lastperiodmonth-1,periodcyclelength-1, periodduration, mYear);
-            Utils.saveToPrefs(getActivity(),Utils.DATA_COLLECTION_PREFERENCES,Utils.LOG_FUNCTION,Utils.STATUS_FALSE);
-        }
-        else {
-            seteventsoncalendar(lastperiodday, lastperiodmonth-1,periodcyclelength-1, periodduration, mYear);
-        }
+        calendarforeventset = Calendar.getInstance();
+        calendarforeventset.set(Calendar.YEAR, lastYear);
+        calendarforeventset.set(Calendar.MONTH, lastperiodmonth-1);
+        calendarforeventset.set(Calendar.DAY_OF_MONTH, lastperiodday);
+        calendarforeventset.add(Calendar.DAY_OF_MONTH, periodcyclelength-1);
 
 
 
+        Utils.saveToPrefs(getActivity(),Utils.DATA_COLLECTION_PREFERENCES,Utils.LOG_FUNCTION,Utils.STATUS_FALSE);
+        android.util.Log.e("first time cal_date", calendarforeventset.getTimeInMillis() + " " + simpleDateFormat.format(calendarforeventset.getTimeInMillis()));
+        seteventsoncalendarnew(calendarforeventset);
 
 
         periodCalenderBinding.compactcalendarView.shouldScrollMonth(false);
@@ -189,73 +214,79 @@ public class PeriodCalenderFragment extends Fragment {
             public void onDayClick(Date dateClicked) {
 
                 calendarDateClicked = dateClicked;
-                android.util.Log.e("error from listener:", String.valueOf(calendarDateClicked));
+                //android.util.Log.e("error from listener:", String.valueOf(calendarDateClicked));
                 if (periodCalenderBinding.compactcalendarView.getEvents(dateClicked).size() > 0) {
                     Event event = periodCalenderBinding.compactcalendarView.getEvents(dateClicked).get(0);
-                  //  Toast.makeText(getActivity(), "" + event.getData().toString(), Toast.LENGTH_SHORT).show();
+                    //  Toast.makeText(getActivity(), "" + event.getData().toString(), Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onMonthScroll(Date firstDayOfNewMonth) {
 
-                if(datecurrent.getTime()<firstDayOfNewMonth.getTime() || datecurrent.getTime()==firstDayOfNewMonth.getTime()){
+                if (datecurrent.getTime() < firstDayOfNewMonth.getTime() || datecurrent.getTime() == firstDayOfNewMonth.getTime()) {
 
-                    if(prev){
+                    if (prev) {
 
-                    }
-                    else {
-
+                    } else {
+                        ldtemp = new Date(lastdate.getTime());
                         Calendar cal = Calendar.getInstance();
                         cal.setTime(lastdate);
-                        cal.set(Calendar.MILLISECOND,0);
-                        cal.set(Calendar.HOUR,0);
-                        cal.set(Calendar.MINUTE,0);
-                        cal.set(Calendar.SECOND,0);
+                        cal.set(Calendar.MILLISECOND, 0);
+                        cal.set(Calendar.HOUR, 0);
+                        cal.set(Calendar.MINUTE, 0);
+                        cal.set(Calendar.SECOND, 0);
                         Date ld = new Date(cal.getTimeInMillis());
 
 
-                        android.util.Log.e("lastdate and fdom",ld.toString()+" "+ld.getTime()+"    "+firstDayOfNewMonth.getTime()+" "+firstDayOfNewMonth.toString());
+                        android.util.Log.e("lastdate and fdom", ld.toString() + " " + ld.getTime() + "    " + firstDayOfNewMonth.getTime() + " " + firstDayOfNewMonth.toString());
 
-                        if(ld.getTime()==firstDayOfNewMonth.getTime()){
-                            android.util.Log.e("same month","same month");
+                        if (ld.getTime() == firstDayOfNewMonth.getTime()) {
+                            android.util.Log.e("same month", "same month");
+
                         }
 
                         //if scroll to next month
                         else if (ld.getTime() < firstDayOfNewMonth.getTime()) {
 
-                            android.util.Log.e("next month","next month");
+                            android.util.Log.e("next month", "next month");
 
-                            int lastperiodday = Integer.parseInt(dayformatter.format(lastdate.getTime()));
-                            int lastperiodmonth = Integer.parseInt(monthformatter.format(lastdate.getTime()));
-                            int myear = Integer.parseInt(yearformatter.format(lastdate.getTime()));
-                            //  logs.clear();
-                            // logListRecViewAdapter.notifyDataSetChanged();
-                            logs.clear();
-                            logListRecViewAdapter.notifyDataSetChanged();
-                            seteventsoncalendar(lastperiodday, lastperiodmonth-1, periodcyclelength-1, periodduration, myear);
-                            logListRecViewAdapter.notifyDataSetChanged();
-//                    posiion = posiion+ periodduration + 5;
-//                    periodCalenderBinding.periodCalenderRecyclerView.getLayoutManager().scrollToPosition(posiion);
+                            Date date = new Date(lastdate.getTime());
+                            date.setHours(0);
+                            date.setMinutes(0);
+                            date.setSeconds(0);
+                            if (date.getTime() < datekemp.getTime()) {
+                                logs.clear();
 
+                                if (lastdate != null) {
+                                    calendarforeventset.setTime(lastdate);
+                                }
 
-                            //if scroll to previous month
+                                calendarforeventset.add(Calendar.DAY_OF_MONTH, periodcyclelength - 1);
+                                logListRecViewAdapter.notifyDataSetChanged();
+                                seteventsoncalendarnew(calendarforeventset);
+                                logListRecViewAdapter.notifyDataSetChanged();
+
+                            } else {
+                                prev = true;
+                                periodCalenderBinding.compactcalendarView.showPreviousMonth();
+                                firstDayOfNewMonth.setMonth(firstDayOfNewMonth.getMonth() - 1);
+                                periodCalenderBinding.monthTV.setText(dateFormatMonth.format(firstDayOfNewMonth));
+                                prev = false;
+                                Toast.makeText(getActivity(), "no predictions on next days", Toast.LENGTH_SHORT).show();
+                            }
+
                         } else if (ld.getTime() > firstDayOfNewMonth.getTime()) {
 
-                            android.util.Log.e("prev month","prev month");
-                            int lastperiodday = Integer.parseInt(dayformatter.format(lastdate.getTime()));
-                            int lastperiodmonth = Integer.parseInt(monthformatter.format(lastdate.getTime()));
-                            int myear = Integer.parseInt(yearformatter.format(lastdate.getTime()));
-                            Calendar calendar = Calendar.getInstance();
-                            calendar.set(Calendar.DAY_OF_MONTH,lastperiodday);
-                            calendar.set(Calendar.MONTH,lastperiodmonth);
-                            calendar.set(Calendar.YEAR,myear);
-                            lastperiodday = Integer.parseInt(dayformatter.format(calendar.getTimeInMillis()));
-                            lastperiodmonth = Integer.parseInt(monthformatter.format(calendar.getTimeInMillis()));
-                            myear = Integer.parseInt(yearformatter.format(calendar.getTimeInMillis()));
+                            android.util.Log.e("prev month", "prev month");
+
+                            if (lastdate != null) {
+                                calendarforeventset.setTime(lastdate);
+                            }
+                            calendarforeventset.add(Calendar.DAY_OF_MONTH, -(periodcyclelength + 1));
                             logs.clear();
                             logListRecViewAdapter.notifyDataSetChanged();
-                            seteventsoncalendar(lastperiodday, lastperiodmonth-2, -(periodcyclelength+1), periodduration, myear);
+                            seteventsoncalendarnew(calendarforeventset);
                             logListRecViewAdapter.notifyDataSetChanged();
 
                             //  posiion = posiion-(periodduration+5);
@@ -268,12 +299,11 @@ public class PeriodCalenderFragment extends Fragment {
 
                     periodCalenderBinding.monthTV.setText(dateFormatMonth.format(firstDayOfNewMonth));
 
-                }
-                else {
+                } else {
 
-                    prev =true;
+                    prev = true;
                     periodCalenderBinding.compactcalendarView.showNextMonth();
-                    prev=false;
+                    prev = false;
                     Toast.makeText(getActivity(), "no events on previous days", Toast.LENGTH_SHORT).show();
 
                 }
@@ -283,8 +313,6 @@ public class PeriodCalenderFragment extends Fragment {
         });
 
     }
-
-
 
 
     public String getMonthFromNumber(int x) {
@@ -331,6 +359,7 @@ public class PeriodCalenderFragment extends Fragment {
         return month;
 
     }
+
     public String getextfromnumber(int x) {
 
         String ext = "null";
@@ -351,6 +380,7 @@ public class PeriodCalenderFragment extends Fragment {
         return ext;
 
     }
+
     private void setlogsandadapter(ArrayList<Log> logs) {
         logstemp = logs;
         logListRecViewAdapter = new LogListRecViewAdapter(logstemp, getActivity());
@@ -363,221 +393,253 @@ public class PeriodCalenderFragment extends Fragment {
     }
 
 
+    private DatePickerDialog.OnDateSetListener dateSet = new DatePickerDialog.OnDateSetListener() {
+        @Override
+        public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
+
+            clearAllAlarms();
+            //android.util.Log.e("date:",String .valueOf(datePicker.getDayOfMonth()));
+            datePicker.getDrawingTime();
+            int new_day = datePicker.getDayOfMonth();
+            int new_month = datePicker.getMonth();
+            int new_year = datePicker.getYear();
+
+            //android.util.Log.e("error from listener:", String.valueOf(new_day));
+
+            Calendar calendar = Calendar.getInstance();
+            calendar.set(Calendar.DAY_OF_MONTH, new_day);
+            calendar.set(Calendar.MONTH, new_month);
+            calendar.set(Calendar.YEAR, new_year);
+            int daysonmonth = calendar.getActualMaximum(Calendar.DATE);
+          //  Toast.makeText(getActivity(), "days on month " + daysonmonth, Toast.LENGTH_SHORT).show();
+
+            //android.util.Log.e("error massage from log",""+daysonmonth);
+            log_function = true;
+            Utils.saveToPrefs(getActivity(), Utils.DATA_COLLECTION_PREFERENCES, Utils.LOG_FUNCTION, Utils.STATUS_TRUE);
+            periodCalenderBinding.compactcalendarView.removeAllEvents();
+            logs.clear();
+            logListRecViewAdapter.notifyDataSetChanged();
 
 
+            calendarforeventset.set(Calendar.DAY_OF_MONTH, new_day - 1);
+            calendarforeventset.set(Calendar.MONTH, new_month);
+            calendarforeventset.set(Calendar.YEAR, new_year);
+            calendarforeventset.set(Calendar.HOUR, 0);
+            calendarforeventset.set(Calendar.MINUTE, 0);
+            calendarforeventset.set(Calendar.SECOND, 0);
+            calendarforeventset.set(Calendar.MILLISECOND, 0);
 
-    private void seteventsoncalendar(int lastperiodday, int lastperiodmonth, int periodcyclelength, int periodduration, int mYear) {
+            seteventsoncalendarnew(calendarforeventset);
+
+            logListRecViewAdapter.notifyDataSetChanged();
+        }
+    };
+
+    private void clearAllAlarms() {
+        if (Utils.getFromPrefs(getActivity(), Utils.DATA_COLLECTION_PREFERENCES, Utils.USER_WANT_TO_PREGNANT_STATUS).equals(Utils.STATUS_FALSE)) {
+
+            for (int i = 0; i < periodduration; i++) {
+                if (periodalarmset == true) {
+                    PendingIntent broadcast = PendingIntent.getBroadcast(getActivity(), i + 100, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+                    //android.util.Log.e("from notification", String.valueOf(milliTimearray[i]));
+                    alarmManager.cancel(broadcast);
+                    broadcast.cancel();
+                }
+            }
+        } else {
+
+            for (int i = 0; i < periodduration; i++) {
+                if (periodalarmset == true) {
+                    PendingIntent broadcast = PendingIntent.getBroadcast(getActivity(), i + 100, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+                    alarmManager.cancel(broadcast);
+                    broadcast.cancel();
+                }
+
+            }
+
+            for (int i = 0; i < 5; i++) {
+                if (pregnancyalarmset == true) {
+                    PendingIntent broadcast = PendingIntent.getBroadcast(getActivity(), i + 200, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+                    alarmManager.cancel(broadcast);
+                    broadcast.cancel();
+                }
+
+            }
+        }
+
+    }
 
 
-        calendertemp = Calendar.getInstance();
-        calendertemp.set(Calendar.YEAR, mYear);
-        calendertemp.set(Calendar.MONTH, lastperiodmonth);
-        calendertemp.set(Calendar.DAY_OF_MONTH, lastperiodday);
-        calendertemp.add(Calendar.DAY_OF_MONTH, periodcyclelength);
-        String dddd = simpleDateFormat.format(calendertemp.getTimeInMillis());
-       // Toast.makeText(getActivity(), ""+dddd, Toast.LENGTH_SHORT).show();
+    private void seteventsoncalendarnew(Calendar cal) {
 
+        cal.set(Calendar.HOUR, 0);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
+
+        Date date2 = new Date(cal.getTimeInMillis());
+        Calendar cal2 = Calendar.getInstance();
+        cal2.setTime(date2);
+
+        android.util.Log.e("first time cal_date", cal.getTimeInMillis() + " " + simpleDateFormat.format(cal.getTimeInMillis()));
 
         milliTimearray = new long[periodduration];
 
         for (int i = 0; i < periodduration; i++) {
-            calendertemp.add(Calendar.DAY_OF_MONTH, 1);
-            milliTimearray[i] = calendertemp.getTimeInMillis();
-                ddd.setTime(milliTimearray[i]);
-            if (!periodCalenderBinding.compactcalendarView.getEvents(ddd).equals(null)){
+            cal.add(Calendar.DAY_OF_MONTH, 1);
+            milliTimearray[i] = cal.getTimeInMillis();
+            ddd.setTime(milliTimearray[i]);
+            ddd.setHours(0);
+
+            if (!periodCalenderBinding.compactcalendarView.getEvents(ddd).equals(null)) {
                 List<Event> event = periodCalenderBinding.compactcalendarView.getEvents(ddd);
-                if(!event.equals(null)){
+                if (!event.equals(null)) {
                     periodCalenderBinding.compactcalendarView.removeEvents(event);
                 }
 
             }
-                Event eventone = new Event(Color.parseColor("#C072A4"), milliTimearray[i], logTitles[i]);
-                periodCalenderBinding.compactcalendarView.addEvent(eventone);
-                String date = calendertemp.get(Calendar.DAY_OF_MONTH) + "" + getextfromnumber(calendertemp.get(Calendar.DAY_OF_MONTH)) + " " + getMonthFromNumber(calendertemp.get(Calendar.MONTH) + 1);
-                String day = formatter.format(ddd);
-                log = new Log(logTitles[i], logSuggessions[i], date, day, logTitleSymbols[i]);
-                logs.add(log);
-                setlogsandadapter(logs);
+            Event eventone = new Event(Color.parseColor("#C072A4"), ddd.getTime(), logTitles[i]);
+            periodCalenderBinding.compactcalendarView.addEvent(eventone);
+            // android.util.Log.e("setting events", String.valueOf(simpleDateFormat.format(ddd.getTime())));
 
-                if(Utils.getFromPrefs(getActivity(),Utils.DATA_COLLECTION_PREFERENCES,Utils.FROM_NOTIFICATION).equals(Utils.STATUS_FALSE) || Utils.getFromPrefs(getActivity(),Utils.DATA_COLLECTION_PREFERENCES,Utils.FROM_NOTIFICATION).equals("null")){
-                    notificationIntent = new Intent(getActivity(),AlarmReceiver.class);
+            String date = cal.get(Calendar.DAY_OF_MONTH) + "" + getextfromnumber(cal.get(Calendar.DAY_OF_MONTH)) + " " + getMonthFromNumber(cal.get(Calendar.MONTH) + 1);
+            String day = formatter.format(ddd);
+            log = new Log(logTitles[i], logSuggessions[i], date, day, logTitleSymbols[i]);
+            logs.add(log);
+            setlogsandadapter(logs);
+
+            if (datemain.getTime() <= ddd.getTime()) {
+                if (Utils.getFromPrefs(getActivity(), Utils.DATA_COLLECTION_PREFERENCES, Utils.FROM_NOTIFICATION).equals(Utils.STATUS_FALSE) || Utils.getFromPrefs(getActivity(), Utils.DATA_COLLECTION_PREFERENCES, Utils.FROM_NOTIFICATION).equals("null")) {
+                    notificationIntent = new Intent(getActivity(), AlarmReceiver.class);
                     alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
                     Date dte = new Date(milliTimearray[i]);
                     Calendar cld = Calendar.getInstance();
                     cld.setTime(dte);
-                    cld.set(Calendar.HOUR,0);
-                    cld.set(Calendar.MINUTE,0);
-                    cld.set(Calendar.SECOND,0);
-                    cld.set(Calendar.MILLISECOND,0);
+                    cld.set(Calendar.HOUR, 0);
+                    cld.set(Calendar.MINUTE, 0);
+                    cld.set(Calendar.SECOND, 0);
+                    cld.set(Calendar.MILLISECOND, 0);
                     dte = cld.getTime();
-                    android.util.Log.e("alarms:",dte.toString());
+                    //android.util.Log.e("alarms:",dte.toString());
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
                         notificationIntent.putExtra("request_code", i + 100);
-                        pendingIntent = PendingIntent.getBroadcast(getActivity(),100+i,notificationIntent,PendingIntent.FLAG_UPDATE_CURRENT);
-                        // android.util.Log.e("from notification", String.valueOf(simpleDateFormat.format(dte.getTime())));
+                        pendingIntent = PendingIntent.getBroadcast(getActivity(), 100 + i, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+                        //  android.util.Log.e("event notif alarms", String.valueOf(simpleDateFormat.format(dte.getTime())));
                         alarmManager.setExact(AlarmManager.RTC_WAKEUP, dte.getTime(), pendingIntent);
+                        periodalarmset = true;
+                    }
+
+                } else {
+                    if (Utils.getFromPrefs(getActivity(), Utils.DATA_COLLECTION_PREFERENCES, Utils.USER_WANT_TO_PREGNANT_STATUS).equals(Utils.STATUS_TRUE)) {
+
+                    } else {
+                        Utils.saveToPrefs(getActivity(), Utils.DATA_COLLECTION_PREFERENCES, Utils.FROM_NOTIFICATION, Utils.STATUS_FALSE);
                     }
 
                 }
-                else {
-                    if(Utils.getFromPrefs(getActivity(),Utils.DATA_COLLECTION_PREFERENCES,Utils.USER_WANT_TO_PREGNANT_STATUS).equals(Utils.STATUS_TRUE)){
+            } else {
 
-                    }else {
-                        Utils.saveToPrefs(getActivity(),Utils.DATA_COLLECTION_PREFERENCES,Utils.FROM_NOTIFICATION,Utils.STATUS_FALSE);
-                    }
-
-                }
-
-
+            }
 
 
         }
 
         lastdate = new Date(milliTimearray[0]);
+        String ddddd = simpleDateFormat.format(lastdate.getTime());
+        // android.util.Log.e("last date:",ddddd);
 
-//        for (int i = 0; i < milliTimearray.length; i++) {
-//
-//        }
+        if (lastdate.getTime() < datemain.getTime()) {
+            periodCalenderBinding.compactcalendarView.setCurrentDate(datemain);
+            periodCalenderBinding.monthTV.setText(dateFormatMonth.format(datemain));
+        } else {
+            if (ldtemp != null) {
+                if (monthformatter.format(ldtemp.getTime()).equals(monthformatter.format(lastdate.getTime()))) {
 
-//        if (log_function == true) {
-//
-//            for (int i = 0; i < milliTimearray.length; i++) {
-//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-//                    notificationIntent.putExtra("request_code", i + 100);
-//                    PendingIntent broadcast = PendingIntent.getBroadcast(getActivity(), i + 100, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-//                    android.util.Log.e("from notification", String.valueOf(milliTimearray[i]));
-//                    alarmManager.setExact(AlarmManager.RTC_WAKEUP, milliTimearray[i], broadcast);
-//                }
-//            }
-//          //  setNotificationAlarts(milliTimearray);
-//            if (!pragnancystatus.equals("true")) {
-//                log_function = false;
-//            }
-//        }
+                } else {
+                    periodCalenderBinding.compactcalendarView.setCurrentDate(lastdate);
+                    periodCalenderBinding.monthTV.setText(dateFormatMonth.format(lastdate));
+                }
+            } else {
+                periodCalenderBinding.compactcalendarView.setCurrentDate(lastdate);
+                periodCalenderBinding.monthTV.setText(dateFormatMonth.format(lastdate));
+            }
+
+
+        }
+
+
         if (pragnancystatus.equals("true")) {
-            calendertemp.add(Calendar.DAY_OF_MONTH, 4);
+            cal.setTime(lastdate);
+            cal.add(Calendar.DAY_OF_MONTH, 11);
             milliTimearray = new long[5];
             for (int i = 0; i < 5; i++) {
-                calendertemp.add(Calendar.DAY_OF_MONTH, 1);
-                milliTimearray[i] = calendertemp.getTimeInMillis();
-                    ddd.setTime(milliTimearray[i]);
+                cal.add(Calendar.DAY_OF_MONTH, 1);
+                milliTimearray[i] = cal.getTimeInMillis();
+                ddd.setTime(milliTimearray[i]);
+
                 if (!periodCalenderBinding.compactcalendarView.getEvents(ddd).equals(null)) {
                     List<Event> event = periodCalenderBinding.compactcalendarView.getEvents(ddd);
                     if (!event.equals(null)) {
                         periodCalenderBinding.compactcalendarView.removeEvents(event);
                     }
                 }
-                    Event eventone = new Event(Color.parseColor("#FFA500"), milliTimearray[i], "Favourable pregnancy date");
-                    periodCalenderBinding.compactcalendarView.addEvent(eventone);
-                    String mon = formatter.format(ddd);
-                    String date = calendertemp.get(Calendar.DAY_OF_MONTH) + "" + getextfromnumber(calendertemp.get(Calendar.DAY_OF_MONTH)) + " " + getMonthFromNumber(calendertemp.get(Calendar.MONTH) + 1);
-                    log = new Log(logTitlesPregnant[i], logSuggessionsPregnant[i], date, mon, logTitleSymbolsPregnant[i]);
-                    logs.add(log);
-                    setlogsandadapter(logs);
+                Event eventone = new Event(Color.parseColor("#FFA500"), ddd.getTime(), "Favourable pregnancy date");
+                periodCalenderBinding.compactcalendarView.addEvent(eventone);
+                //  android.util.Log.e("setting fpd", String.valueOf(simpleDateFormat.format(ddd.getTime())));
+                String mon = formatter.format(ddd);
+                String date = cal.get(Calendar.DAY_OF_MONTH) + "" + getextfromnumber(cal.get(Calendar.DAY_OF_MONTH)) + " " + getMonthFromNumber(cal.get(Calendar.MONTH) + 1);
+                log = new Log(logTitlesPregnant[i], logSuggessionsPregnant[i], date, mon, logTitleSymbolsPregnant[i]);
+                logs.add(log);
+                setlogsandadapter(logs);
 
-                    if(Utils.getFromPrefs(getActivity(),Utils.DATA_COLLECTION_PREFERENCES,Utils.FROM_NOTIFICATION).equals(Utils.STATUS_FALSE)||Utils.getFromPrefs(getActivity(),Utils.DATA_COLLECTION_PREFERENCES,Utils.FROM_NOTIFICATION).equals("null")){
-                        notificationIntent = new Intent(getActivity(),AlarmReceiver.class);
+                if (datemain.getTime() <= ddd.getTime()) {
+                    if (Utils.getFromPrefs(getActivity(), Utils.DATA_COLLECTION_PREFERENCES, Utils.FROM_NOTIFICATION).equals(Utils.STATUS_FALSE) || Utils.getFromPrefs(getActivity(), Utils.DATA_COLLECTION_PREFERENCES, Utils.FROM_NOTIFICATION).equals("null")) {
+                        notificationIntent = new Intent(getActivity(), AlarmReceiver.class);
                         alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
                         Date dte = new Date(milliTimearray[i]);
                         Calendar cld = Calendar.getInstance();
                         cld.setTime(dte);
-                        cld.set(Calendar.HOUR,0);
-                        cld.set(Calendar.MINUTE,0);
-                        cld.set(Calendar.SECOND,0);
-                        cld.set(Calendar.MILLISECOND,0);
+                        cld.set(Calendar.HOUR, 0);
+                        cld.set(Calendar.MINUTE, 0);
+                        cld.set(Calendar.SECOND, 0);
+                        cld.set(Calendar.MILLISECOND, 0);
                         dte = cld.getTime();
-                        android.util.Log.e("alarms:",dte.toString());
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
                             notificationIntent.putExtra("request_code", i + 200);
-                            pendingIntent = PendingIntent.getBroadcast(getActivity(),200+i,notificationIntent,PendingIntent.FLAG_UPDATE_CURRENT);
-                            // android.util.Log.e("from notification", String.valueOf(simpleDateFormat.format(dte.getTime())));
+                            pendingIntent = PendingIntent.getBroadcast(getActivity(), 200 + i, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+                            //    android.util.Log.e("fpd alarms", String.valueOf(simpleDateFormat.format(dte.getTime())));
                             alarmManager.setExact(AlarmManager.RTC_WAKEUP, dte.getTime(), pendingIntent);
+                            pregnancyalarmset = true;
                         }
 
+                    } else {
+                        Utils.saveToPrefs(getActivity(), Utils.DATA_COLLECTION_PREFERENCES, Utils.FROM_NOTIFICATION, Utils.STATUS_FALSE);
                     }
-                    else {
-                        Utils.saveToPrefs(getActivity(),Utils.DATA_COLLECTION_PREFERENCES,Utils.FROM_NOTIFICATION,Utils.STATUS_FALSE);
-                    }
+                } else {
 
-
-
-
-
+                }
 
 
             }
 
 
-//            if (log_function == true) {
-//                setNotificationAlarts(milliTimearray);
-//                for (int i = 0; i < milliTimearray.length; i++) {
-//                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-//                        notificationIntent.putExtra("request_code", i + 100);
-//                        PendingIntent broadcast = PendingIntent.getBroadcast(getActivity(), i + 100, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-//                        android.util.Log.e("from notification", String.valueOf(milliTimearray[i]));
-//                        alarmManager.setExact(AlarmManager.RTC_WAKEUP, milliTimearray[i], broadcast);
-//                    }
-//                }
-//                log_function = false;
-//            }
-
         }
 
+        if(Utils.getFromPrefs(getActivity(),Utils.DATA_COLLECTION_PREFERENCES,Utils.LOG_FUNCTION).equals(Utils.STATUS_TRUE)){
 
-    }
+            cal2.add(Calendar.DAY_OF_MONTH,-(periodcyclelength-1));
+            int new_day = Integer.parseInt(dayformatter.format(cal2.getTimeInMillis()));
+            int new_month = Integer.parseInt(monthformatter.format(cal2.getTimeInMillis()));
+            int new_year = Integer.parseInt(yearformatter.format(cal2.getTimeInMillis()));
 
-
-    private DatePickerDialog.OnDateSetListener dateSet = new DatePickerDialog.OnDateSetListener() {
-        @Override
-        public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
-
-
-            clearAllAlarms();
-            android.util.Log.e("date:",String .valueOf(datePicker.getDayOfMonth()));
-
-            int new_day = datePicker.getDayOfMonth();
-            int new_month = datePicker.getMonth();
-            int new_year = datePicker.getYear();
             Utils.saveToPrefs(getActivity(), Utils.DATA_COLLECTION_PREFERENCES, Utils.USER_LAST_PERIOD_DATE, String.valueOf(new_day));
             Utils.saveToPrefs(getActivity(), Utils.DATA_COLLECTION_PREFERENCES, Utils.USER_LAST_PERIOD_MONTH, String.valueOf(new_month));
+            Utils.saveToPrefs(getActivity(), Utils.DATA_COLLECTION_PREFERENCES, Utils.USER_LAST_PERIOD_YEAR, String.valueOf(new_year));
+            android.util.Log.e("whatsavinginpreflog",new_day +" "+new_month+" "+new_year);
 
-            android.util.Log.e("error from listener:", String.valueOf(new_day));
-
-            log_function = true;
-            Utils.saveToPrefs(getActivity(),Utils.DATA_COLLECTION_PREFERENCES,Utils.LOG_FUNCTION,Utils.STATUS_TRUE);
-            periodCalenderBinding.compactcalendarView.removeAllEvents();
-            logs.clear();
-            logListRecViewAdapter.notifyDataSetChanged();
-            seteventsoncalendar(new_day, new_month-1, periodcyclelength, periodduration, new_year);
-            logListRecViewAdapter.notifyDataSetChanged();
+            Utils.saveToPrefs(getActivity(),Utils.DATA_COLLECTION_PREFERENCES,Utils.LOG_FUNCTION,Utils.STATUS_FALSE);
         }
-    };
 
-
-    private void clearAllAlarms(){
-        if(Utils.getFromPrefs(getActivity(),Utils.DATA_COLLECTION_PREFERENCES,Utils.USER_WANT_TO_PREGNANT_STATUS).equals(Utils.STATUS_FALSE)){
-
-            for (int i = 0; i < periodduration; i++) {
-                PendingIntent broadcast = PendingIntent.getBroadcast(getActivity(), i + 100, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-                android.util.Log.e("from notification", String.valueOf(milliTimearray[i]));
-                alarmManager.cancel(broadcast);
-                broadcast.cancel();
-            }
-        }
-        else {
-
-            for (int i = 0; i < periodduration; i++) {
-                PendingIntent broadcast = PendingIntent.getBroadcast(getActivity(), i + 100, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-                alarmManager.cancel(broadcast);
-                broadcast.cancel();
-            }
-
-            for (int i = 0; i < 5; i++) {
-                PendingIntent broadcast = PendingIntent.getBroadcast(getActivity(), i + 200, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-                alarmManager.cancel(broadcast);
-                broadcast.cancel();
-            }
-        }
 
     }
 

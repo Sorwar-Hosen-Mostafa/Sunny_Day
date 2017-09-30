@@ -71,7 +71,7 @@ public class FragmentFour extends Fragment {
                     set=true;
                     checkstatus=true;
                     fourBinding.idontknowRB.setChecked(true);
-                    cycle_length = 27;
+                    cycle_length = 30;
                     fourBinding.CycleLengthPicker.setEnabled(false);
 
 

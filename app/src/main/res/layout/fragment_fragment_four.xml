@@ -79,7 +79,7 @@
             app:np_textColor="#fff"
             app:np_textSize="20sp"
             app:np_dividerDistance="32dp"
-            app:np_value="27"
+            app:np_value="30"
             android:layout_below="@+id/idontknow_RB"
             android:layout_centerHorizontal="true" />
         <TextView

@@ -38,21 +38,21 @@
         <item>LF</item>
     </string-array>
     <string-array name="logs_suggessions">
-        <item>Make reminder of emergency.</item>
-        <item>Drink log of water not to be dehydrated.</item>
-        <item>Take bed rest. do not do any heavy work.</item>
-        <item>Eat healthy and keep yourself strong.</item>
-        <item>Eat healthy and keep yourself strong.</item>
-        <item>Eat healthy and keep yourself strong.</item>
-        <item>Eat healthy and keep yourself strong.</item>
+        <item>Drink a lot of water to stay hydrated!</item>
+        <item>Don\'t forget to change your napkin in every 6 hours!</item>
+        <item>Mood swings are natural! Try to munch on a chocolate bar, it helps!</item>
+        <item>Take enough rest to keep your body energetic!</item>
+        <item>Try hot bags to calm your belly cramps!</item>
+        <item>Take enough rest to keep your body energetic!</item>
+        <item>Don\'t forget to change your napkin in every 6 hours!</item>
         <item>Eat healthy and keep yourself strong.</item>
     </string-array>
     <string-array name="logs_suggessions_pregnant">
-        <item>Make reminder of emergency.</item>
-        <item>Drink log of water not to be dehydrated.</item>
-        <item>Take bed rest. do not do any heavy work.</item>
-        <item>Eat healthy and keep yourself strong.</item>
-        <item>Eat healthy and keep yourself strong.</item>
+        <item>Hey! Your Ovulation has started, it\'s the lucky time!</item>
+        <item>There is a chance to get pregnant, try today!</item>
+        <item>You are the most fertile today, there is a high chance to get pregnant!</item>
+        <item>If you haven\'t tried yet, don\'t miss the chance! It\'s still a fertile day!</item>
+        <item>Last day to get pregnant on this cycle, don\'t miss it!</item>
     </string-array>
 
     <!-- TODO: Remove or change this placeholder text -->
@@ -74,7 +74,7 @@
     <string name="fragment_one_i_want_to_receive_cycle_predictios">I want to receive cycle predictios</string>
     <string name="data_collection_fragments_next">next</string>
     <string name="fragment_two_when_did_your_last_period_n_start">When did your last period  start?</string>
-    <string name="fragment_three_on_avarage_how_long_is_nyour_period">On avarage, How long is  \nyour period??</string>
+    <string name="fragment_three_on_avarage_how_long_is_nyour_period">On avarage, How long is  \nyour period?</string>
     <string name="data_collection_fragments_i_don_t_know">         I don\'t know</string>
     <string name="fragment_four_how_long_is_your_cycle">On avarage, How long is \nyour cycle??</string>
     <string name="fragment_five_what_year_were_you_born">What year were you born?</string>

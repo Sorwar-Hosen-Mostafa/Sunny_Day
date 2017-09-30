@@ -74,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
     private WhatsInWhatsOutFragment whatsInWhatsOutFragment;
     private TrendingNowFragmet trendingNowFragmet;
     private FragmentOne fragmentOne;
+    public boolean fromsavedarticle = false;
 
     private Article article;
     private ArrayList<Article> articles;
@@ -86,6 +87,9 @@ public class MainActivity extends AppCompatActivity {
         activityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         savedarticle = new ArrayList<>();
         savedarticlefinel = new ArrayList<>();
+
+
+        Utils.saveToPrefs(MainActivity.this,Utils.DATA_COLLECTION_PREFERENCES,Utils.FIRST_TIME_OPEN_APP,Utils.STATUS_TRUE);
 
 
         Utils.saveToPrefs(this, Utils.DATA_COLLECTION_PREFERENCES, Utils.FROM_NOTIFICATION, Utils.STATUS_FALSE);
@@ -109,14 +113,19 @@ public class MainActivity extends AppCompatActivity {
             // Here we can decide what do to -- perhaps load other parameters from the intent extras such as IDs, etc
             if (menuFragment.equals("periodCalendar")) {
 
-                PeriodCalenderFragment periodCalenderFragment = new PeriodCalenderFragment();
-                fragmentTransaction.replace(R.id.child_fragment_container, periodCalenderFragment, "periodCalendarFrag");
-                fragmentTransaction.addToBackStack("eww");
-                fragmentTransaction.commit();
-                activityMainBinding.bottomNevigationView.setSelectedItemId(R.id.PeriodCalanderMenuItem);
+                    Utils.saveToPrefs(MainActivity.this,Utils.DATA_COLLECTION_PREFERENCES,Utils.FROM_NOTIFICATION,Utils.STATUS_TRUE);
+                    PeriodCalenderFragment periodCalenderFragment = new PeriodCalenderFragment();
+                    fragmentTransaction.replace(R.id.child_fragment_container, periodCalenderFragment, "periodCalendarFrag");
+                    fragmentTransaction.addToBackStack("eww");
+                    fragmentTransaction.commit();
+                    activityMainBinding.bottomNevigationView.setSelectedItemId(R.id.PeriodCalanderMenuItem);
+                    Utils.saveToPrefs(MainActivity.this,Utils.DATA_COLLECTION_PREFERENCES,Utils.FIRST_TIME_OPEN_APP,Utils.STATUS_FALSE);
+
+
             }
         } else {
 
+            Utils.saveToPrefs(MainActivity.this,Utils.DATA_COLLECTION_PREFERENCES,Utils.FROM_NOTIFICATION,Utils.STATUS_FALSE);
             fragmentTransaction.replace(R.id.child_fragment_container, healthAndFitnessFragment, "healthAndFitnessFrag");
             fragmentTransaction.commit();
 
@@ -154,7 +163,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
 
-                Utils.saveToPrefs(MainActivity.this, Utils.DATA_COLLECTION_PREFERENCES, Utils.FROM_NOTIFICATION, Utils.STATUS_TRUE);
+              //  Utils.saveToPrefs(MainActivity.this, Utils.DATA_COLLECTION_PREFERENCES, Utils.FROM_NOTIFICATION, Utils.STATUS_TRUE);
 
                 switch (tab.getPosition()) {
                     case 0:
@@ -197,7 +206,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
 
-                Utils.saveToPrefs(MainActivity.this, Utils.DATA_COLLECTION_PREFERENCES, Utils.FROM_NOTIFICATION, Utils.STATUS_TRUE);
+               // Utils.saveToPrefs(MainActivity.this, Utils.DATA_COLLECTION_PREFERENCES, Utils.FROM_NOTIFICATION, Utils.STATUS_TRUE);
 
                 switch (tab.getPosition()) {
                     case 0:
@@ -245,7 +254,7 @@ public class MainActivity extends AppCompatActivity {
 //                    tv.setTextColor(Color.parseColor("#cccccc"));
 //                }
 
-                Utils.saveToPrefs(MainActivity.this, Utils.DATA_COLLECTION_PREFERENCES, Utils.FROM_NOTIFICATION, Utils.STATUS_TRUE);
+              //  Utils.saveToPrefs(MainActivity.this, Utils.DATA_COLLECTION_PREFERENCES, Utils.FROM_NOTIFICATION, Utils.STATUS_TRUE);
 
                 switch (item.getItemId()) {
                     case R.id.healthAndHygieneMenuItem:
@@ -269,20 +278,41 @@ public class MainActivity extends AppCompatActivity {
                             fragmentTransaction.commit();
 
                         } else {
-                            settingsFragment = new SettingsFragment();
-                            fragmentManager = getSupportFragmentManager();
-                            fragmentTransaction = fragmentManager.beginTransaction();
-                            fragmentTransaction.replace(R.id.child_fragment_container, settingsFragment, "settingsFrag");
-                            fragmentTransaction.addToBackStack("eww");
-                            fragmentTransaction.commit();
 
-                            activityMainBinding.ProgramsTabLayout.setSelectedTabIndicatorColor(Color.parseColor("#4e92cf"));
-                            periodCalenderFragment = new PeriodCalenderFragment();
-                            fragmentManager = getSupportFragmentManager();
-                            fragmentTransaction = fragmentManager.beginTransaction();
-                            fragmentTransaction.addToBackStack("eww");
-                            fragmentTransaction.replace(R.id.child_fragment_container, periodCalenderFragment, "periodCalenderFrag");
-                            fragmentTransaction.commit();
+                            if(Utils.getFromPrefs(MainActivity.this,Utils.DATA_COLLECTION_PREFERENCES,Utils.FIRST_TIME_OPEN_APP).equals(Utils.STATUS_TRUE)){
+                             //   Utils.saveToPrefs(MainActivity.this,Utils.DATA_COLLECTION_PREFERENCES,Utils.FROM_NOTIFICATION,Utils.STATUS_FALSE);
+                                settingsFragment = new SettingsFragment();
+                                fragmentManager = getSupportFragmentManager();
+                                fragmentTransaction = fragmentManager.beginTransaction();
+                                fragmentTransaction.replace(R.id.child_fragment_container, settingsFragment, "settingsFrag");
+                                fragmentTransaction.addToBackStack("eww");
+                                fragmentTransaction.commit();
+                                activityMainBinding.ProgramsTabLayout.setSelectedTabIndicatorColor(Color.parseColor("#4e92cf"));
+                                periodCalenderFragment = new PeriodCalenderFragment();
+                                fragmentManager = getSupportFragmentManager();
+                                fragmentTransaction = fragmentManager.beginTransaction();
+                                fragmentTransaction.addToBackStack("eww");
+                                fragmentTransaction.replace(R.id.child_fragment_container, periodCalenderFragment, "periodCalenderFrag");
+                                fragmentTransaction.commit();
+                                Utils.saveToPrefs(MainActivity.this,Utils.DATA_COLLECTION_PREFERENCES,Utils.FIRST_TIME_OPEN_APP,Utils.STATUS_FALSE);
+                            }
+                            else {
+                              //  Utils.saveToPrefs(MainActivity.this,Utils.DATA_COLLECTION_PREFERENCES,Utils.FROM_NOTIFICATION,Utils.STATUS_TRUE);
+//                                settingsFragment = new SettingsFragment();
+//                                fragmentManager = getSupportFragmentManager();
+//                                fragmentTransaction = fragmentManager.beginTransaction();
+//                                fragmentTransaction.replace(R.id.child_fragment_container, settingsFragment, "settingsFrag");
+//                                fragmentTransaction.addToBackStack("eww");
+//                                fragmentTransaction.commit();
+                                activityMainBinding.ProgramsTabLayout.setSelectedTabIndicatorColor(Color.parseColor("#4e92cf"));
+                                periodCalenderFragment = new PeriodCalenderFragment();
+                                fragmentManager = getSupportFragmentManager();
+                                fragmentTransaction = fragmentManager.beginTransaction();
+                                fragmentTransaction.addToBackStack("eww");
+                                fragmentTransaction.replace(R.id.child_fragment_container, periodCalenderFragment, "periodCalenderFrag");
+                                fragmentTransaction.commit();
+                            }
+
                         }
 
 
