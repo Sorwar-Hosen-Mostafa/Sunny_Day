@@ -186,6 +186,14 @@
 
         </LinearLayout>
 
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:id="@+id/secretbutton"
+            android:layout_below="@+id/lowerLinearLayout"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
 
     </RelativeLayout>
 

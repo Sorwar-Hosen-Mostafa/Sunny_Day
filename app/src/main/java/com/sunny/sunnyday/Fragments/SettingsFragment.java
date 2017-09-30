@@ -2,6 +2,7 @@ package com.sunny.sunnyday.Fragments;
 
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -15,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.Toast;
 
+import com.sunny.sunnyday.DeveloperInfo;
 import com.sunny.sunnyday.MainActivity;
 import com.sunny.sunnyday.R;
 import com.sunny.sunnyday.Utils;
@@ -85,6 +87,15 @@ public class SettingsFragment extends Fragment {
 
 
                 }
+            }
+        });
+
+
+        settingsBinding.secretbutton.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                getActivity().startActivity(new Intent(getActivity(), DeveloperInfo.class));
+                return true;
             }
         });
 
