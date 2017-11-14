@@ -23,6 +23,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         try {
             db.execSQL(SavedArticleDAO.CREATE_SAVED_ARTICLE_TABLE);
             db.execSQL(SavedArticleDAO.CREATE_ALREADY_READ_ARTICLE_TABLE);
+            db.execSQL(SavedArticleDAO.CREATE_PERIOD_HISTORY_TABLE);
         }
         catch (SQLException e){
             Log.e("SQL ERROR",e.getMessage().toString());
@@ -36,6 +37,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("drop table if exists "+ SavedArticleDAO.SAVED_ARTICLE_TABLE);
         db.execSQL("drop table if exists "+ SavedArticleDAO.ALREADY_READ_ARTICLE_TABLE);
+        db.execSQL("drop table if exists "+ SavedArticleDAO.PERIOD_HISTORY_TABLE);
         onCreate(db);
     }
 }

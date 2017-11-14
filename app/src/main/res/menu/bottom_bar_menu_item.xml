@@ -7,7 +7,7 @@
         />
     <item android:id="@+id/PeriodCalanderMenuItem"
         android:title="@string/period_calender_menu_item_text"
-        android:icon="@drawable/calender"
+        android:icon="@drawable/calendaricon"
         />
     <item android:id="@+id/SettingsMenuItem"
         android:title="@string/settings_menu_item_text"

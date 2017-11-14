@@ -4,6 +4,7 @@ package com.sunny.sunnyday.Fragments;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -17,6 +18,7 @@ import android.widget.CompoundButton;
 import android.widget.Toast;
 
 import com.sunny.sunnyday.DeveloperInfo;
+import com.sunny.sunnyday.LocalDatabase.SavedArticleDAO;
 import com.sunny.sunnyday.MainActivity;
 import com.sunny.sunnyday.R;
 import com.sunny.sunnyday.Utils;
@@ -31,6 +33,7 @@ public class SettingsFragment extends Fragment {
     private SavedArticlesFragment savedArticlesFragment;
     private TermsAndConditionsFragment termsAndConditionsFragment;
     private LisenseFragment lisenseFragment;
+    private HistoryFragment historyFragment;
     private FragmentManager fragmentManager;
     String notification_status;
     String pregnancy_mode_status;
@@ -58,16 +61,16 @@ public class SettingsFragment extends Fragment {
 
         settingsBinding.notificationchkState.setSelected(true);
 
-        notification_status=Utils.getFromPrefs(getActivity(),Utils.SETTINGS_PREFERENCES,Utils.NOTIFICATION);
-        pregnancy_mode_status=Utils.getFromPrefs(getActivity(),Utils.SETTINGS_PREFERENCES,Utils.PREGNANCY_MODE);
+        notification_status= Utils.getFromPrefs(getActivity(), Utils.SETTINGS_PREFERENCES, Utils.NOTIFICATION);
+        pregnancy_mode_status= Utils.getFromPrefs(getActivity(), Utils.SETTINGS_PREFERENCES, Utils.PREGNANCY_MODE);
 
         if(notification_status.equals("null")){
-            Utils.saveToPrefs(getActivity(),Utils.SETTINGS_PREFERENCES,Utils.NOTIFICATION,Utils.STATUS_TRUE);
-            notification_status =Utils.getFromPrefs(getActivity(),Utils.SETTINGS_PREFERENCES,Utils.NOTIFICATION);
+            Utils.saveToPrefs(getActivity(), Utils.SETTINGS_PREFERENCES, Utils.NOTIFICATION, Utils.STATUS_TRUE);
+            notification_status = Utils.getFromPrefs(getActivity(), Utils.SETTINGS_PREFERENCES, Utils.NOTIFICATION);
         }
         if(pregnancy_mode_status.equals("null")){
-            Utils.saveToPrefs(getActivity(),Utils.SETTINGS_PREFERENCES,Utils.PREGNANCY_MODE,Utils.STATUS_FALSE);
-            pregnancy_mode_status=Utils.getFromPrefs(getActivity(),Utils.SETTINGS_PREFERENCES,Utils.PREGNANCY_MODE);
+            Utils.saveToPrefs(getActivity(), Utils.SETTINGS_PREFERENCES, Utils.PREGNANCY_MODE, Utils.STATUS_FALSE);
+            pregnancy_mode_status= Utils.getFromPrefs(getActivity(), Utils.SETTINGS_PREFERENCES, Utils.PREGNANCY_MODE);
         }
 
         setScreenWithSettings(notification_status,pregnancy_mode_status);
@@ -77,12 +80,12 @@ public class SettingsFragment extends Fragment {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
                     settingsBinding.notificationchkState.setChecked(true);
-                    Utils.saveToPrefs(getActivity(),Utils.SETTINGS_PREFERENCES,Utils.NOTIFICATION,Utils.STATUS_TRUE);
+                    Utils.saveToPrefs(getActivity(), Utils.SETTINGS_PREFERENCES, Utils.NOTIFICATION, Utils.STATUS_TRUE);
                     Toast.makeText(getActivity(), "notification on", Toast.LENGTH_SHORT).show();
                 }
                 else {
                     settingsBinding.notificationchkState.setChecked(false);
-                    Utils.saveToPrefs(getActivity(),Utils.SETTINGS_PREFERENCES,Utils.NOTIFICATION,Utils.STATUS_FALSE);
+                    Utils.saveToPrefs(getActivity(), Utils.SETTINGS_PREFERENCES, Utils.NOTIFICATION, Utils.STATUS_FALSE);
                     Toast.makeText(getActivity(), "notification off", Toast.LENGTH_SHORT).show();
 
 
@@ -104,12 +107,12 @@ public class SettingsFragment extends Fragment {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(!isChecked){
                     settingsBinding.pragnentchkState.setChecked(false);
-                    Utils.saveToPrefs(getActivity(),Utils.SETTINGS_PREFERENCES,Utils.PREGNANCY_MODE,Utils.STATUS_FALSE);
+                    Utils.saveToPrefs(getActivity(), Utils.SETTINGS_PREFERENCES, Utils.PREGNANCY_MODE, Utils.STATUS_FALSE);
                     Toast.makeText(getActivity(), "pregnancy mode off", Toast.LENGTH_SHORT).show();
                 }
                 else {
                     settingsBinding.pragnentchkState.setChecked(true);
-                    Utils.saveToPrefs(getActivity(),Utils.SETTINGS_PREFERENCES,Utils.PREGNANCY_MODE,Utils.STATUS_TRUE);
+                    Utils.saveToPrefs(getActivity(), Utils.SETTINGS_PREFERENCES, Utils.PREGNANCY_MODE, Utils.STATUS_TRUE);
                     Toast.makeText(getActivity(), "pregnancy mode on", Toast.LENGTH_SHORT).show();
                 }
 
@@ -127,7 +130,12 @@ public class SettingsFragment extends Fragment {
                 alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Utils.saveToPrefs(getActivity(),Utils.DATA_COLLECTION_PREFERENCES,Utils.DATA_COLLECTED_STATUS,Utils.STATUS_FALSE);
+                        Utils.saveToPrefs(getActivity(), Utils.DATA_COLLECTION_PREFERENCES, Utils.DATA_COLLECTED_STATUS, Utils.STATUS_FALSE);
+
+                        Utils.saveToPrefs(getActivity(),Utils.DATA_COLLECTION_PREFERENCES,Utils.LOG_CLICKED,Utils.STATUS_FALSE);
+                        SavedArticleDAO savedArticleDAO = new SavedArticleDAO(getActivity());
+                        savedArticleDAO.deleteAllHistory();
+
                         Toast.makeText(getActivity(),"Data reset successfully",Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -177,6 +185,43 @@ public class SettingsFragment extends Fragment {
                 fragmentTransaction.addToBackStack("abc");
                 fragmentTransaction.replace(R.id.child_fragment_container, lisenseFragment, "lisenseFrag");
                 fragmentTransaction.commit();
+            }
+        });
+
+        settingsBinding.historvBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity mainActivity = (MainActivity) getActivity();
+                historyFragment = new HistoryFragment();
+                fragmentManager = mainActivity.fragmentManager;
+                fragmentTransaction = mainActivity.fragmentTransaction;
+                fragmentManager = getFragmentManager();
+                fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.addToBackStack("abc");
+                fragmentTransaction.replace(R.id.child_fragment_container, historyFragment, "historyFrag");
+                fragmentTransaction.commit();
+            }
+        });
+        settingsBinding.facebookBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/sunnydaybd/?hc_ref=ARQsaOGPG2hF7Fl0ncStlgcuKLxrnTjLwmFDh5fYcixefpSZt-zVZ80YFQOKRylui9k&fref=nf"));
+                startActivity(browserIntent);
+            }
+        });
+        settingsBinding.tvcBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/channel/UCe7RahM4GICcD3Llo0e1sCA"));
+                startActivity(browserIntent);
+            }
+        });
+        settingsBinding.shopnowBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://chaldal.com/sunnyday-superior-heavy-flow-wings-sanitary-napkin-8-pcs-buy-1-get-1"));
+                startActivity(browserIntent);
             }
         });
 

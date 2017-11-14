@@ -38,16 +38,92 @@
 
 
         </FrameLayout>
-        <android.support.design.widget.BottomNavigationView
+        <LinearLayout
             android:layout_width="match_parent"
             android:id="@+id/bottom_nevigation_view"
             android:layout_height="0dp"
-            app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
-            design:itemBackground="@drawable/bnv_item_background"
-            design:itemIconTint="@color/bnv_tab_item_forground"
-            design:itemTextColor="@color/bnv_tab_item_forground"
             android:layout_weight="1"
-            design:menu="@menu/bottom_bar_menu_item"></android.support.design.widget.BottomNavigationView>
+            android:orientation="horizontal"
+           >
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:background="#E02693"
+                android:id="@+id/HealthMenuItemContainer"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:scaleType="fitCenter"
+                    android:id="@+id/HealthMenuItemIV"
+                    android:padding="4dp"
+                    android:tint="@android:color/white"
+                    android:src="@drawable/health"
+                    android:layout_weight="2"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:id="@+id/HealthMenuItemTV"
+                    android:gravity="center"
+                    android:textSize="12sp"
+                    android:textColor="@android:color/white"
+                    android:text="@string/health_hygiene_menu_item_text"
+                    android:layout_weight="1.5"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:background="#E02693"
+                android:id="@+id/CalenderMenuItemContainer"
+                android:orientation="vertical"
+                android:layout_height="match_parent">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:tint="@android:color/white"
+                    android:padding="4dp"
+                    android:scaleType="fitCenter"
+                    android:id="@+id/CalenderMenuItemIV"
+                    android:src="@drawable/calender"
+                    android:layout_weight="2"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:id="@+id/CalenderMenuItemTV"
+                    android:gravity="center"
+                    android:textSize="12sp"
+                    android:textColor="@android:color/white"
+                    android:text="@string/period_calender_menu_item_text"
+                    android:layout_weight="1.5"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:id="@+id/SettingsMenuItemContainer"
+                android:background="#E02693"
+                android:orientation="vertical"
+                android:layout_height="match_parent">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:padding="4dp"
+                    android:scaleType="fitCenter"
+                    android:id="@+id/SettingsMenuItemIV"
+                    android:tint="@android:color/white"
+                    android:src="@drawable/settings"
+                    android:layout_weight="2"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:gravity="center"
+                    android:textSize="12sp"
+                    android:id="@+id/SettingsMenuItemTV"
+                    android:textColor="@android:color/white"
+                    android:text="@string/settings_menu_item_text"
+                    android:layout_weight="1.5"/>
+            </LinearLayout>
+        </LinearLayout>
 
     </LinearLayout>
 </layout>

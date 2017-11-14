@@ -13,8 +13,9 @@ public class Utils {
     public static final String FIRST_TIME_OPEN_APP = "firsttimeopensapp";
 
 
-
+    public static final String LOG_CLICKED = "log_clicked";
     public static final String LOG_FUNCTION = "log_function";
+    public static final String END_FUNCTION = "end_function";
     public static final String NOTIFICATION = "notification";
     public static final String FROM_NOTIFICATION = "from_notification";
     public static final String PREGNANCY_MODE = "pregnancy_mode";

@@ -2,9 +2,11 @@ package com.sunny.sunnyday.Fragments;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
@@ -14,6 +16,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.youtube.player.YouTubeInitializationResult;
+import com.google.android.youtube.player.YouTubePlayer;
+import com.google.android.youtube.player.YouTubePlayerFragment;
+import com.google.android.youtube.player.YouTubePlayerSupportFragment;
+import com.google.android.youtube.player.YouTubePlayerView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -23,6 +30,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.sunny.sunnyday.Adapters.ArticleGridRecViewAdapter;
 import com.sunny.sunnyday.MainActivity;
 import com.sunny.sunnyday.Model.Article;
+import com.sunny.sunnyday.PlayerConfig;
 import com.sunny.sunnyday.R;
 import com.sunny.sunnyday.Utils;
 import com.sunny.sunnyday.databinding.FragmentTrendingNowFragmetBinding;
@@ -36,10 +44,8 @@ import dmax.dialog.SpotsDialog;
  */
 public class TrendingNowFragmet extends Fragment {
 
-
     private Article article;
     private ArrayList<Article> articles;
-    static SpotsDialog progressDialog;
     private ArticleGridRecViewAdapter articleGridRecViewAdapter;
     private FragmentTrendingNowFragmetBinding trendingNowFragmetBinding;
     private DatabaseReference dbRef;
@@ -67,6 +73,13 @@ public class TrendingNowFragmet extends Fragment {
 
         mainActivity.fromsavedarticle = false;
 
+        trendingNowFragmetBinding.tvcImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=z4gNrdacbws"));
+                startActivity(browserIntent);
+            }
+        });
 
         if(isNetworkAvailable()){
           getdata();

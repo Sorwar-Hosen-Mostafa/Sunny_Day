@@ -2,14 +2,11 @@ package com.sunny.sunnyday;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.pm.PackageManager;
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
 import android.os.Build;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
@@ -17,18 +14,17 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
-import android.util.Log;
-import android.view.MenuItem;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
+
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.sunny.sunnyday.DataCollectionFragments.FragmentOne;
 import com.sunny.sunnyday.Fragments.ArticleReadViewFragment;
 import com.sunny.sunnyday.Fragments.HealthAndFitnessFragment;
 import com.sunny.sunnyday.Fragments.HumorOfTheDayFragment;
-import com.sunny.sunnyday.Fragments.PeriodCalenderFragment;
+import com.sunny.sunnyday.Fragments.PeriodCalendarFragment;
 import com.sunny.sunnyday.Fragments.SettingsFragment;
 import com.sunny.sunnyday.Fragments.TrendingNowFragmet;
 import com.sunny.sunnyday.Fragments.WhatsInWhatsOutFragment;
@@ -37,8 +33,6 @@ import com.sunny.sunnyday.databinding.ActivityMainBinding;
 
 import java.util.ArrayList;
 import java.util.UUID;
-
-import static android.content.ContentValues.TAG;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -51,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
     public static int REQUEST_READ_PHONE_STATE = 1;
     private ActivityMainBinding activityMainBinding;
     private HealthAndFitnessFragment healthAndFitnessFragment;
-    private PeriodCalenderFragment periodCalenderFragment;
+    private PeriodCalendarFragment periodCalenderFragment;
     private SettingsFragment settingsFragment;
     public FragmentManager fragmentManager;
     public ArrayList<String> savedarticle;
@@ -74,6 +68,17 @@ public class MainActivity extends AppCompatActivity {
         savedarticle = new ArrayList<>();
         savedarticlefinel = new ArrayList<>();
 
+        activityMainBinding.HealthMenuItemContainer.setBackgroundColor(Color.parseColor("#B5317C"));
+        activityMainBinding.CalenderMenuItemContainer.setBackgroundColor(Color.parseColor("#E02693"));
+        activityMainBinding.SettingsMenuItemContainer.setBackgroundColor(Color.parseColor("#E02693"));
+
+
+        activityMainBinding.SettingsMenuItemTV.setTextColor(Color.parseColor("#dddddd"));
+        activityMainBinding.SettingsMenuItemIV.setColorFilter(ContextCompat.getColor(MainActivity.this, R.color.text_unselected), android.graphics.PorterDuff.Mode.MULTIPLY);
+        activityMainBinding.CalenderMenuItemTV.setTextColor(Color.parseColor("#dddddd"));
+        activityMainBinding.CalenderMenuItemIV.setColorFilter(ContextCompat.getColor(MainActivity.this, R.color.text_unselected), android.graphics.PorterDuff.Mode.MULTIPLY);
+        activityMainBinding.HealthMenuItemTV.setTextColor(Color.parseColor("#ffffff"));
+        activityMainBinding.HealthMenuItemIV.setColorFilter(ContextCompat.getColor(MainActivity.this, R.color.text_selected), android.graphics.PorterDuff.Mode.MULTIPLY);
 
         Utils.saveToPrefs(MainActivity.this,Utils.DATA_COLLECTION_PREFERENCES,Utils.FIRST_TIME_OPEN_APP,Utils.STATUS_TRUE);
 
@@ -100,11 +105,10 @@ public class MainActivity extends AppCompatActivity {
             if (menuFragment.equals("periodCalendar")) {
 
                     Utils.saveToPrefs(MainActivity.this,Utils.DATA_COLLECTION_PREFERENCES,Utils.FROM_NOTIFICATION,Utils.STATUS_TRUE);
-                    PeriodCalenderFragment periodCalenderFragment = new PeriodCalenderFragment();
+                    PeriodCalendarFragment periodCalenderFragment = new PeriodCalendarFragment();
                     fragmentTransaction.replace(R.id.child_fragment_container, periodCalenderFragment, "periodCalendarFrag");
                     fragmentTransaction.addToBackStack("eww");
                     fragmentTransaction.commit();
-                    activityMainBinding.bottomNevigationView.setSelectedItemId(R.id.PeriodCalanderMenuItem);
                     Utils.saveToPrefs(MainActivity.this,Utils.DATA_COLLECTION_PREFERENCES,Utils.FIRST_TIME_OPEN_APP,Utils.STATUS_FALSE);
 
 
@@ -145,9 +149,19 @@ public class MainActivity extends AppCompatActivity {
 
 
         activityMainBinding.ProgramsTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
 
+                activityMainBinding.SettingsMenuItemContainer.setBackgroundColor(Color.parseColor("#E02693"));
+                activityMainBinding.HealthMenuItemContainer.setBackgroundColor(Color.parseColor("#E02693"));
+                activityMainBinding.CalenderMenuItemContainer.setBackgroundColor(Color.parseColor("#E02693"));
+                activityMainBinding.SettingsMenuItemTV.setTextColor(Color.parseColor("#dddddd"));
+                activityMainBinding.SettingsMenuItemIV.setColorFilter(ContextCompat.getColor(MainActivity.this, R.color.text_unselected), android.graphics.PorterDuff.Mode.MULTIPLY);
+                activityMainBinding.CalenderMenuItemTV.setTextColor(Color.parseColor("#dddddd"));
+                activityMainBinding.CalenderMenuItemIV.setColorFilter(ContextCompat.getColor(MainActivity.this, R.color.text_unselected), android.graphics.PorterDuff.Mode.MULTIPLY);
+                activityMainBinding.HealthMenuItemTV.setTextColor(Color.parseColor("#dddddd"));
+                activityMainBinding.HealthMenuItemIV.setColorFilter(ContextCompat.getColor(MainActivity.this, R.color.text_unselected), android.graphics.PorterDuff.Mode.MULTIPLY);
 
                 switch (tab.getPosition()) {
                     case 0:
@@ -191,6 +205,16 @@ public class MainActivity extends AppCompatActivity {
             public void onTabReselected(TabLayout.Tab tab) {
 
 
+                activityMainBinding.SettingsMenuItemContainer.setBackgroundColor(Color.parseColor("#E02693"));
+                activityMainBinding.HealthMenuItemContainer.setBackgroundColor(Color.parseColor("#E02693"));
+                activityMainBinding.CalenderMenuItemContainer.setBackgroundColor(Color.parseColor("#E02693"));
+                activityMainBinding.SettingsMenuItemTV.setTextColor(Color.parseColor("#dddddd"));
+                activityMainBinding.SettingsMenuItemIV.setColorFilter(ContextCompat.getColor(MainActivity.this, R.color.text_unselected), android.graphics.PorterDuff.Mode.MULTIPLY);
+                activityMainBinding.CalenderMenuItemTV.setTextColor(Color.parseColor("#dddddd"));
+                activityMainBinding.CalenderMenuItemIV.setColorFilter(ContextCompat.getColor(MainActivity.this, R.color.text_unselected), android.graphics.PorterDuff.Mode.MULTIPLY);
+                activityMainBinding.HealthMenuItemTV.setTextColor(Color.parseColor("#dddddd"));
+                activityMainBinding.HealthMenuItemIV.setColorFilter(ContextCompat.getColor(MainActivity.this, R.color.text_unselected), android.graphics.PorterDuff.Mode.MULTIPLY);
+
                 switch (tab.getPosition()) {
                     case 0:
 
@@ -226,79 +250,112 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-        activityMainBinding.bottomNevigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+        activityMainBinding.HealthMenuItemContainer.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            public void onClick(View v) {
+                activityMainBinding.HealthMenuItemContainer.setBackgroundColor(Color.parseColor("#B5317C"));
+                activityMainBinding.CalenderMenuItemContainer.setBackgroundColor(Color.parseColor("#E02693"));
+                activityMainBinding.SettingsMenuItemContainer.setBackgroundColor(Color.parseColor("#E02693"));
 
 
-                switch (item.getItemId()) {
-                    case R.id.healthAndHygieneMenuItem:
-                        activityMainBinding.ProgramsTabLayout.setSelectedTabIndicatorColor(Color.parseColor("#4e92cf"));
-                        healthAndFitnessFragment = new HealthAndFitnessFragment();
-                        fragmentManager = getSupportFragmentManager();
-                        fragmentTransaction = fragmentManager.beginTransaction();
-                        fragmentTransaction.replace(R.id.child_fragment_container, healthAndFitnessFragment, "healthAndFitnessFrag");
-                        fragmentTransaction.addToBackStack("eww");
-                        fragmentTransaction.commit();
-                        return true;
-                    case R.id.PeriodCalanderMenuItem:
-                        activityMainBinding.ProgramsTabLayout.setSelectedTabIndicatorColor(Color.parseColor("#4e92cf"));
-                        String status = Utils.getFromPrefs(MainActivity.this, Utils.DATA_COLLECTION_PREFERENCES, Utils.DATA_COLLECTED_STATUS);
-                        if (status.equals("false") || status.equals("null")) {
-                            fragmentOne = new FragmentOne();
-                            fragmentManager = getSupportFragmentManager();
-                            fragmentTransaction = fragmentManager.beginTransaction();
-                            fragmentTransaction.replace(R.id.child_fragment_container, fragmentOne, "fragmentOne");
-                            fragmentTransaction.addToBackStack("eww");
-                            fragmentTransaction.commit();
-
-                        } else {
-
-                            if(Utils.getFromPrefs(MainActivity.this,Utils.DATA_COLLECTION_PREFERENCES,Utils.FIRST_TIME_OPEN_APP).equals(Utils.STATUS_TRUE)){
-                             //   Utils.saveToPrefs(MainActivity.this,Utils.DATA_COLLECTION_PREFERENCES,Utils.FROM_NOTIFICATION,Utils.STATUS_FALSE);
-                                settingsFragment = new SettingsFragment();
-                                fragmentManager = getSupportFragmentManager();
-                                fragmentTransaction = fragmentManager.beginTransaction();
-                                fragmentTransaction.replace(R.id.child_fragment_container, settingsFragment, "settingsFrag");
-                                fragmentTransaction.addToBackStack("eww");
-                                fragmentTransaction.commit();
-                                activityMainBinding.ProgramsTabLayout.setSelectedTabIndicatorColor(Color.parseColor("#4e92cf"));
-                                periodCalenderFragment = new PeriodCalenderFragment();
-                                fragmentManager = getSupportFragmentManager();
-                                fragmentTransaction = fragmentManager.beginTransaction();
-                                fragmentTransaction.addToBackStack("eww");
-                                fragmentTransaction.replace(R.id.child_fragment_container, periodCalenderFragment, "periodCalenderFrag");
-                                fragmentTransaction.commit();
-                                Utils.saveToPrefs(MainActivity.this,Utils.DATA_COLLECTION_PREFERENCES,Utils.FIRST_TIME_OPEN_APP,Utils.STATUS_FALSE);
-                            }
-                            else {
-                                activityMainBinding.ProgramsTabLayout.setSelectedTabIndicatorColor(Color.parseColor("#4e92cf"));
-                                periodCalenderFragment = new PeriodCalenderFragment();
-                                fragmentManager = getSupportFragmentManager();
-                                fragmentTransaction = fragmentManager.beginTransaction();
-                                fragmentTransaction.addToBackStack("eww");
-                                fragmentTransaction.replace(R.id.child_fragment_container, periodCalenderFragment, "periodCalenderFrag");
-                                fragmentTransaction.commit();
-                            }
-
-                        }
+                activityMainBinding.SettingsMenuItemTV.setTextColor(Color.parseColor("#dddddd"));
+                activityMainBinding.SettingsMenuItemIV.setColorFilter(ContextCompat.getColor(MainActivity.this, R.color.text_unselected), android.graphics.PorterDuff.Mode.MULTIPLY);
+                activityMainBinding.CalenderMenuItemTV.setTextColor(Color.parseColor("#dddddd"));
+                activityMainBinding.CalenderMenuItemIV.setColorFilter(ContextCompat.getColor(MainActivity.this, R.color.text_unselected), android.graphics.PorterDuff.Mode.MULTIPLY);
+                activityMainBinding.HealthMenuItemTV.setTextColor(Color.parseColor("#ffffff"));
+                activityMainBinding.HealthMenuItemIV.setColorFilter(ContextCompat.getColor(MainActivity.this, R.color.text_selected), android.graphics.PorterDuff.Mode.MULTIPLY);
 
 
-                        return true;
-                    case R.id.SettingsMenuItem:
-                        activityMainBinding.ProgramsTabLayout.setSelectedTabIndicatorColor(Color.parseColor("#4e92cf"));
 
+                activityMainBinding.ProgramsTabLayout.setSelectedTabIndicatorColor(Color.parseColor("#4e92cf"));
+                healthAndFitnessFragment = new HealthAndFitnessFragment();
+                fragmentManager = getSupportFragmentManager();
+                fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.child_fragment_container, healthAndFitnessFragment, "healthAndFitnessFrag");
+                fragmentTransaction.addToBackStack("eww");
+                fragmentTransaction.commit();
+            }
+        });
+        activityMainBinding.CalenderMenuItemContainer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                activityMainBinding.CalenderMenuItemContainer.setBackgroundColor(Color.parseColor("#B5317C"));
+                activityMainBinding.HealthMenuItemContainer.setBackgroundColor(Color.parseColor("#E02693"));
+                activityMainBinding.SettingsMenuItemContainer.setBackgroundColor(Color.parseColor("#E02693"));
+                activityMainBinding.ProgramsTabLayout.setSelectedTabIndicatorColor(Color.parseColor("#4e92cf"));
+
+
+                activityMainBinding.SettingsMenuItemTV.setTextColor(Color.parseColor("#dddddd"));
+                activityMainBinding.SettingsMenuItemIV.setColorFilter(ContextCompat.getColor(MainActivity.this, R.color.text_unselected), android.graphics.PorterDuff.Mode.MULTIPLY);
+                activityMainBinding.CalenderMenuItemTV.setTextColor(Color.parseColor("#ffffff"));
+                activityMainBinding.CalenderMenuItemIV.setColorFilter(ContextCompat.getColor(MainActivity.this, R.color.text_selected), android.graphics.PorterDuff.Mode.MULTIPLY);
+                activityMainBinding.HealthMenuItemTV.setTextColor(Color.parseColor("#dddddd"));
+                activityMainBinding.HealthMenuItemIV.setColorFilter(ContextCompat.getColor(MainActivity.this, R.color.text_unselected), android.graphics.PorterDuff.Mode.MULTIPLY);
+
+                String status = Utils.getFromPrefs(MainActivity.this, Utils.DATA_COLLECTION_PREFERENCES, Utils.DATA_COLLECTED_STATUS);
+                if (status.equals("false") || status.equals("null")) {
+                    fragmentOne = new FragmentOne();
+                    fragmentManager = getSupportFragmentManager();
+                    fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.child_fragment_container, fragmentOne, "fragmentOne");
+                    fragmentTransaction.addToBackStack("eww");
+                    fragmentTransaction.commit();
+
+                } else {
+
+                    if(Utils.getFromPrefs(MainActivity.this,Utils.DATA_COLLECTION_PREFERENCES,Utils.FIRST_TIME_OPEN_APP).equals(Utils.STATUS_TRUE)){
+                        //   Utils.saveToPrefs(MainActivity.this,Utils.DATA_COLLECTION_PREFERENCES,Utils.FROM_NOTIFICATION,Utils.STATUS_FALSE);
                         settingsFragment = new SettingsFragment();
                         fragmentManager = getSupportFragmentManager();
                         fragmentTransaction = fragmentManager.beginTransaction();
                         fragmentTransaction.replace(R.id.child_fragment_container, settingsFragment, "settingsFrag");
                         fragmentTransaction.addToBackStack("eww");
                         fragmentTransaction.commit();
-                        return true;
+                        activityMainBinding.ProgramsTabLayout.setSelectedTabIndicatorColor(Color.parseColor("#4e92cf"));
+                        periodCalenderFragment = new PeriodCalendarFragment();
+                        fragmentManager = getSupportFragmentManager();
+                        fragmentTransaction = fragmentManager.beginTransaction();
+                        fragmentTransaction.addToBackStack("eww");
+                        fragmentTransaction.replace(R.id.child_fragment_container, periodCalenderFragment, "periodCalenderFrag");
+                        fragmentTransaction.commit();
+                        Utils.saveToPrefs(MainActivity.this,Utils.DATA_COLLECTION_PREFERENCES,Utils.FIRST_TIME_OPEN_APP,Utils.STATUS_FALSE);
+                    }
+                    else {
+                        activityMainBinding.ProgramsTabLayout.setSelectedTabIndicatorColor(Color.parseColor("#4e92cf"));
+                        periodCalenderFragment = new PeriodCalendarFragment();
+                        fragmentManager = getSupportFragmentManager();
+                        fragmentTransaction = fragmentManager.beginTransaction();
+                        fragmentTransaction.addToBackStack("eww");
+                        fragmentTransaction.replace(R.id.child_fragment_container, periodCalenderFragment, "periodCalenderFrag");
+                        fragmentTransaction.commit();
+                    }
 
                 }
-                return false;
+            }
+        });
+        activityMainBinding.SettingsMenuItemContainer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                activityMainBinding.SettingsMenuItemContainer.setBackgroundColor(Color.parseColor("#B5317C"));
+                activityMainBinding.HealthMenuItemContainer.setBackgroundColor(Color.parseColor("#E02693"));
+                activityMainBinding.CalenderMenuItemContainer.setBackgroundColor(Color.parseColor("#E02693"));
+                activityMainBinding.ProgramsTabLayout.setSelectedTabIndicatorColor(Color.parseColor("#4e92cf"));
+
+
+                activityMainBinding.SettingsMenuItemTV.setTextColor(Color.parseColor("#ffffff"));
+                activityMainBinding.SettingsMenuItemIV.setColorFilter(ContextCompat.getColor(MainActivity.this, R.color.text_selected), android.graphics.PorterDuff.Mode.MULTIPLY);
+                activityMainBinding.CalenderMenuItemTV.setTextColor(Color.parseColor("#dddddd"));
+                activityMainBinding.CalenderMenuItemIV.setColorFilter(ContextCompat.getColor(MainActivity.this, R.color.text_unselected), android.graphics.PorterDuff.Mode.MULTIPLY);
+                activityMainBinding.HealthMenuItemTV.setTextColor(Color.parseColor("#dddddd"));
+                activityMainBinding.HealthMenuItemIV.setColorFilter(ContextCompat.getColor(MainActivity.this, R.color.text_unselected), android.graphics.PorterDuff.Mode.MULTIPLY);
+
+
+                settingsFragment = new SettingsFragment();
+                fragmentManager = getSupportFragmentManager();
+                fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.child_fragment_container, settingsFragment, "settingsFrag");
+                fragmentTransaction.addToBackStack("eww");
+                fragmentTransaction.commit();
             }
         });
 

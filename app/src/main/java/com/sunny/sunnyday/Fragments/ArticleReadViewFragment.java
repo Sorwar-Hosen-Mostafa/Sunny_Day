@@ -58,7 +58,7 @@ public class ArticleReadViewFragment extends Fragment {
         article = mainActivity.getArticleViewData();
         articleReadViewBinding.articleDescriptionTV.setText(article.getArticle_Description());
         Picasso.with(getContext()).load(article.getArticle_Image()).into(articleReadViewBinding.articleImageIV);
-        articleReadViewBinding.postDateAndReadTimeTV.setText(article.getArticle_PostDate()+" ,"+article.getArticle_Readtime());
+        articleReadViewBinding.postDateAndReadTimeTV.setText(article.getArticle_PostDate()+" ,  "+article.getArticle_Readtime());
         articleReadViewBinding.authorNameTV.setText(article.getArticle_author());
         articleReadViewBinding.articleTitleTV.setText(article.getArticle_title());
         final String cat = article.getArticle_Category();
