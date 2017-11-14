@@ -39,7 +39,7 @@ public class ArticleListRecViewAdapter extends RecyclerView.Adapter<ArticleListR
     Context context;
     ArrayList<Article> saved_articles_list;
     SavedArticleDAO savedArticleDAO;
-    MainActivity mainActivity;;
+    MainActivity mainActivity;
     public ArticleListRecViewAdapter(List<Article> articles, Context context, String from){
 
         this.context = context;
@@ -65,7 +65,7 @@ public class ArticleListRecViewAdapter extends RecyclerView.Adapter<ArticleListR
     public void onBindViewHolder(final DerpHolder holder, final int position) {
 
         final Article article = articles.get(position);
-        holder.description.setText(article.getArticle_Description());
+        holder.description.setText(article.getArticle_title());
 
         Picasso.with(context).load(article.getArticle_Image()).networkPolicy(NetworkPolicy.OFFLINE).into(holder.picture, new Callback() {
             @Override
