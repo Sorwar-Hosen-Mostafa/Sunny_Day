@@ -120,7 +120,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="2"
                     android:layout_marginTop="54dp"
-                    android:padding="10dp">
+                    android:padding="1dp">
 
                     <ToggleButton
                         android:id="@+id/pragnentchkState"
@@ -152,6 +152,7 @@
                         android:layout_weight="1"
                         android:background="@drawable/border_button"
                         android:text="go"
+                        android:gravity="center"
                         android:textColor="@android:color/white"
                         android:layout_marginBottom="7dp"
                         android:layout_alignParentBottom="true"
@@ -243,6 +244,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="20dp"
                     android:layout_weight=".5"
+                    android:gravity="center"
                     android:background="@drawable/border_button"
                     android:text="@string/settings_shop_now"
                     android:textColor="@android:color/white"
