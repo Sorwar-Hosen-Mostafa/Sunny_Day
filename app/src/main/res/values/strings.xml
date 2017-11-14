@@ -26,7 +26,7 @@
         <item>2nd Favourable day to conceive</item>
         <item>3rd Favourable day to conceive</item>
         <item>4th Favourable day to conceive</item>
-        <item>last Favourable day to conceive</item>
+        <item>Last Favourable day to conceive</item>
     </string-array>
     <string-array name="logs_title_symbols">
         <item>PS</item>
@@ -103,7 +103,7 @@
     <string name="fragment_five_what_year_were_you_born">What year were you born?</string>
     <string name="fragment_five_the_cycle_prediction_will_be_more_accurate_if_the_app_get_your_age">The cycle prediction will be more accurate if the app gets your age.</string>
     <string name="fragment_six_get_reminders_nabout_your_cycle">Get reminders \nabout your cycle</string>
-    <string name="fragment_six_we_will_send_you_reminders_about_the_begining_of_a_new_cycle_so_that_you_dont_forget_to_long">We will send you reminders about the begining of a new cycle so that you don\'t forget to log it. You can manage the notifications in settings.</string>
+    <string name="fragment_six_we_will_send_you_reminders_about_the_begining_of_a_new_cycle_so_that_you_dont_forget_to_long">We will send you reminders about the begining of a new cycle so that you don\'t forget to log it. You can manage the notifications from settings.</string>
     <string name="fragment_article_read_view_save_article">Save article</string>
     <string name="health_and_hygiene_title">Health and Hygiene</string>
     <string name="trending_now_title">Trending Now</string>
