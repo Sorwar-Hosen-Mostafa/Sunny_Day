@@ -7,7 +7,6 @@
         android:background="@android:color/white"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
         tools:context="com.sunny.sunnyday.Fragments.ArticleReadViewFragment">
         <ImageView
             android:layout_width="wrap_content"
@@ -53,7 +52,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
 
-                android:text="24 Oct, 12 min read"
+                android:text="24 Oct,12 min read"
                 android:textSize="12sp"
                 android:textColor="#aaa"
                 android:layout_below="@+id/author_name_TV"
