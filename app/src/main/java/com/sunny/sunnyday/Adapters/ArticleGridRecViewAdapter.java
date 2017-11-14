@@ -62,7 +62,7 @@ public class ArticleGridRecViewAdapter extends RecyclerView.Adapter<ArticleGridR
     public void onBindViewHolder(final DerpHolder holder, int position) {
 
         final Article article = articles.get(position);
-        holder.description.setText(article.getArticle_Description());
+        holder.description.setText(article.getArticle_title());
 
 
         Picasso.with(context).load(article.getArticle_Image()).networkPolicy(NetworkPolicy.OFFLINE).into(holder.picture, new Callback() {
