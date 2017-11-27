@@ -48,13 +48,26 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
-                <ImageView
-                    android:padding="2dp"
-                    android:id="@+id/tvc_image"
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="180dp"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/tcv"/>
+                    >
+                    <ImageView
+                        android:padding="2dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/videothumbnail"/>
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:id="@+id/tvc_image"
+                        android:layout_height="50dp"
+                        android:src="@drawable/youtube_button_image"
+                        android:layout_centerVertical="true"
+                        android:layout_centerHorizontal="true"/>
+
+                </RelativeLayout>
+
 
                 <android.support.v7.widget.RecyclerView
                     android:padding="5dp"

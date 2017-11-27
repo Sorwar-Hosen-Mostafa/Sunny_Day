@@ -27,9 +27,9 @@
 
     <dimen name="LogTitleSymbolTextSize">25dp</dimen>
        
-    <dimen name="SettingsItemsTextSize">16sp</dimen>
+    <dimen name="SettingsItemsTextSize">14sp</dimen>
        
-    <dimen name="SettingsTextSize">25sp</dimen>
+    <dimen name="SettingsTextSize">22sp</dimen>
        
     <dimen name="ViewSavedArticleButtonTextSize">18sp</dimen>
 

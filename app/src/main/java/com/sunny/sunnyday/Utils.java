@@ -12,6 +12,8 @@ public class Utils {
     public static final String FIRST_TIME_RUNS_APP = "firsttimerunsapp";
     public static final String FIRST_TIME_OPEN_APP = "firsttimeopensapp";
 
+    public static final String LOG_SET = "log_set";
+
 
     public static final String LOG_CLICKED = "log_clicked";
     public static final String LOG_FUNCTION = "log_function";

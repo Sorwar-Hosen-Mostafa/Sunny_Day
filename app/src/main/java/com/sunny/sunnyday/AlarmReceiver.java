@@ -8,16 +8,22 @@ import android.content.Context;
 import android.content.Intent;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 
 
 public class AlarmReceiver extends BroadcastReceiver{
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     public void onReceive(Context context, Intent intent) {
         Intent notificationIntent = new Intent(context, MainActivity.class);
         notificationIntent.putExtra("menuFragment", "periodCalendar");
         notificationIntent.putExtra("again_notify","false");
+
+
+
 
         Notification notification;
         NotificationManager notificationManager;
@@ -32,6 +38,7 @@ public class AlarmReceiver extends BroadcastReceiver{
         PendingIntent pendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
+        NotificationCompat.InboxStyle inboxStyle = new NotificationCompat.InboxStyle();
 
 
         notification_status = Utils.getFromPrefs(context,Utils.SETTINGS_PREFERENCES,Utils.NOTIFICATION);
@@ -42,38 +49,51 @@ public class AlarmReceiver extends BroadcastReceiver{
             Utils.saveToPrefs(context,Utils.DATA_COLLECTION_PREFERENCES,Utils.FROM_NOTIFICATION,Utils.STATUS_TRUE);
             switch (intent.getIntExtra("request_code", 0)) {
                 case 100:
-                    notification = builder.setContentTitle("How is your day??")
-                            .setContentText("Your period might start today, please take precaution!")
+                    inboxStyle.setBigContentTitle("How is your day?");
+                    inboxStyle.addLine("Your period might start today,");
+                    inboxStyle.addLine("please take precaution!");
+                    notification = builder.setContentTitle("How is your day?")
                             .setTicker("Hello from sunny day!!")
-                            .setSmallIcon(R.drawable.icon1)
+                            .setSmallIcon(R.mipmap.ic_launcher)
                             .setVibrate(pattern)
                             .setAutoCancel(true)
+                            .setStyle(inboxStyle)
                             .setSound(alarmSound)
                             .setContentIntent(pendingIntent).build();
+
+
 
                     notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
                     notificationManager.notify(0, notification);
                     break;
                 case 101:
-                    notification = builder.setContentTitle("How is your day??")
-                            .setContentText("You are one day late for your current cycle, want to log your period?")
+                    inboxStyle.setBigContentTitle("How is your day?");
+                    inboxStyle.addLine("You are one day late for your current cycle,");
+                    inboxStyle.addLine("want to log your period?");
+                    notification = builder.setContentTitle("How is your day?")
                             .setVibrate(pattern)
                             .setSound(alarmSound)
                             .setAutoCancel(true)
+                            .setStyle(inboxStyle)
                             .setTicker("Hello from sunny day!!")
-                            .setSmallIcon(R.drawable.icon1)
+                            .setSmallIcon(R.mipmap.ic_launcher)
                             .setContentIntent(pendingIntent).build();
 
                     notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
                     notificationManager.notify(0, notification);
                     break;
                 case 102:
-                    notification = builder.setContentTitle("How is your day??")
-                            .setContentText("You are 2 days late for your current cycle, want to log your period?")
+                    inboxStyle.setBigContentTitle("How is your day?");
+                    inboxStyle.addLine("You are 2 days late for your current cycle,");
+                    inboxStyle.addLine("want to log your period?");
+
+                    
+                    notification = builder.setContentTitle("How is your day?")
                             .setTicker("Hello from sunny day!!")
-                            .setSmallIcon(R.drawable.icon1)
+                            .setSmallIcon(R.mipmap.ic_launcher)
                             .setVibrate(pattern)
                             .setAutoCancel(true)
+                            .setStyle(inboxStyle)
                             .setSound(alarmSound)
                             .setContentIntent(pendingIntent).build();
 
@@ -81,25 +101,31 @@ public class AlarmReceiver extends BroadcastReceiver{
                     notificationManager.notify(0, notification);
                     break;
                 case 103:
-                    notification = builder.setContentTitle("How is your day??")
-                            .setContentText("You are late for your current cycle, want to log your period?")
+                    inboxStyle.setBigContentTitle("How is your day?");
+                    inboxStyle.addLine("You are late for your current cycle,");
+                    inboxStyle.addLine("want to log your period?");
+                    notification = builder.setContentTitle("How is your day?")
                             .setTicker("Hello from sunny day!!")
                             .setVibrate(pattern)
                             .setAutoCancel(true)
+                            .setStyle(inboxStyle)
                             .setSound(alarmSound)
-                            .setSmallIcon(R.drawable.icon1)
+                            .setSmallIcon(R.mipmap.ic_launcher)
                             .setContentIntent(pendingIntent).build();
 
                     notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
                     notificationManager.notify(0, notification);
                     break;
                 case 104:
-                    notification = builder.setContentTitle("How is your day??")
-                            .setContentText("You are late for your current cycle, want to log your period?")
+                    inboxStyle.setBigContentTitle("How is your day?");
+                    inboxStyle.addLine("You are late for your current cycle,");
+                    inboxStyle.addLine("want to log your period?");
+                    notification = builder.setContentTitle("How is your day?")
                             .setTicker("Hello from sunny day!!")
-                            .setSmallIcon(R.drawable.icon1)
+                            .setSmallIcon(R.mipmap.ic_launcher)
                             .setVibrate(pattern)
                             .setSound(alarmSound)
+                            .setStyle(inboxStyle)
                             .setAutoCancel(true)
                             .setContentIntent(pendingIntent).build();
 
@@ -107,24 +133,30 @@ public class AlarmReceiver extends BroadcastReceiver{
                     notificationManager.notify(0, notification);
                     break;
                 case 105:
-                    notification = builder.setContentTitle("How is your day??")
-                            .setContentText("You are late for your current cycle, want to log your period?")
+                    inboxStyle.setBigContentTitle("How is your day?");
+                    inboxStyle.addLine("You are late for your current cycle,");
+                    inboxStyle.addLine("want to log your period?");
+                    notification = builder.setContentTitle("How is your day?")
                             .setTicker("Hello from sunny day!!")
-                            .setSmallIcon(R.drawable.icon1)
+                            .setSmallIcon(R.mipmap.ic_launcher)
                             .setVibrate(pattern)
                             .setAutoCancel(true)
                             .setSound(alarmSound)
+                            .setStyle(inboxStyle)
                             .setContentIntent(pendingIntent).build();
 
                     notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
                     notificationManager.notify(0, notification);
                     break;
                 case 106:
-                    notification = builder.setContentTitle("How is your day??")
-                            .setContentText("You are late for your current cycle, want to log your period?")
+                    inboxStyle.setBigContentTitle("How is your day?");
+                    inboxStyle.addLine("You are late for your current cycle,");
+                    inboxStyle.addLine("want to log your period?");
+                    notification = builder.setContentTitle("How is your day?")
                             .setTicker("Hello from sunny day!!")
-                            .setSmallIcon(R.drawable.icon1)
+                            .setSmallIcon(R.mipmap.ic_launcher)
                             .setVibrate(pattern)
+                            .setStyle(inboxStyle)
                             .setSound(alarmSound)
                             .setAutoCancel(true)
                             .setContentIntent(pendingIntent).build();
@@ -133,12 +165,15 @@ public class AlarmReceiver extends BroadcastReceiver{
                     notificationManager.notify(0, notification);
                     break;
                 case 200:
-                    notification = builder.setContentTitle("How is your day??")
-                            .setContentText("Hey! Your Ovulation has started, it's the lucky time!")
+                    inboxStyle.setBigContentTitle("How is your day?");
+                    inboxStyle.addLine("Hey! Your Ovulation has started,");
+                    inboxStyle.addLine("it's the lucky time!");
+                    notification = builder.setContentTitle("How is your day?")
                             .setTicker("Hello from sunny day!!")
-                            .setSmallIcon(R.drawable.icon1)
+                            .setSmallIcon(R.mipmap.ic_launcher)
                             .setVibrate(pattern)
                             .setSound(alarmSound)
+                            .setStyle(inboxStyle)
                             .setAutoCancel(true)
                             .setContentIntent(pendingIntent).build();
 
@@ -146,11 +181,14 @@ public class AlarmReceiver extends BroadcastReceiver{
                     notificationManager.notify(0, notification);
                     break;
                 case 201:
-                    notification = builder.setContentTitle("How is your day??")
-                            .setContentText("There is a chance to get pregnant, try today!")
+                    inboxStyle.setBigContentTitle("How is your day?");
+                    inboxStyle.addLine("There is a chance to get pregnant,");
+                    inboxStyle.addLine("try today!");
+                    notification = builder.setContentTitle("How is your day?")
                             .setTicker("Hello from sunny day!!")
-                            .setSmallIcon(R.drawable.icon1)
+                            .setSmallIcon(R.mipmap.ic_launcher)
                             .setVibrate(pattern)
+                            .setStyle(inboxStyle)
                             .setAutoCancel(true)
                             .setSound(alarmSound)
                             .setContentIntent(pendingIntent).build();
@@ -159,12 +197,15 @@ public class AlarmReceiver extends BroadcastReceiver{
                     notificationManager.notify(0, notification);
                     break;
                 case 202:
-                    notification = builder.setContentTitle("How is your day??")
-                            .setContentText("You are the most fertile today, there is a high chance to get pregnant!")
+                    inboxStyle.setBigContentTitle("How is your day?");
+                    inboxStyle.addLine("You are the most fertile today,");
+                    inboxStyle.addLine("there is a high chance to get pregnant!");
+                    notification = builder.setContentTitle("How is your day?")
                             .setTicker("Hello from sunny day!!")
-                            .setSmallIcon(R.drawable.icon1)
+                            .setSmallIcon(R.mipmap.ic_launcher)
                             .setVibrate(pattern)
                             .setSound(alarmSound)
+                            .setStyle(inboxStyle)
                             .setAutoCancel(true)
                             .setContentIntent(pendingIntent).build();
 
@@ -172,12 +213,15 @@ public class AlarmReceiver extends BroadcastReceiver{
                     notificationManager.notify(0, notification);
                     break;
                 case 203:
-                    notification = builder.setContentTitle("How is your day??")
-                            .setContentText("If you haven't tried yet, don't miss the chance! It's still a fertile day!")
+                    inboxStyle.setBigContentTitle("How is your day?");
+                    inboxStyle.addLine("If you haven't tried yet, don't miss the chance!");
+                    inboxStyle.addLine("It's still a fertile day!");
+                    notification = builder.setContentTitle("How is your day?")
                             .setTicker("Hello from sunny day!!")
-                            .setSmallIcon(R.drawable.icon1)
+                            .setSmallIcon(R.mipmap.ic_launcher)
                             .setVibrate(pattern)
                             .setSound(alarmSound)
+                            .setStyle(inboxStyle)
                             .setAutoCancel(true)
                             .setContentIntent(pendingIntent).build();
 
@@ -185,11 +229,14 @@ public class AlarmReceiver extends BroadcastReceiver{
                     notificationManager.notify(0, notification);
                     break;
                 case 204:
-                    notification = builder.setContentTitle("How is your day??")
-                            .setContentText("Last day to get pregnant on this cycle, don't miss it!")
+                    inboxStyle.setBigContentTitle("How is your day?");
+                    inboxStyle.addLine("Last day to get pregnant on this cycle,");
+                    inboxStyle.addLine("don't miss it!");
+                    notification = builder.setContentTitle("How is your day?")
                             .setTicker("Hello from sunny day!!")
-                            .setSmallIcon(R.drawable.icon1)
+                            .setSmallIcon(R.mipmap.ic_launcher)
                             .setVibrate(pattern)
+                            .setStyle(inboxStyle)
                             .setAutoCancel(true)
                             .setSound(alarmSound)
                             .setContentIntent(pendingIntent).build();

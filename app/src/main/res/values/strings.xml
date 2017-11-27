@@ -56,10 +56,62 @@
         <item>Drink a lot of water to stay hydrated!</item>
         <item>Don\'t forget to change your napkin in every 6 hours!</item>
         <item>Mood swings are natural! Try to munch on a chocolate bar, it helps!</item>
+        <item>Take enough rest to keep your body energetic.</item>
+        <item>Try hot bags to calm your belly cramps!</item>
+        <item>Good substitutes for caffeine are ginger or herbal tea.</item>
+        <item>A low-fat diet decreases levels of inflammation in the body.</item>
+        <item>Don\'t forget to change your napkin in every 6 hours!</item>
+        <item>Mood swings are natural! Try to munch on a chocolate bar, it helps!</item>
         <item>Take enough rest to keep your body energetic!</item>
         <item>Try hot bags to calm your belly cramps!</item>
         <item>Take enough rest to keep your body energetic!</item>
         <item>Don\'t forget to change your napkin in every 6 hours!</item>
+        <item>Eat healthy and keep yourself strong.</item>
+    </string-array>
+    <string-array name="logs_suggessions_two">
+        <item>Exercise with lighter activities.</item>
+        <item>Try eating more fresh fruit and green veggies.</item>
+        <item>If possible, avoid caffeine.</item>
+        <item>Getting enough sleep will help you to feel rejuvenated.</item>
+        <item>Find the right pantyliner or pads that provide great protection.</item>
+        <item>Be sure to carry a water bottle with you.</item>
+        <item>Try fish oil and Vitamin B1 for better recovery.</item>
+        <item>Eat healthy and keep yourself strong.</item>
+        <item>Drink a lot of water to stay hydrated!</item>
+        <item>Don\'t forget to change your napkin in every 6 hours!</item>
+        <item>Mood swings are natural! Try to munch on a chocolate bar, it helps!</item>
+        <item>Take enough rest to keep your body energetic!</item>
+        <item>Try hot bags to calm your belly cramps!</item>
+        <item>Take enough rest to keep your body energetic!</item>
+        <item>Don\'t forget to change your napkin in every 6 hours!</item>
+        <item>Eat healthy and keep yourself strong.</item>
+    </string-array>
+    <string-array name="logs_suggessions_three">
+        <item>Stretching, yoga, walking or swimming help minimizing cramping.</item>
+        <item>Heating pad soothes your muscles, eases your body’s discomfort.</item>
+        <item>Drink fluid like water, juice or milk throughout the day!</item>
+        <item>Eat good-for-you foods!</item>
+        <item>Try snacking on carrots, apples or blend up a smoothie.</item>
+        <item>Sitting still can make you feel worse, keep moving.</item>
+        <item>Massage with essential oils for pain relief.</item>
+        <item>Eat healthy and keep yourself strong.</item>
+        <item>Drink a lot of water to stay hydrated!</item>
+        <item>Don\'t forget to change your napkin in every 6 hours!</item>
+        <item>Mood swings are natural! Try to munch on a chocolate bar, it helps!</item>
+        <item>Take enough rest to keep your body energetic!</item>
+        <item>Try hot bags to calm your belly cramps!</item>
+        <item>Take enough rest to keep your body energetic!</item>
+        <item>Don\'t forget to change your napkin in every 6 hours!</item>
+        <item>Eat healthy and keep yourself strong.</item>
+    </string-array>
+    <string-array name="logs_suggessions_four">
+        <item>Fruits and veggies contain lots of water, so they keep you hydrated.</item>
+        <item>Caffeine is also in sodas and chocolate. Avoid these too.</item>
+        <item>You need eight to nine hours of sleep per night.</item>
+        <item>Period doesn’t have to prevent you from activities you are used to.</item>
+        <item>If you\'re craving chocolate, grab a small piece of dark chocolate.</item>
+        <item>A spontaneous dance in your room is a great way to ease cramping.</item>
+        <item>Try hugging a heating pad.</item>
         <item>Eat healthy and keep yourself strong.</item>
         <item>Drink a lot of water to stay hydrated!</item>
         <item>Don\'t forget to change your napkin in every 6 hours!</item>
@@ -111,5 +163,6 @@
     <string name="settings_facebook">Facebook</string>
     <string name="settings_youtube">Youtube</string>
     <string name="settings_shop_now">Shop Now</string>
+    <string name="helpline">Help Line</string>
 
 </resources>

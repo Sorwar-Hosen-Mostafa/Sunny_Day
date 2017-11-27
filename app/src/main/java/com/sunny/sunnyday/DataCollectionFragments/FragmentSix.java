@@ -75,11 +75,11 @@ public class FragmentSix extends Fragment {
         int year = calendar.get(Calendar.YEAR);
         String start_date = simpleDateFormat.format(calendar.getTimeInMillis());
 
-        calendar.add(calendar.DAY_OF_MONTH,duration);
+        calendar.add(calendar.DAY_OF_MONTH,duration-1);
 
-        String history_id = month+""+year;
+
         String end_date = simpleDateFormat.format(calendar.getTimeInMillis());
-
+        String history_id = start_date+""+end_date+""+month+""+year;
 
 
 

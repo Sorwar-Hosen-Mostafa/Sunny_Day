@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -49,6 +50,7 @@ public class PeriodCalendarFragment extends Fragment {
     boolean prev = false;
     private String log_clicked;
     boolean periodalarmset = false;
+    String log_set ;
     boolean pregnancyalarmset = false;
     SimpleDateFormat simpleDateFormatforhistory = new SimpleDateFormat("MMM d");
     private SimpleDateFormat dateFormatMonth;
@@ -103,10 +105,10 @@ public class PeriodCalendarFragment extends Fragment {
         log_clicked=Utils.getFromPrefs(getActivity(),Utils.DATA_COLLECTION_PREFERENCES,Utils.LOG_CLICKED);
         if(log_clicked.equals("true")){
             periodCalenderBinding.logText.setText("END");
-            periodCalenderBinding.logImage.setColorFilter(ContextCompat.getColor(getActivity(), R.color.state_unselected), android.graphics.PorterDuff.Mode.MULTIPLY);
+            periodCalenderBinding.logImage.setColorFilter(ContextCompat.getColor(getActivity(), R.color.state_unselected));
         }else {
             periodCalenderBinding.logText.setText("LOG");
-            periodCalenderBinding.logImage.setColorFilter(ContextCompat.getColor(getActivity(), R.color.state_selected), android.graphics.PorterDuff.Mode.MULTIPLY);
+            periodCalenderBinding.logImage.setColorFilter(ContextCompat.getColor(getActivity(), R.color.state_selected));
         }
 
         calendarmain = Calendar.getInstance();
@@ -139,15 +141,29 @@ public class PeriodCalendarFragment extends Fragment {
         ddd = new Date();
 
 
+        log_set = Utils.getFromPrefs(getActivity(),Utils.DATA_COLLECTION_PREFERENCES,Utils.LOG_SET);
 
         dateFormatMonth = new SimpleDateFormat("MMMM- yyyy", Locale.getDefault());
 
         logTitles = getResources().getStringArray(R.array.logs_title);
         logTitleSymbols = getResources().getStringArray(R.array.logs_title_symbols);
-        logSuggessions = getResources().getStringArray(R.array.logs_suggessions);
         logTitlesPregnant = getResources().getStringArray(R.array.logs_title_pregnant);
         logTitleSymbolsPregnant = getResources().getStringArray(R.array.logs_title_symbols_pregnant);
         logSuggessionsPregnant = getResources().getStringArray(R.array.logs_suggessions_pregnant);
+
+
+        if(log_set.equals("1")){
+            logSuggessions = getResources().getStringArray(R.array.logs_suggessions);
+        }else if(log_set.equals("2")){
+            logSuggessions = getResources().getStringArray(R.array.logs_suggessions_two);
+        }else if(log_set.equals("3")){
+            logSuggessions = getResources().getStringArray(R.array.logs_suggessions_three);
+        }else if (log_set.equals("4")){
+            logSuggessions = getResources().getStringArray(R.array.logs_suggessions_four);
+        }else {
+            logSuggessions = getResources().getStringArray(R.array.logs_suggessions);
+        }
+
 
 
         periodCalenderBinding.compactcalendarView.setUseThreeLetterAbbreviation(true);
@@ -408,70 +424,11 @@ public class PeriodCalendarFragment extends Fragment {
 
             if(log_clicked.equals("null") || log_clicked.equals("false")){
 
-                clearAllAlarms();
-                datePicker.getDrawingTime();
-                int new_day = datePicker.getDayOfMonth();
-                int new_month = datePicker.getMonth();
-                int new_year = datePicker.getYear();
-
-                log_function = true;
-                Utils.saveToPrefs(getActivity(), Utils.DATA_COLLECTION_PREFERENCES, Utils.LOG_FUNCTION, Utils.STATUS_TRUE);
-                Utils.saveToPrefs(getActivity(),Utils.DATA_COLLECTION_PREFERENCES,Utils.USER_LAST_PERIOD_DATE,String.valueOf(new_day));
-                Utils.saveToPrefs(getActivity(),Utils.DATA_COLLECTION_PREFERENCES,Utils.USER_LAST_PERIOD_MONTH,String.valueOf(new_month));
-                Utils.saveToPrefs(getActivity(),Utils.DATA_COLLECTION_PREFERENCES,Utils.USER_LAST_PERIOD_YEAR,String.valueOf(new_year));
-                lastperiodday = new_day;
-                lastperiodmonth = new_month;
-                lastYear = new_year;
-
-
-                periodCalenderBinding.compactcalendarView.removeAllEvents();
-                logs.clear();
-                logListRecViewAdapter.notifyDataSetChanged();
-
-
-                calendarforeventset.set(Calendar.DAY_OF_MONTH, new_day-1);
-                calendarforeventset.set(Calendar.MONTH, new_month);
-                calendarforeventset.set(Calendar.YEAR, new_year);
-                calendarforeventset.set(Calendar.HOUR, 0);
-                calendarforeventset.set(Calendar.MINUTE, 0);
-                calendarforeventset.set(Calendar.SECOND, 0);
-                calendarforeventset.set(Calendar.MILLISECOND, 0);
-
-                seteventsoncalendarnew(calendarforeventset);
-
-                logListRecViewAdapter.notifyDataSetChanged();
-
-                periodCalenderBinding.logText.setText("END");
-                periodCalenderBinding.logImage.setColorFilter(ContextCompat.getColor(getActivity(), R.color.state_unselected), android.graphics.PorterDuff.Mode.MULTIPLY);
-                log_clicked="true";
-                Utils.saveToPrefs(getActivity(),Utils.DATA_COLLECTION_PREFERENCES,Utils.LOG_CLICKED,"true");
-
-            }
-            else {
 
                 datePicker.getDrawingTime();
                 int new_day = datePicker.getDayOfMonth();
                 int new_month = datePicker.getMonth();
                 int new_year = datePicker.getYear();
-
-                log_function = true;
-                int new_day_temp = Integer.parseInt(Utils.getFromPrefs(getActivity(),Utils.DATA_COLLECTION_PREFERENCES,Utils.USER_LAST_PERIOD_DATE));
-                int new_month_temp = Integer.parseInt(Utils.getFromPrefs(getActivity(),Utils.DATA_COLLECTION_PREFERENCES,Utils.USER_LAST_PERIOD_MONTH));
-                int new_year_temp = Integer.parseInt(Utils.getFromPrefs(getActivity(),Utils.DATA_COLLECTION_PREFERENCES,Utils.USER_LAST_PERIOD_YEAR));
-
-                Calendar calendartemp= Calendar.getInstance();
-                calendartemp.set(Calendar.YEAR,new_year_temp);
-                calendartemp.set(Calendar.MONTH,new_month_temp);
-                calendartemp.set(Calendar.DAY_OF_MONTH,new_day_temp);
-                calendartemp.set(Calendar.HOUR,0);
-                calendartemp.set(Calendar.MINUTE,0);
-                calendartemp.set(Calendar.SECOND,0);
-                calendartemp.set(Calendar.MILLISECOND,0);
-                Date datefromprevious = new Date(calendartemp.getTimeInMillis());
-                String dfp = simpleDateFormat.format(datefromprevious);
-                android.util.Log.e("date from previuous",dfp);
-
-
 
                 calendarforeventset.set(Calendar.DAY_OF_MONTH, new_day);
                 calendarforeventset.set(Calendar.MONTH, new_month);
@@ -481,67 +438,185 @@ public class PeriodCalendarFragment extends Fragment {
                 calendarforeventset.set(Calendar.SECOND, 0);
                 calendarforeventset.set(Calendar.MILLISECOND, 0);
 
-                Calendar calendarforeventsetmain = Calendar.getInstance();
-                calendarforeventsetmain.setTimeInMillis(calendarforeventset.getTimeInMillis());
+                Calendar calendar_now_time = Calendar.getInstance();
+                calendar_now_time.set(Calendar.HOUR,0);
+                calendar_now_time.set(Calendar.MINUTE,0);
+                calendar_now_time.set(Calendar.SECOND,0);
+                calendar_now_time.set(Calendar.MILLISECOND,0);
 
+                if(calendarforeventset.getTimeInMillis()<=calendar_now_time.getTimeInMillis()){
+                    clearAllAlarms();
+                    calendarforeventset.add(Calendar.DAY_OF_MONTH,-1);
+                    lastperiodday = new_day;
+                    lastperiodmonth = new_month;
+                    lastYear = new_year;
 
-                if(calendartemp.getTimeInMillis()<calendarforeventset.getTimeInMillis()){
+                    periodCalenderBinding.compactcalendarView.removeAllEvents();
+                    logs.clear();
+                    logListRecViewAdapter.notifyDataSetChanged();
 
-                    int i = 1;
-                    for(;calendarforeventsetmain.getTimeInMillis()>calendartemp.getTimeInMillis();calendarforeventsetmain.add(Calendar.DAY_OF_MONTH,-1)){
-                        i++;
+                    log_function = true;
+                    Utils.saveToPrefs(getActivity(), Utils.DATA_COLLECTION_PREFERENCES, Utils.LOG_FUNCTION, Utils.STATUS_TRUE);
+                    Utils.saveToPrefs(getActivity(),Utils.DATA_COLLECTION_PREFERENCES,Utils.USER_LAST_PERIOD_DATE,String.valueOf(new_day));
+                    Utils.saveToPrefs(getActivity(),Utils.DATA_COLLECTION_PREFERENCES,Utils.USER_LAST_PERIOD_MONTH,String.valueOf(new_month));
+                    Utils.saveToPrefs(getActivity(),Utils.DATA_COLLECTION_PREFERENCES,Utils.USER_LAST_PERIOD_YEAR,String.valueOf(new_year));
+
+                    log_set = Utils.getFromPrefs(getActivity(),Utils.DATA_COLLECTION_PREFERENCES,Utils.LOG_SET);
+
+                    if(log_set.equals("1")){
+                        logSuggessions = getResources().getStringArray(R.array.logs_suggessions_two);
+                        Utils.saveToPrefs(getActivity(),Utils.DATA_COLLECTION_PREFERENCES,Utils.LOG_SET,"2");
+                    }else if(log_set.equals("2")){
+                        logSuggessions = getResources().getStringArray(R.array.logs_suggessions_three);
+                        Utils.saveToPrefs(getActivity(),Utils.DATA_COLLECTION_PREFERENCES,Utils.LOG_SET,"3");
+
+                    }else if(log_set.equals("3")){
+                        logSuggessions = getResources().getStringArray(R.array.logs_suggessions_four);
+                        Utils.saveToPrefs(getActivity(),Utils.DATA_COLLECTION_PREFERENCES,Utils.LOG_SET,"4");
+
+                    }else if (log_set.equals("4")){
+                        logSuggessions = getResources().getStringArray(R.array.logs_suggessions);
+                        Utils.saveToPrefs(getActivity(),Utils.DATA_COLLECTION_PREFERENCES,Utils.LOG_SET,"1");
                     }
-                 //   Toast.makeText(getActivity(),String.valueOf(i),Toast.LENGTH_LONG).show();
-                    Utils.saveToPrefs(getActivity(),Utils.DATA_COLLECTION_PREFERENCES,Utils.USER_PERIOD_DURATION,String .valueOf(i));
-
-
-                    if(i<=10){
-                        periodduration=i;
-                        Toast.makeText(getActivity(),"End date selected",Toast.LENGTH_LONG).show();
-                        periodCalenderBinding.logText.setText("LOG");
-                        periodCalenderBinding.logImage.setColorFilter(ContextCompat.getColor(getActivity(), R.color.state_selected), android.graphics.PorterDuff.Mode.MULTIPLY);
-                        log_clicked="false";
-                        Utils.saveToPrefs(getActivity(),Utils.DATA_COLLECTION_PREFERENCES,Utils.LOG_CLICKED,"false");
-
-                        clearAllAlarms();
-                        periodCalenderBinding.compactcalendarView.removeAllEvents();
-                        logs.clear();
-                        logListRecViewAdapter.notifyDataSetChanged();
-
-                        calendartemp.add(Calendar.DAY_OF_MONTH,-1);
-                        seteventsoncalendarnew(calendartemp);
-
-
-                        Calendar calendarforhistory = Calendar.getInstance();
-                        calendarforhistory.setTimeInMillis(calendartemp.getTimeInMillis());
-                        int month_for_history = Integer.parseInt(monthformatter.format(calendarforhistory.getTimeInMillis()));
-                        int year_for_history = Integer.parseInt(yearformatter.format(calendarforhistory.getTimeInMillis()));
-                        String startdate_for_history = simpleDateFormatforhistory.format(calendarforhistory.getTimeInMillis());
-                        calendarforhistory.add(Calendar.DAY_OF_MONTH,periodduration);
-                        String enddate_for_history = simpleDateFormatforhistory.format(calendarforhistory.getTimeInMillis());
-                        History history = new History();
-                        history.setHistoryMonth(month_for_history);
-                        history.setHistoryYear(year_for_history);
-                        history.setHistoryStartDate(startdate_for_history);
-                        history.setHistoryEndDate(enddate_for_history);
-                        SavedArticleDAO savedArticleDAO = new SavedArticleDAO(getActivity());
-                        savedArticleDAO.insert_history(history);
-
-
-                        logListRecViewAdapter.notifyDataSetChanged();
+                    else {
+                        logSuggessions = getResources().getStringArray(R.array.logs_suggessions_two);
+                        Utils.saveToPrefs(getActivity(),Utils.DATA_COLLECTION_PREFERENCES,Utils.LOG_SET,"2");
                     }
-                    else{
-                        Toast.makeText(getActivity(),"Period duration can not be that long, please recheck!",Toast.LENGTH_LONG).show();
-                    }
+
+
+                    seteventsoncalendarnew(calendarforeventset);
+
+                    logListRecViewAdapter.notifyDataSetChanged();
+
+                    periodCalenderBinding.logText.setText("END");
+                    periodCalenderBinding.logImage.setColorFilter(ContextCompat.getColor(getActivity(), R.color.state_unselected));
+                    log_clicked="true";
+                    Utils.saveToPrefs(getActivity(),Utils.DATA_COLLECTION_PREFERENCES,Utils.LOG_CLICKED,"true");
+
+
+
 
                 }
-                else if (calendartemp.getTimeInMillis()==calendarforeventset.getTimeInMillis()){
 
-                    Toast.makeText(getActivity(),"Start date and end date cannot be same",Toast.LENGTH_LONG).show();
+                else {
+                    Toast.makeText(getActivity(),"You can't log a future date",Toast.LENGTH_LONG).show();
+                }
+
+
+            }
+            else {
+
+                Calendar calendar_now_time = Calendar.getInstance();
+                calendar_now_time.set(Calendar.HOUR,0);
+                calendar_now_time.set(Calendar.MINUTE,0);
+                calendar_now_time.set(Calendar.SECOND,0);
+                calendar_now_time.set(Calendar.MILLISECOND,0);
+
+                datePicker.getDrawingTime();
+                int new_day = datePicker.getDayOfMonth();
+                int new_month = datePicker.getMonth();
+                int new_year = datePicker.getYear();
+
+                calendarforeventset.set(Calendar.DAY_OF_MONTH, new_day);
+                calendarforeventset.set(Calendar.MONTH, new_month);
+                calendarforeventset.set(Calendar.YEAR, new_year);
+                calendarforeventset.set(Calendar.HOUR, 0);
+                calendarforeventset.set(Calendar.MINUTE, 0);
+                calendarforeventset.set(Calendar.SECOND, 0);
+                calendarforeventset.set(Calendar.MILLISECOND, 0);
+
+
+
+                if(calendarforeventset.getTimeInMillis()<=calendar_now_time.getTimeInMillis()){
+                    log_function = true;
+                    int new_day_temp = Integer.parseInt(Utils.getFromPrefs(getActivity(),Utils.DATA_COLLECTION_PREFERENCES,Utils.USER_LAST_PERIOD_DATE));
+                    int new_month_temp = Integer.parseInt(Utils.getFromPrefs(getActivity(),Utils.DATA_COLLECTION_PREFERENCES,Utils.USER_LAST_PERIOD_MONTH));
+                    int new_year_temp = Integer.parseInt(Utils.getFromPrefs(getActivity(),Utils.DATA_COLLECTION_PREFERENCES,Utils.USER_LAST_PERIOD_YEAR));
+
+                    Calendar calendartemp= Calendar.getInstance();
+                    calendartemp.set(Calendar.YEAR,new_year_temp);
+                    calendartemp.set(Calendar.MONTH,new_month_temp);
+                    calendartemp.set(Calendar.DAY_OF_MONTH,new_day_temp);
+                    calendartemp.set(Calendar.HOUR,0);
+                    calendartemp.set(Calendar.MINUTE,0);
+                    calendartemp.set(Calendar.SECOND,0);
+                    calendartemp.set(Calendar.MILLISECOND,0);
+                    Date datefromprevious = new Date(calendartemp.getTimeInMillis());
+                    String dfp = simpleDateFormat.format(datefromprevious);
+                    android.util.Log.e("date from previuous",dfp);
+
+
+                    Calendar calendarforeventsetmain = Calendar.getInstance();
+                    calendarforeventsetmain.setTimeInMillis(calendarforeventset.getTimeInMillis());
+
+
+                    if(calendartemp.getTimeInMillis()<calendarforeventset.getTimeInMillis()){
+
+                        int i = 1;
+                        for(;calendarforeventsetmain.getTimeInMillis()>calendartemp.getTimeInMillis();calendarforeventsetmain.add(Calendar.DAY_OF_MONTH,-1)){
+                            i++;
+                        }
+                        //   Toast.makeText(getActivity(),String.valueOf(i),Toast.LENGTH_LONG).show();
+                        Utils.saveToPrefs(getActivity(),Utils.DATA_COLLECTION_PREFERENCES,Utils.USER_PERIOD_DURATION,String .valueOf(i));
+
+
+                        if(i<=10){
+                            periodduration=i;
+                            Toast.makeText(getActivity(),"End date selected",Toast.LENGTH_LONG).show();
+                            periodCalenderBinding.logText.setText("LOG");
+                            periodCalenderBinding.logImage.setColorFilter(ContextCompat.getColor(getActivity(), R.color.state_selected));
+                            log_clicked="false";
+                            Utils.saveToPrefs(getActivity(),Utils.DATA_COLLECTION_PREFERENCES,Utils.LOG_CLICKED,"false");
+
+                            clearAllAlarms();
+                            periodCalenderBinding.compactcalendarView.removeAllEvents();
+                            logs.clear();
+                            logListRecViewAdapter.notifyDataSetChanged();
+
+                            Calendar calendarforhistory = Calendar.getInstance();
+                            calendarforhistory.setTimeInMillis(calendartemp.getTimeInMillis());
+
+                            calendartemp.add(Calendar.DAY_OF_MONTH,-1);
+                            seteventsoncalendarnew(calendartemp);
+
+
+                            android.util.Log.e("calendar for history",simpleDateFormat.format(calendartemp.getTimeInMillis()).toString());
+                            int month_for_history = Integer.parseInt(monthformatter.format(calendarforhistory.getTimeInMillis()));
+                            int year_for_history = Integer.parseInt(yearformatter.format(calendarforhistory.getTimeInMillis()));
+                            String startdate_for_history = simpleDateFormatforhistory.format(calendarforhistory.getTimeInMillis());
+                            calendarforhistory.add(Calendar.DAY_OF_MONTH,periodduration-1);
+                            String enddate_for_history = simpleDateFormatforhistory.format(calendarforhistory.getTimeInMillis());
+                            History history = new History();
+                            history.setHistoryId(startdate_for_history+""+enddate_for_history+""+month_for_history+""+year_for_history);
+                            history.setHistoryMonth(month_for_history);
+                            history.setHistoryYear(year_for_history);
+                            history.setHistoryStartDate(startdate_for_history);
+                            history.setHistoryEndDate(enddate_for_history);
+                            SavedArticleDAO savedArticleDAO = new SavedArticleDAO(getActivity());
+                            savedArticleDAO.insert_history(history);
+
+
+                            logListRecViewAdapter.notifyDataSetChanged();
+                        }
+                        else{
+                            Toast.makeText(getActivity(),"Period duration can't be that long, please recheck!",Toast.LENGTH_LONG).show();
+                        }
+
+                    }
+                    else if (calendartemp.getTimeInMillis()==calendarforeventset.getTimeInMillis()){
+
+                        Toast.makeText(getActivity(),"Start date and end date can't be same",Toast.LENGTH_LONG).show();
+                    }
+                    else {
+                        Toast.makeText(getActivity(),"End date can't be a previous of start date",Toast.LENGTH_LONG).show();
+                    }
                 }
                 else {
-                    Toast.makeText(getActivity(),"End date cannot be a previous of start date",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(),"You can't select a future date as end date",Toast.LENGTH_LONG).show();
+
                 }
+
+
 
 
 
@@ -650,8 +725,6 @@ public class PeriodCalendarFragment extends Fragment {
                     }
 
                 }
-            } else {
-
             }
 
 
@@ -694,7 +767,7 @@ public class PeriodCalendarFragment extends Fragment {
                         periodCalenderBinding.compactcalendarView.removeEvents(event);
                     }
                 }
-                Event eventone = new Event(Color.parseColor("#FFA500"), ddd.getTime(), "Favourable pregnancy date");
+                Event eventone = new Event(Color.parseColor("#8CCB28"), ddd.getTime(), "Favourable pregnancy date");
                 periodCalenderBinding.compactcalendarView.addEvent(eventone);
                 String mon = formatter.format(ddd);
                 String date = cal.get(Calendar.DAY_OF_MONTH) + "" + getextfromnumber(cal.get(Calendar.DAY_OF_MONTH)) + " " + getMonthFromNumber(cal.get(Calendar.MONTH) + 1);

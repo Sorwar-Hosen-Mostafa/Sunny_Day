@@ -33,6 +33,7 @@ public class SettingsFragment extends Fragment {
     private SavedArticlesFragment savedArticlesFragment;
     private TermsAndConditionsFragment termsAndConditionsFragment;
     private LisenseFragment lisenseFragment;
+    private HelpLineFragment helpLineFragment;
     private HistoryFragment historyFragment;
     private FragmentManager fragmentManager;
     String notification_status;
@@ -131,7 +132,7 @@ public class SettingsFragment extends Fragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Utils.saveToPrefs(getActivity(), Utils.DATA_COLLECTION_PREFERENCES, Utils.DATA_COLLECTED_STATUS, Utils.STATUS_FALSE);
-
+                        Utils.saveToPrefs(getActivity(),Utils.DATA_COLLECTION_PREFERENCES,Utils.LOG_SET,"1");
                         Utils.saveToPrefs(getActivity(),Utils.DATA_COLLECTION_PREFERENCES,Utils.LOG_CLICKED,Utils.STATUS_FALSE);
                         SavedArticleDAO savedArticleDAO = new SavedArticleDAO(getActivity());
                         savedArticleDAO.deleteAllHistory();
@@ -199,6 +200,20 @@ public class SettingsFragment extends Fragment {
                 fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.addToBackStack("abc");
                 fragmentTransaction.replace(R.id.child_fragment_container, historyFragment, "historyFrag");
+                fragmentTransaction.commit();
+            }
+        });
+        settingsBinding.helplineBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity mainActivity = (MainActivity) getActivity();
+                helpLineFragment = new HelpLineFragment();
+                fragmentManager = mainActivity.fragmentManager;
+                fragmentTransaction = mainActivity.fragmentTransaction;
+                fragmentManager = getFragmentManager();
+                fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.addToBackStack("abc");
+                fragmentTransaction.replace(R.id.child_fragment_container, helpLineFragment, "helpfrag");
                 fragmentTransaction.commit();
             }
         });
